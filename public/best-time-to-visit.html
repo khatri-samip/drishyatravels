@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Best Time to Visit Nepal — Drishya Travels</title>
+
+  <meta
+    name="description"
+    content="Find the best time to visit Nepal for trekking, sightseeing, wildlife, adventure and cultural experiences."
+  >
+
+  <link rel="icon" type="image/png" href="logo.jpeg">
+  <link rel="stylesheet" href="css/global.css">
+
+  <style>
+/* =========================
+   PRELOADER
+========================= */
+
+.preloader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:var(--accent2, #214f45);
+
+  opacity:1;
+  visibility:visible;
+
+  transition:
+    opacity .7s ease,
+    visibility .7s ease;
+}
+
+/* Hidden state */
+.preloader.loaded{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+/* Content */
+.preloader-content{
+  text-align:center;
+  color:#fff;
+}
+
+/* Logo */
+.preloader-logo{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:-1px;
+
+  animation:preloaderFade 1.2s ease-in-out infinite alternate;
+}
+
+.preloader-logo span{
+  color:var(--accent, #d66a3d);
+}
+
+/* =========================
+   MOUNTAIN LOADER
+========================= */
+
+.mountain-loader{
+  position:relative;
+
+  width:120px;
+  height:55px;
+
+  margin:25px auto 18px;
+
+  overflow:hidden;
+}
+
+/* Mountain shapes */
+.mountain-loader span{
+  position:absolute;
+  bottom:0;
+
+  width:0;
+  height:0;
+
+  border-left:30px solid transparent;
+  border-right:30px solid transparent;
+  border-bottom:45px solid rgba(255,255,255,.92);
+
+  transform-origin:center bottom;
+
+  animation:mountainPulse 1.5s ease-in-out infinite;
+}
+
+.mountain-loader span:nth-child(1){
+  left:0;
+  transform:scale(.8);
+  animation-delay:0s;
+}
+
+.mountain-loader span:nth-child(2){
+  left:30px;
+  border-left-width:40px;
+  border-right-width:40px;
+  border-bottom-width:55px;
+  animation-delay:.15s;
+}
+
+.mountain-loader span:nth-child(3){
+  right:0;
+  transform:scale(.75);
+  animation-delay:.3s;
+}
+
+/* Loading text */
+.preloader p{
+  margin:0;
+
+  font-size:11px;
+  font-weight:800;
+
+  text-transform:uppercase;
+  letter-spacing:3px;
+
+  color:rgba(255,255,255,.65);
+
+  animation:preloaderText 1.5s ease-in-out infinite;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes mountainPulse{
+
+  0%,
+  100%{
+    opacity:.45;
+    transform:translateY(5px) scale(.92);
+  }
+
+  50%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+@keyframes preloaderFade{
+
+  from{
+    opacity:.65;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+@keyframes preloaderText{
+
+  0%,
+  100%{
+    opacity:.45;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:520px){
+
+  .preloader-logo{
+    font-size:24px;
+  }
+
+  .mountain-loader{
+    width:105px;
+    height:50px;
+  }
+
+  .preloader p{
+    font-size:10px;
+    letter-spacing:2.5px;
+  }
+
+}
+
+    .travel-page {
+      padding: 150px 0 100px;
+    }
+
+    .travel-header {
+      max-width: 850px;
+      margin-bottom: 60px;
+    }
+
+    .travel-header h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 20px;
+    }
+
+    .travel-header p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 700px;
+    }
+
+    .season-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+    }
+
+    .season-card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.05);
+    }
+
+    .season-card h2 {
+      font-size: 28px;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .season {
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    .season-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .highlight {
+      margin-top: 35px;
+      max-width: 1000px;
+      background: var(--accent2);
+      color: #fff;
+      padding: 35px;
+      border-radius: 24px;
+    }
+
+    .highlight h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .highlight p {
+      color: rgba(255,255,255,.75);
+      line-height: 1.7;
+    }
+
+    .legal-nav {
+      background: var(--accent2);
+      color: #fff;
+    }
+
+    @media(max-width:700px) {
+
+      .travel-page {
+        padding: 120px 0 70px;
+      }
+
+      .season-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+ 
+  <!-- =========================
+     PAGE PRELOADER
+========================= -->
+
+<div class="preloader" id="preloader">
+
+  <div class="preloader-content">
+
+    <div class="preloader-logo">
+      Drishya Travels<span>.</span>
+    </div>
+
+    <div class="mountain-loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <p>Discovering Nepal...</p>
+
+  </div>
+
+</div>
+
+<header class="nav legal-nav">
+
+  <div class="container nav-inner">
+
+    <a class="logo" href="index.html">
+      Drishya Travels<span>.</span>
+    </a>
+
+    <nav class="links">
+
+      <a href="index.html#about">
+        Why Nepal
+      </a>
+
+      <a href="index.html#experiences">
+        Experiences
+      </a>
+
+      <a href="index.html#planner">
+        Plan a Trip
+      </a>
+
+    </nav>
+
+    <a class="nav-btn" href="packages.html">
+      Explore packages
+    </a>
+
+    <button class="menu" aria-label="Open menu">
+      ☰
+    </button>
+
+  </div>
+
+</header>
+
+
+<main>
+
+<section class="travel-page">
+
+  <div class="container">
+
+    <div class="travel-header">
+
+      <div class="kicker">
+        Plan Your Journey
+      </div>
+
+      <h1>
+        Best Time to Visit Nepal
+      </h1>
+
+      <p>
+        Nepal can be enjoyed throughout the year, but the best time
+        depends on where you want to go and what you want to do.
+      </p>
+
+    </div>
+
+
+    <div class="season-grid">
+
+
+      <article class="season-card">
+
+        <div class="season">
+          Spring · March–May
+        </div>
+
+        <h2>
+          Flowers & Mountains
+        </h2>
+
+        <p>
+          Spring brings warmer conditions and blooming rhododendrons
+          in many trekking regions. It is one of the best periods
+          for trekking and mountain adventures.
+        </p>
+
+      </article>
+
+
+      <article class="season-card">
+
+        <div class="season">
+          Summer · June–August
+        </div>
+
+        <h2>
+          Monsoon Nepal
+        </h2>
+
+        <p>
+          The monsoon brings substantial rainfall to much of Nepal.
+          Some trekking areas can become wet and more difficult,
+          although rain-shadow destinations such as Mustang can
+          offer different conditions.
+        </p>
+
+      </article>
+
+
+      <article class="season-card">
+
+        <div class="season">
+          Autumn · September–November
+        </div>
+
+        <h2>
+          Clear Mountain Views
+        </h2>
+
+        <p>
+          Autumn is one of Nepal's most popular travel periods.
+          Conditions are generally favorable for trekking, with
+          October and November often offering clear mountain views.
+        </p>
+
+      </article>
+
+
+      <article class="season-card">
+
+        <div class="season">
+          Winter · December–February
+        </div>
+
+        <h2>
+          Crisp & Peaceful
+        </h2>
+
+        <p>
+          Winter can be cold at higher elevations, but lower
+          elevations and cities can still be enjoyable. This period
+          can also be suitable for sightseeing and selected lower
+          altitude journeys.
+        </p>
+
+      </article>
+
+
+    </div>
+
+
+    <div class="highlight">
+
+      <h2>
+        So, when should you visit?
+      </h2>
+
+      <p>
+        For classic Himalayan trekking, spring and autumn are
+        generally the safest starting points. For sightseeing,
+        culture, wildlife and lower-altitude destinations, Nepal
+        offers worthwhile experiences throughout much of the year.
+        Always check current weather and destination-specific
+        conditions before travelling.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div>
+
+        <div class="logo">
+          Drishya Travels<span>.</span>
+        </div>
+
+        <p style="margin-top:12px;max-width:300px">
+          Discover Nepal through unforgettable journeys,
+          authentic experiences, and thoughtfully planned adventures.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>Help & Legal</h4>
+
+        <a href="faq.html">FAQs</a>
+
+        <a href="privacy-policy.html">
+          Privacy Policy
+        </a>
+
+        <a href="terms-and-conditions.html">
+          Terms & Conditions
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>Travel</h4>
+
+        <a href="travel-tips.html">
+          Travel Tips
+        </a>
+
+        <a href="best-time-to-visit.html">
+          Best Time to Visit
+        </a>
+
+        <a href="visa-information.html">
+          Visa Information
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>Connect</h4>
+        <a href="https://www.facebook.com/share/1EnaUqG3Lr/" target="_blank">
+          Facebook
+        </a>
+        <a href="tel:+9779851349571">
+          9851349571
+        </a>
+
+        <a href="tel:+9779851122871">
+          9851122871
+        </a>
+
+        <a href="mailto:drishyatravels111@gmail.com">
+          Email
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 Drishya Travels. All rights reserved.
+    </div>
+
+  </div>
+
+</footer>
+
+<script>
+window.addEventListener("load", function(){
+
+  const preloader = document.getElementById("preloader");
+
+  setTimeout(() => {
+    preloader.classList.add("loaded");
+  }, 500);
+
+});
+</script>
+</body>
+</html>

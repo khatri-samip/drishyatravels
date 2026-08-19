@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Terms & Conditions — Drishya Travels</title>
+
+  <meta
+    name="description"
+    content="Read the Terms and Conditions governing the use of the Drishya Travels website and travel services."
+  >
+
+  <link rel="icon" type="image/png" href="logo.jpeg">
+  <link rel="stylesheet" href="css/global.css">
+
+  <style>
+/* =========================
+   PRELOADER
+========================= */
+
+.preloader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:var(--accent2, #214f45);
+
+  opacity:1;
+  visibility:visible;
+
+  transition:
+    opacity .7s ease,
+    visibility .7s ease;
+}
+
+/* Hidden state */
+.preloader.loaded{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+/* Content */
+.preloader-content{
+  text-align:center;
+  color:#fff;
+}
+
+/* Logo */
+.preloader-logo{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:-1px;
+
+  animation:preloaderFade 1.2s ease-in-out infinite alternate;
+}
+
+.preloader-logo span{
+  color:var(--accent, #d66a3d);
+}
+
+/* =========================
+   MOUNTAIN LOADER
+========================= */
+
+.mountain-loader{
+  position:relative;
+
+  width:120px;
+  height:55px;
+
+  margin:25px auto 18px;
+
+  overflow:hidden;
+}
+
+/* Mountain shapes */
+.mountain-loader span{
+  position:absolute;
+  bottom:0;
+
+  width:0;
+  height:0;
+
+  border-left:30px solid transparent;
+  border-right:30px solid transparent;
+  border-bottom:45px solid rgba(255,255,255,.92);
+
+  transform-origin:center bottom;
+
+  animation:mountainPulse 1.5s ease-in-out infinite;
+}
+
+.mountain-loader span:nth-child(1){
+  left:0;
+  transform:scale(.8);
+  animation-delay:0s;
+}
+
+.mountain-loader span:nth-child(2){
+  left:30px;
+  border-left-width:40px;
+  border-right-width:40px;
+  border-bottom-width:55px;
+  animation-delay:.15s;
+}
+
+.mountain-loader span:nth-child(3){
+  right:0;
+  transform:scale(.75);
+  animation-delay:.3s;
+}
+
+/* Loading text */
+.preloader p{
+  margin:0;
+
+  font-size:11px;
+  font-weight:800;
+
+  text-transform:uppercase;
+  letter-spacing:3px;
+
+  color:rgba(255,255,255,.65);
+
+  animation:preloaderText 1.5s ease-in-out infinite;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes mountainPulse{
+
+  0%,
+  100%{
+    opacity:.45;
+    transform:translateY(5px) scale(.92);
+  }
+
+  50%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+@keyframes preloaderFade{
+
+  from{
+    opacity:.65;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+@keyframes preloaderText{
+
+  0%,
+  100%{
+    opacity:.45;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:520px){
+
+  .preloader-logo{
+    font-size:24px;
+  }
+
+  .mountain-loader{
+    width:105px;
+    height:50px;
+  }
+
+  .preloader p{
+    font-size:10px;
+    letter-spacing:2.5px;
+  }
+
+}
+
+    .legal-page {
+      padding: 150px 0 100px;
+    }
+
+    .legal-header {
+      max-width: 850px;
+      margin-bottom: 55px;
+    }
+
+    .legal-header h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -3px;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .legal-header p {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .legal-content {
+      max-width: 850px;
+    }
+
+    .legal-content section {
+      margin-bottom: 42px;
+    }
+
+    .legal-content h2 {
+      font-size: 28px;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+
+    .legal-content p,
+    .legal-content li {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .legal-content ul {
+      padding-left: 22px;
+      margin-top: 10px;
+    }
+
+    .legal-content li {
+      margin-bottom: 7px;
+    }
+
+    .legal-content a {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .legal-nav {
+      background: var(--accent2);
+      color: white;
+    }
+
+    @media(max-width:520px) {
+
+      .legal-page {
+        padding: 120px 0 70px;
+      }
+
+      .legal-header h1 {
+        letter-spacing: -2px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+ <!-- =========================
+     PAGE PRELOADER
+========================= -->
+
+<div class="preloader" id="preloader">
+
+  <div class="preloader-content">
+
+    <div class="preloader-logo">
+      Drishya Travels<span>.</span>
+    </div>
+
+    <div class="mountain-loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <p>Discovering Nepal...</p>
+
+  </div>
+
+</div>
+<header class="nav legal-nav">
+
+  <div class="container nav-inner">
+
+    <a class="logo" href="index.html">
+      Drishya Travels<span>.</span>
+    </a>
+
+    <nav class="links">
+      <a href="index.html#about">Why Nepal</a>
+      <a href="index.html#experiences">Experiences</a>
+      <a href="index.html#planner">Plan a Trip</a>
+    </nav>
+
+    <a class="nav-btn" href="packages.html">
+      Explore packages
+    </a>
+
+    <button
+      class="menu"
+      aria-label="Open menu">
+      ☰
+    </button>
+
+  </div>
+
+</header>
+
+
+<main>
+
+<section class="legal-page">
+
+  <div class="container">
+
+    <div class="legal-header">
+
+      <div class="kicker">
+        Legal
+      </div>
+
+      <h1>
+        Terms & Conditions
+      </h1>
+
+      <p>
+        Last updated: August 19, 2026
+      </p>
+
+    </div>
+
+
+    <div class="legal-content">
+
+
+      <section>
+
+        <h2>
+          1. Introduction
+        </h2>
+
+        <p>
+          These Terms & Conditions govern your use of the Drishya
+          Travels website and your interaction with our travel
+          services. By using this website or requesting our services,
+          you acknowledge that you have read and understood these
+          terms.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          2. Travel Packages
+        </h2>
+
+        <p>
+          Information about travel packages, itineraries, prices,
+          destinations and inclusions displayed on our website is
+          provided for informational purposes and may be changed
+          when necessary.
+        </p>
+
+        <p style="margin-top:12px">
+          Package availability and final arrangements are subject to
+          confirmation by Drishya Travels.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          3. Booking and Confirmation
+        </h2>
+
+        <p>
+          A travel enquiry submitted through the website, WhatsApp,
+          email or another communication channel does not necessarily
+          constitute a confirmed booking.
+        </p>
+
+        <p style="margin-top:12px">
+          A booking becomes confirmed only after the required
+          arrangements, availability and payment conditions have
+          been agreed upon by the customer and Drishya Travels.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          4. Prices and Payments
+        </h2>
+
+        <p>
+          Prices may vary depending on the selected package,
+          accommodation, transportation, group size, season and
+          other travel requirements.
+        </p>
+
+        <p style="margin-top:12px">
+          Payment requirements and deadlines will be communicated
+          during the booking process.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          5. Cancellation and Refunds
+        </h2>
+
+        <p>
+          Cancellation, amendment and refund conditions may differ
+          depending on the package and services booked.
+        </p>
+
+        <p style="margin-top:12px">
+          Customers should review the applicable cancellation and
+          refund conditions before confirming a booking.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          6. Changes to Itineraries
+        </h2>
+
+        <p>
+          Travel itineraries may need to be modified because of
+          weather, natural conditions, transportation disruptions,
+          government restrictions, safety considerations or other
+          circumstances beyond our reasonable control.
+        </p>
+
+        <p style="margin-top:12px">
+          We will make reasonable efforts to provide suitable
+          alternatives when changes are necessary.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          7. Traveller Responsibilities
+        </h2>
+
+        <p>
+          Travellers are responsible for providing accurate
+          information and complying with applicable laws, regulations,
+          immigration requirements and instructions provided during
+          the trip.
+        </p>
+
+        <p style="margin-top:12px">
+          Travellers participating in trekking or adventure
+          activities should ensure that they are appropriately
+          prepared and understand the risks associated with such
+          activities.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          8. Travel Documents
+        </h2>
+
+        <p>
+          Travellers are responsible for ensuring that they possess
+          valid passports, visas, permits, insurance and other
+          documents required for their journey.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          9. Third-Party Services
+        </h2>
+
+        <p>
+          Certain travel arrangements may involve independent
+          third-party providers such as hotels, airlines,
+          transportation companies, guides or activity operators.
+        </p>
+
+        <p style="margin-top:12px">
+          Their services may be subject to their own terms,
+          conditions and policies.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          10. Website Information
+        </h2>
+
+        <p>
+          We make reasonable efforts to keep information on this
+          website accurate and current. However, descriptions,
+          photographs, prices, availability and other information
+          may occasionally contain errors or become outdated.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          11. Limitation of Liability
+        </h2>
+
+        <p>
+          To the extent permitted by applicable law, Drishya Travels
+          shall not be responsible for losses, delays, injuries,
+          cancellations or disruptions caused by circumstances
+          outside our reasonable control.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          12. Website Use
+        </h2>
+
+        <p>
+          You agree not to misuse this website, attempt to gain
+          unauthorized access to its systems, interfere with its
+          operation or use its content for unlawful purposes.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          13. Intellectual Property
+        </h2>
+
+        <p>
+          Unless otherwise stated, website content including text,
+          graphics, branding, design elements and other materials
+          belongs to or is used by Drishya Travels with appropriate
+          permission. Such content may not be reproduced or
+          redistributed without authorization.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          14. Changes to These Terms
+        </h2>
+
+        <p>
+          Drishya Travels may update these Terms & Conditions from
+          time to time. Updated terms will be published on this page
+          with a revised date.
+        </p>
+
+      </section>
+
+
+      <section>
+
+        <h2>
+          15. Contact
+        </h2>
+
+        <p>
+          If you have questions about these Terms & Conditions,
+          please contact Drishya Travels at
+          <a href="mailto:drishyatravels111@gmail.com">
+            drishyatravels111@gmail.com
+          </a>.
+        </p>
+
+      </section>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div>
+
+        <div class="logo">
+          Drishya Travels<span>.</span>
+        </div>
+
+        <p style="margin-top:12px;max-width:300px">
+          A modern travel guide for discovering Nepal's mountains,
+          culture, adventure and wild places.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Help & Legal
+        </h4>
+
+        <a href="faq.html">
+          FAQs
+        </a>
+
+        <a href="privacy-policy.html">
+          Privacy Policy
+        </a>
+
+        <a href="terms-and-conditions.html">
+          Terms & Conditions
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Travel
+        </h4>
+
+        <a href="packages.html">
+          Packages
+        </a>
+
+        <a href="index.html#experiences">
+          Experiences
+        </a>
+
+        <a href="index.html#planner">
+          Plan a Trip
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Connect
+        </h4>
+        <a href="https://www.facebook.com/share/1EnaUqG3Lr/">
+          Facebook
+        </a>
+        <a href="tel:+9779851349571">
+          9851349571
+        </a>
+
+        <a href="tel:+9779851122871">
+          9851122871
+        </a>
+
+        <a href="mailto:drishyatravels111@gmail.com">
+          Email
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+      © 2026 Drishya Travels. All rights reserved.
+    </div>
+
+  </div>
+
+</footer>
+
+</body>
+<script>
+window.addEventListener("load", function(){
+
+  const preloader = document.getElementById("preloader");
+
+  setTimeout(() => {
+    preloader.classList.add("loaded");
+  }, 500);
+
+});
+</script>
+</html>

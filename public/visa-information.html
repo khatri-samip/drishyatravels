@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Visa Information — Drishya Travels</title>
+
+  <meta
+    name="description"
+    content="Visa information for travelling to Nepal, including tourist visas, visa on arrival, requirements and useful official resources."
+  >
+
+  <link rel="icon" type="image/png" href="logo.jpeg">
+  <link rel="stylesheet" href="css/global.css">
+
+  <style>
+/* =========================
+   PRELOADER
+========================= */
+
+.preloader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:var(--accent2, #214f45);
+
+  opacity:1;
+  visibility:visible;
+
+  transition:
+    opacity .7s ease,
+    visibility .7s ease;
+}
+
+/* Hidden state */
+.preloader.loaded{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+/* Content */
+.preloader-content{
+  text-align:center;
+  color:#fff;
+}
+
+/* Logo */
+.preloader-logo{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:-1px;
+
+  animation:preloaderFade 1.2s ease-in-out infinite alternate;
+}
+
+.preloader-logo span{
+  color:var(--accent, #d66a3d);
+}
+
+/* =========================
+   MOUNTAIN LOADER
+========================= */
+
+.mountain-loader{
+  position:relative;
+
+  width:120px;
+  height:55px;
+
+  margin:25px auto 18px;
+
+  overflow:hidden;
+}
+
+/* Mountain shapes */
+.mountain-loader span{
+  position:absolute;
+  bottom:0;
+
+  width:0;
+  height:0;
+
+  border-left:30px solid transparent;
+  border-right:30px solid transparent;
+  border-bottom:45px solid rgba(255,255,255,.92);
+
+  transform-origin:center bottom;
+
+  animation:mountainPulse 1.5s ease-in-out infinite;
+}
+
+.mountain-loader span:nth-child(1){
+  left:0;
+  transform:scale(.8);
+  animation-delay:0s;
+}
+
+.mountain-loader span:nth-child(2){
+  left:30px;
+  border-left-width:40px;
+  border-right-width:40px;
+  border-bottom-width:55px;
+  animation-delay:.15s;
+}
+
+.mountain-loader span:nth-child(3){
+  right:0;
+  transform:scale(.75);
+  animation-delay:.3s;
+}
+
+/* Loading text */
+.preloader p{
+  margin:0;
+
+  font-size:11px;
+  font-weight:800;
+
+  text-transform:uppercase;
+  letter-spacing:3px;
+
+  color:rgba(255,255,255,.65);
+
+  animation:preloaderText 1.5s ease-in-out infinite;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes mountainPulse{
+
+  0%,
+  100%{
+    opacity:.45;
+    transform:translateY(5px) scale(.92);
+  }
+
+  50%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+@keyframes preloaderFade{
+
+  from{
+    opacity:.65;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+@keyframes preloaderText{
+
+  0%,
+  100%{
+    opacity:.45;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:520px){
+
+  .preloader-logo{
+    font-size:24px;
+  }
+
+  .mountain-loader{
+    width:105px;
+    height:50px;
+  }
+
+  .preloader p{
+    font-size:10px;
+    letter-spacing:2.5px;
+  }
+
+}
+
+    .travel-page {
+      padding: 150px 0 100px;
+    }
+
+    .travel-header {
+      max-width: 850px;
+      margin-bottom: 55px;
+    }
+
+    .travel-header h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 20px;
+    }
+
+    .travel-header p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 700px;
+    }
+
+    .visa-content {
+      max-width: 850px;
+    }
+
+    .visa-section {
+      margin-bottom: 42px;
+    }
+
+    .visa-section h2 {
+      font-size: 30px;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+
+    .visa-section p,
+    .visa-section li {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .visa-section ul {
+      padding-left: 22px;
+      margin-top: 12px;
+    }
+
+    .visa-section li {
+      margin-bottom: 8px;
+    }
+
+    .visa-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .visa-table th,
+    .visa-table td {
+      text-align: left;
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .visa-table th {
+      background: #f0eee7;
+      color: var(--ink);
+    }
+
+    .visa-table td {
+      color: var(--muted);
+    }
+
+    .important {
+      background: var(--accent2);
+      color: #fff;
+      padding: 30px;
+      border-radius: 22px;
+      margin-bottom: 45px;
+    }
+
+    .important h2 {
+      font-size: 27px;
+      margin-bottom: 10px;
+    }
+
+    .important p {
+      color: rgba(255,255,255,.78);
+      line-height: 1.7;
+    }
+
+    .official-link {
+      display: inline-flex;
+      margin-top: 15px;
+      padding: 12px 18px;
+      border-radius: 25px;
+      background: #e47b4e;
+      color: #fff;
+      font-weight: 750;
+    }
+
+    .legal-nav {
+      background: var(--accent2);
+      color: #fff;
+    }
+
+    @media(max-width:600px) {
+
+      .travel-page {
+        padding: 120px 0 70px;
+      }
+
+      .visa-table {
+        font-size: 13px;
+      }
+
+      .visa-table th,
+      .visa-table td {
+        padding: 12px 9px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+ 
+  <!-- =========================
+     PAGE PRELOADER
+========================= -->
+
+<div class="preloader" id="preloader">
+
+  <div class="preloader-content">
+
+    <div class="preloader-logo">
+      Drishya Travels<span>.</span>
+    </div>
+
+    <div class="mountain-loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <p>Discovering Nepal...</p>
+
+  </div>
+
+</div>
+<header class="nav legal-nav">
+
+  <div class="container nav-inner">
+
+    <a class="logo" href="index.html">
+      Drishya Travels<span>.</span>
+    </a>
+
+    <nav class="links">
+
+      <a href="index.html#about">
+        Why Nepal
+      </a>
+
+      <a href="index.html#experiences">
+        Experiences
+      </a>
+
+      <a href="index.html#planner">
+        Plan a Trip
+      </a>
+
+    </nav>
+
+    <a class="nav-btn" href="packages.html">
+      Explore packages
+    </a>
+
+    <button class="menu" aria-label="Open menu">
+      ☰
+    </button>
+
+  </div>
+
+</header>
+
+
+<main>
+
+<section class="travel-page">
+
+  <div class="container">
+
+    <div class="travel-header">
+
+      <div class="kicker">
+        Before You Arrive
+      </div>
+
+      <h1>
+        Visa Information
+      </h1>
+
+      <p>
+        Important information for international travellers
+        planning a visit to Nepal.
+      </p>
+
+    </div>
+
+
+    <div class="visa-content">
+
+
+      <div class="important">
+
+        <h2>
+          Check the latest requirements
+        </h2>
+
+        <p>
+          Visa requirements, fees and entry procedures can change.
+          Always verify the latest information with Nepal's
+          Department of Immigration or Nepal Tourism Board before
+          travelling.
+        </p>
+
+        <a
+          class="official-link"
+          href="https://ntb.gov.np/plan-your-trip/before-you-come/tourist-visa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Official Nepal Visa Information →
+        </a>
+
+      </div>
+
+
+      <section class="visa-section">
+
+        <h2>
+          Who Needs a Visa?
+        </h2>
+
+        <p>
+          Most foreign nationals travelling to Nepal for tourism
+          require a tourist visa. Indian nationals do not require
+          a visa to enter Nepal. :contentReference[oaicite:3]{index=3}
+        </p>
+
+      </section>
+
+
+      <section class="visa-section">
+
+        <h2>
+          Visa on Arrival
+        </h2>
+
+        <p>
+          Tourist visas on arrival are available at designated
+          international airports and entry points for eligible
+          travellers. Nepal Tourism Board recommends having a valid
+          passport and passport-size photograph and completing the
+          required visa process. :contentReference[oaicite:4]{index=4}
+        </p>
+
+      </section>
+
+
+      <section class="visa-section">
+
+        <h2>
+          Tourist Visa Fees
+        </h2>
+
+        <p>
+          The current tourist visa fees listed by Nepal Tourism
+          Board are:
+        </p>
+
+
+        <table class="visa-table">
+
+          <thead>
+
+            <tr>
+              <th>Visa Duration</th>
+              <th>Current Listed Fee</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>
+                15 Days
+              </td>
+
+              <td>
+                US$ 30
+              </td>
+            </tr>
+
+
+            <tr>
+
+              <td>
+                30 Days
+              </td>
+
+              <td>
+                US$ 50
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td>
+                90 Days
+              </td>
+
+              <td>
+                US$ 125
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+        <p style="margin-top:14px">
+          Fees are subject to change. Verify the current fee before
+          travelling. :contentReference[oaicite:5]{index=5}
+        </p>
+
+      </section>
+
+
+      <section class="visa-section">
+
+        <h2>
+          What You May Need
+        </h2>
+
+        <ul>
+
+          <li>
+            A valid passport.
+          </li>
+
+          <li>
+            A passport-size photograph.
+          </li>
+
+          <li>
+            Payment for the applicable visa fee.
+          </li>
+
+          <li>
+            Any additional documents required for your nationality
+            or travel circumstances.
+          </li>
+
+        </ul>
+
+      </section>
+
+
+      <section class="visa-section">
+
+        <h2>
+          Countries Requiring Prior Visa
+        </h2>
+
+        <p>
+          Certain nationalities are not eligible for visa on arrival
+          and are required to obtain a visa from a Nepalese diplomatic
+          mission before travelling. The list can change, so check
+          the latest official requirements before departure.
+          :contentReference[oaicite:6]{index=6}
+        </p>
+
+      </section>
+
+
+      <section class="visa-section">
+
+        <h2>
+          Indian Travellers
+        </h2>
+
+        <p>
+          Indian nationals do not require a visa to enter Nepal.
+          Nepal Tourism Board provides specific information regarding
+          acceptable identity documents for Indian travellers, so
+          travellers should verify the current requirements before
+          departure. :contentReference[oaicite:7]{index=7}
+        </p>
+
+      </section>
+
+
+      <section class="visa-section">
+
+        <h2>
+          Visa Extensions
+        </h2>
+
+        <p>
+          Tourist visa extensions can be handled through Nepal's
+          Department of Immigration. The applicable duration,
+          fees and procedures should be confirmed directly with
+          immigration authorities before applying. :contentReference[oaicite:8]{index=8}
+        </p>
+
+      </section>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div>
+
+        <div class="logo">
+          Drishya Travels<span>.</span>
+        </div>
+
+        <p style="margin-top:12px;max-width:300px">
+          Discover Nepal through unforgettable journeys,
+          authentic experiences, and thoughtfully planned adventures.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>Help & Legal</h4>
+
+        <a href="faq.html">
+          FAQs
+        </a>
+
+        <a href="privacy-policy.html">
+          Privacy Policy
+        </a>
+
+        <a href="terms-and-conditions.html">
+          Terms & Conditions
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>Travel</h4>
+
+        <a href="travel-tips.html">
+          Travel Tips
+        </a>
+
+        <a href="best-time-to-visit.html">
+          Best Time to Visit
+        </a>
+
+        <a href="visa-information.html">
+          Visa Information
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>Connect</h4>
+        <a href="https://www.facebook.com/share/1EnaUqG3Lr/" target="_blank">
+          Facebook
+        </a>
+        <a href="tel:+9779851349571">
+          9851349571
+        </a>
+
+        <a href="tel:+9779851122871">
+          9851122871
+        </a>
+
+        <a href="mailto:drishyatravels111@gmail.com">
+          Email
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+      © 2026 Drishya Travels. All rights reserved.
+    </div>
+
+  </div>
+
+</footer>
+
+<script>
+window.addEventListener("load", function(){
+
+  const preloader = document.getElementById("preloader");
+
+  setTimeout(() => {
+    preloader.classList.add("loaded");
+  }, 500);
+
+});
+</script>
+</body>
+</html>

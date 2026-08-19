@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Travel Tips — Drishya Travels</title>
+
+  <meta
+    name="description"
+    content="Essential travel tips for visiting Nepal, including packing, money, transportation, altitude, culture and responsible travel."
+  >
+
+  <link rel="icon" type="image/png" href="logo.jpeg">
+  <link rel="stylesheet" href="css/global.css">
+
+  <style>
+/* =========================
+   PRELOADER
+========================= */
+
+.preloader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:var(--accent2, #214f45);
+
+  opacity:1;
+  visibility:visible;
+
+  transition:
+    opacity .7s ease,
+    visibility .7s ease;
+}
+
+/* Hidden state */
+.preloader.loaded{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+/* Content */
+.preloader-content{
+  text-align:center;
+  color:#fff;
+}
+
+/* Logo */
+.preloader-logo{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:-1px;
+
+  animation:preloaderFade 1.2s ease-in-out infinite alternate;
+}
+
+.preloader-logo span{
+  color:var(--accent, #d66a3d);
+}
+
+/* =========================
+   MOUNTAIN LOADER
+========================= */
+
+.mountain-loader{
+  position:relative;
+
+  width:120px;
+  height:55px;
+
+  margin:25px auto 18px;
+
+  overflow:hidden;
+}
+
+/* Mountain shapes */
+.mountain-loader span{
+  position:absolute;
+  bottom:0;
+
+  width:0;
+  height:0;
+
+  border-left:30px solid transparent;
+  border-right:30px solid transparent;
+  border-bottom:45px solid rgba(255,255,255,.92);
+
+  transform-origin:center bottom;
+
+  animation:mountainPulse 1.5s ease-in-out infinite;
+}
+
+.mountain-loader span:nth-child(1){
+  left:0;
+  transform:scale(.8);
+  animation-delay:0s;
+}
+
+.mountain-loader span:nth-child(2){
+  left:30px;
+  border-left-width:40px;
+  border-right-width:40px;
+  border-bottom-width:55px;
+  animation-delay:.15s;
+}
+
+.mountain-loader span:nth-child(3){
+  right:0;
+  transform:scale(.75);
+  animation-delay:.3s;
+}
+
+/* Loading text */
+.preloader p{
+  margin:0;
+
+  font-size:11px;
+  font-weight:800;
+
+  text-transform:uppercase;
+  letter-spacing:3px;
+
+  color:rgba(255,255,255,.65);
+
+  animation:preloaderText 1.5s ease-in-out infinite;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes mountainPulse{
+
+  0%,
+  100%{
+    opacity:.45;
+    transform:translateY(5px) scale(.92);
+  }
+
+  50%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+@keyframes preloaderFade{
+
+  from{
+    opacity:.65;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+@keyframes preloaderText{
+
+  0%,
+  100%{
+    opacity:.45;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:520px){
+
+  .preloader-logo{
+    font-size:24px;
+  }
+
+  .mountain-loader{
+    width:105px;
+    height:50px;
+  }
+
+  .preloader p{
+    font-size:10px;
+    letter-spacing:2.5px;
+  }
+
+}
+
+    .travel-page {
+      padding: 150px 0 100px;
+    }
+
+    .travel-header {
+      max-width: 850px;
+      margin-bottom: 60px;
+    }
+
+    .travel-header h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 20px;
+    }
+
+    .travel-header p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 680px;
+    }
+
+    .travel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+    }
+
+    .travel-card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.05);
+    }
+
+    .travel-card h2 {
+      font-size: 27px;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+
+    .travel-card p,
+    .travel-card li {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .travel-card ul {
+      padding-left: 20px;
+    }
+
+    .travel-card li {
+      margin-bottom: 8px;
+    }
+
+    .legal-nav {
+      background: var(--accent2);
+      color: #fff;
+    }
+
+    @media(max-width:700px) {
+
+      .travel-page {
+        padding: 120px 0 70px;
+      }
+
+      .travel-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+ 
+  <!-- =========================
+     PAGE PRELOADER
+========================= -->
+
+<div class="preloader" id="preloader">
+
+  <div class="preloader-content">
+
+    <div class="preloader-logo">
+      Drishya Travels<span>.</span>
+    </div>
+
+    <div class="mountain-loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <p>Discovering Nepal...</p>
+
+  </div>
+
+</div>
+<header class="nav legal-nav">
+
+  <div class="container nav-inner">
+
+    <a class="logo" href="index.html">
+      Drishya Travels<span>.</span>
+    </a>
+
+    <nav class="links">
+
+      <a href="index.html#about">
+        Why Nepal
+      </a>
+
+      <a href="index.html#experiences">
+        Experiences
+      </a>
+
+      <a href="index.html#planner">
+        Plan a Trip
+      </a>
+
+    </nav>
+
+    <a class="nav-btn" href="packages.html">
+      Explore packages
+    </a>
+
+    <button class="menu" aria-label="Open menu">
+      ☰
+    </button>
+
+  </div>
+
+</header>
+
+
+<main>
+
+<section class="travel-page">
+
+  <div class="container">
+
+    <div class="travel-header">
+
+      <div class="kicker">
+        Before You Go
+      </div>
+
+      <h1>
+        Travel Tips
+      </h1>
+
+      <p>
+        A few practical things to know before exploring Nepal's
+        mountains, cities, culture and wild places.
+      </p>
+
+    </div>
+
+
+    <div class="travel-grid">
+
+
+      <article class="travel-card">
+
+        <h2>
+          Pack for the Journey
+        </h2>
+
+        <p>
+          Nepal's climate varies significantly with altitude and
+          season. Pack according to your destination and activities.
+        </p>
+
+        <ul>
+
+          <li>
+            Comfortable walking shoes are useful for sightseeing
+            and city exploration.
+          </li>
+
+          <li>
+            Bring layers when travelling to mountainous regions.
+          </li>
+
+          <li>
+            Carry rain protection during the monsoon season.
+          </li>
+
+          <li>
+            Sunscreen, sunglasses and a reusable water bottle are
+            useful for outdoor activities.
+          </li>
+
+        </ul>
+
+      </article>
+
+
+      <article class="travel-card">
+
+        <h2>
+          Money & Payments
+        </h2>
+
+        <p>
+          Nepal uses the Nepalese Rupee (NPR). Cards are accepted
+          at many hotels, restaurants and larger businesses, but
+          cash remains useful, especially outside major cities.
+        </p>
+
+        <ul>
+
+          <li>
+            Carry some Nepalese Rupees for smaller purchases.
+          </li>
+
+          <li>
+            ATMs are more readily available in major cities and
+            tourist areas.
+          </li>
+
+          <li>
+            Keep your foreign exchange receipts when exchanging
+            currency.
+          </li>
+
+        </ul>
+
+      </article>
+
+
+      <article class="travel-card">
+
+        <h2>
+          Altitude & Trekking
+        </h2>
+
+        <p>
+          If your journey includes high-altitude trekking, allow
+          enough time for acclimatization and avoid increasing
+          altitude too quickly.
+        </p>
+
+        <ul>
+
+          <li>
+            Stay hydrated.
+          </li>
+
+          <li>
+            Follow your guide's recommendations.
+          </li>
+
+          <li>
+            Take acclimatization days seriously.
+          </li>
+
+          <li>
+            Inform your travel company about relevant medical or
+            fitness concerns before departure.
+          </li>
+
+        </ul>
+
+      </article>
+
+
+      <article class="travel-card">
+
+        <h2>
+          Respect Local Culture
+        </h2>
+
+        <p>
+          Nepal has diverse cultures, religions and traditions.
+          Travelling respectfully helps preserve the places and
+          communities you visit.
+        </p>
+
+        <ul>
+
+          <li>
+            Dress appropriately when visiting religious sites.
+          </li>
+
+          <li>
+            Ask before photographing people.
+          </li>
+
+          <li>
+            Remove shoes where local customs require it.
+          </li>
+
+          <li>
+            Respect local religious practices and monuments.
+          </li>
+
+        </ul>
+
+      </article>
+
+
+      <article class="travel-card">
+
+        <h2>
+          Stay Connected
+        </h2>
+
+        <p>
+          Mobile connectivity is generally available in populated
+          areas, while connectivity can become limited in remote
+          trekking regions.
+        </p>
+
+        <ul>
+
+          <li>
+            Download important maps before heading into remote areas.
+          </li>
+
+          <li>
+            Keep important documents backed up digitally.
+          </li>
+
+          <li>
+            Carry a power bank for longer journeys.
+          </li>
+
+        </ul>
+
+      </article>
+
+
+      <article class="travel-card">
+
+        <h2>
+          Travel Responsibly
+        </h2>
+
+        <p>
+          Help keep Nepal's natural and cultural destinations
+          beautiful for future generations.
+        </p>
+
+        <ul>
+
+          <li>
+            Avoid unnecessary single-use plastics.
+          </li>
+
+          <li>
+            Dispose of waste properly.
+          </li>
+
+          <li>
+            Support local businesses and communities.
+          </li>
+
+          <li>
+            Follow rules in national parks and protected areas.
+          </li>
+
+        </ul>
+
+      </article>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div>
+
+        <div class="logo">
+          Drishya Travels<span>.</span>
+        </div>
+
+        <p style="margin-top:12px;max-width:300px">
+          Discover Nepal through unforgettable journeys,
+          authentic experiences, and thoughtfully planned adventures.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>Help & Legal</h4>
+
+        <a href="faq.html">FAQs</a>
+
+        <a href="privacy-policy.html">
+          Privacy Policy
+        </a>
+
+        <a href="terms-and-conditions.html">
+          Terms & Conditions
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>Travel</h4>
+
+        <a href="travel-tips.html">
+          Travel Tips
+        </a>
+
+        <a href="best-time-to-visit.html">
+          Best Time to Visit
+        </a>
+
+        <a href="visa-information.html">
+          Visa Information
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>Connect</h4>
+        <a href="https://www.facebook.com/share/1EnaUqG3Lr/" target="_blank">
+          Facebook
+        </a>
+        <a href="tel:+9779851349571">
+          9851349571
+        </a>
+
+        <a href="tel:+9779851122871">
+          9851122871
+        </a>
+
+        <a href="mailto:drishyatravels111@gmail.com">
+          Email
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+      © 2026 Drishya Travels. All rights reserved.
+    </div>
+
+  </div>
+
+</footer>
+
+<script>
+window.addEventListener("load", function(){
+
+  const preloader = document.getElementById("preloader");
+
+  setTimeout(() => {
+    preloader.classList.add("loaded");
+  }, 500);
+
+});
+</script>
+</body>
+</html>

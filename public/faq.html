@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FAQs — Drishya Travels</title>
+
+  <meta
+    name="description"
+    content="Find answers to frequently asked questions about Drishya Travels, travel packages, bookings, payments, cancellations and trips in Nepal."
+  >
+
+  <link rel="icon" type="image/png" href="logo.jpeg">
+  <link rel="stylesheet" href="css/global.css">
+
+  <style>
+    /* =========================
+   PRELOADER
+========================= */
+
+.preloader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:var(--accent2, #214f45);
+
+  opacity:1;
+  visibility:visible;
+
+  transition:
+    opacity .7s ease,
+    visibility .7s ease;
+}
+
+/* Hidden state */
+.preloader.loaded{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+/* Content */
+.preloader-content{
+  text-align:center;
+  color:#fff;
+}
+
+/* Logo */
+.preloader-logo{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:-1px;
+
+  animation:preloaderFade 1.2s ease-in-out infinite alternate;
+}
+
+.preloader-logo span{
+  color:var(--accent, #d66a3d);
+}
+
+/* =========================
+   MOUNTAIN LOADER
+========================= */
+
+.mountain-loader{
+  position:relative;
+
+  width:120px;
+  height:55px;
+
+  margin:25px auto 18px;
+
+  overflow:hidden;
+}
+
+/* Mountain shapes */
+.mountain-loader span{
+  position:absolute;
+  bottom:0;
+
+  width:0;
+  height:0;
+
+  border-left:30px solid transparent;
+  border-right:30px solid transparent;
+  border-bottom:45px solid rgba(255,255,255,.92);
+
+  transform-origin:center bottom;
+
+  animation:mountainPulse 1.5s ease-in-out infinite;
+}
+
+.mountain-loader span:nth-child(1){
+  left:0;
+  transform:scale(.8);
+  animation-delay:0s;
+}
+
+.mountain-loader span:nth-child(2){
+  left:30px;
+  border-left-width:40px;
+  border-right-width:40px;
+  border-bottom-width:55px;
+  animation-delay:.15s;
+}
+
+.mountain-loader span:nth-child(3){
+  right:0;
+  transform:scale(.75);
+  animation-delay:.3s;
+}
+
+/* Loading text */
+.preloader p{
+  margin:0;
+
+  font-size:11px;
+  font-weight:800;
+
+  text-transform:uppercase;
+  letter-spacing:3px;
+
+  color:rgba(255,255,255,.65);
+
+  animation:preloaderText 1.5s ease-in-out infinite;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes mountainPulse{
+
+  0%,
+  100%{
+    opacity:.45;
+    transform:translateY(5px) scale(.92);
+  }
+
+  50%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+@keyframes preloaderFade{
+
+  from{
+    opacity:.65;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+@keyframes preloaderText{
+
+  0%,
+  100%{
+    opacity:.45;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:520px){
+
+  .preloader-logo{
+    font-size:24px;
+  }
+
+  .mountain-loader{
+    width:105px;
+    height:50px;
+  }
+
+  .preloader p{
+    font-size:10px;
+    letter-spacing:2.5px;
+  }
+
+}
+
+    .legal-page {
+      padding: 150px 0 100px;
+      min-height: 80vh;
+    }
+
+    .legal-header {
+      max-width: 800px;
+      margin-bottom: 55px;
+    }
+
+    .legal-header h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -3px;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .legal-header p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 650px;
+    }
+
+    .faq-container {
+      max-width: 850px;
+    }
+
+    .faq-item {
+      border-top: 1px solid var(--line);
+      padding: 25px 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-question {
+      font-size: 19px;
+      font-weight: 750;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+
+    .faq-answer {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 760px;
+    }
+
+    .faq-answer a {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .legal-nav {
+      background: var(--accent2);
+      color: white;
+    }
+
+    .legal-nav .logo {
+      color: white;
+    }
+
+    @media (max-width: 520px) {
+      .legal-page {
+        padding: 120px 0 70px;
+      }
+
+      .legal-header h1 {
+        letter-spacing: -2px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+ <!-- =========================
+     PAGE PRELOADER
+========================= -->
+
+<div class="preloader" id="preloader">
+
+  <div class="preloader-content">
+
+    <div class="preloader-logo">
+      Drishya Travels<span>.</span>
+    </div>
+
+    <div class="mountain-loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <p>Discovering Nepal...</p>
+
+  </div>
+
+</div>
+<header class="nav legal-nav">
+  <div class="container nav-inner">
+
+    <a class="logo" href="index.html">
+      Drishya Travels<span>.</span>
+    </a>
+
+    <nav class="links">
+      <a href="index.html#about">Why Nepal</a>
+      <a href="index.html#experiences">Experiences</a>
+      <a href="index.html#planner">Plan a Trip</a>
+    </nav>
+
+    <a class="nav-btn" href="packages.html">
+      Explore packages
+    </a>
+
+    <button
+      class="menu"
+      id="mobileMenuBtn"
+      aria-label="Open menu">
+      ☰
+    </button>
+
+  </div>
+</header>
+
+
+<main>
+
+  <section class="legal-page">
+
+    <div class="container">
+
+      <div class="legal-header">
+
+        <div class="kicker">
+          Help & Support
+        </div>
+
+        <h1>
+          Frequently Asked Questions
+        </h1>
+
+        <p>
+          Everything you need to know about travelling with
+          Drishya Travels and exploring Nepal.
+        </p>
+
+      </div>
+
+
+      <div class="faq-container">
+
+        <div class="faq-item">
+
+          <h2 class="faq-question">
+            What types of trips does Drishya Travels offer?
+          </h2>
+
+          <p class="faq-answer">
+            We offer a range of travel experiences across Nepal,
+            including trekking, adventure activities, cultural tours,
+            sightseeing, wildlife experiences and customized trips.
+          </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+          <h2 class="faq-question">
+            How can I book a travel package?
+          </h2>
+
+          <p class="faq-answer">
+            You can explore our packages and contact us through
+            WhatsApp, phone or email to discuss availability,
+            requirements and booking arrangements.
+          </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+          <h2 class="faq-question">
+            Can I customize a package?
+          </h2>
+
+          <p class="faq-answer">
+            Yes. Many of our trips can be customized according to
+            your preferred duration, destinations, activities,
+            accommodation and travel requirements.
+          </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+          <h2 class="faq-question">
+            How many people can travel in one group?
+          </h2>
+
+          <p class="faq-answer">
+            Group sizes depend on the specific package and itinerary.
+            Contact us with the number of travellers in your group
+            and we will recommend suitable arrangements.
+          </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+          <h2 class="faq-question">
+            What is included in a travel package?
+          </h2>
+
+          <p class="faq-answer">
+            Package inclusions vary by trip. Depending on the package,
+            they may include transportation, accommodation, meals,
+            guides, permits and selected activities. Please check
+            the individual package details before booking.
+          </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+          <h2 class="faq-question">
+            What is not included in a package?
+          </h2>
+
+          <p class="faq-answer">
+            Common exclusions may include international flights,
+            personal expenses, travel insurance, visa fees and
+            activities that are not specifically listed in the
+            package inclusions.
+          </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+          <h2 class="faq-question">
+            What happens if I need to cancel my trip?
+          </h2>
+
+          <p class="faq-answer">
+            Cancellation and refund conditions depend on the package
+            and booking arrangement. Please contact us as soon as
+            possible if you need to cancel or change your trip.
+          </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+          <h2 class="faq-question">
+            Is travel insurance required?
+          </h2>
+
+          <p class="faq-answer">
+            We strongly recommend obtaining appropriate travel
+            insurance before travelling, particularly for trekking,
+            adventure activities and international travellers.
+          </p>
+
+        </div>
+
+
+        <div class="faq-item">
+
+          <h2 class="faq-question">
+            How can I contact Drishya Travels?
+          </h2>
+
+          <p class="faq-answer">
+            You can contact us by phone, email or WhatsApp.
+            Our contact details are available in the website footer.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div>
+        <div class="logo">
+          Drishya Travels<span>.</span>
+        </div>
+
+        <p style="margin-top:12px;max-width:300px">
+          A modern travel guide for discovering Nepal's mountains,
+          culture, adventure and wild places.
+        </p>
+      </div>
+
+
+      <div>
+
+        <h4>Help & Legal</h4>
+
+        <a href="faq.html">FAQs</a>
+
+        <a href="privacy-policy.html">
+          Privacy Policy
+        </a>
+
+        <a href="terms-and-conditions.html">
+          Terms & Conditions
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>Travel</h4>
+
+        <a href="index.html#experiences">
+          Experiences
+        </a>
+
+        <a href="packages.html">
+          Packages
+        </a>
+
+        <a href="index.html#planner">
+          Plan a Trip
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>Connect</h4>
+        <a href="https://www.facebook.com/share/1EnaUqG3Lr/" target="_blank">
+          Facebook
+        </a>
+
+        <a href="tel:+9779851349571">
+          9851349571
+        </a>
+
+        <a href="tel:+9779851122871">
+          9851122871
+        </a>
+
+        <a href="mailto:drishyatravels111@gmail.com">
+          Email
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+      © 2026 Drishya Travels. All rights reserved.
+    </div>
+
+  </div>
+
+</footer>
+
+</body>
+<script>
+window.addEventListener("load", function(){
+
+  const preloader = document.getElementById("preloader");
+
+  setTimeout(() => {
+    preloader.classList.add("loaded");
+  }, 500);
+
+});
+</script>
+</html>
