@@ -6,7 +6,7 @@
 
   <title>Himalaya — Admin</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -46,7 +46,7 @@
 
     <div class="sidebar-bottom">
 
-      <a href="../index.html" class="back-site">
+      <a href="../public/index.html" class="back-site">
         ← View website
       </a>
 
@@ -433,7 +433,7 @@
 
           <div id="itineraryEmpty" class="empty-state">
             <h3>No itinerary days yet</h3>
-            <p>Click “Add Day” to create the first day.</p>
+            <p>Click "Add Day" to create the first day.</p>
           </div>
         </div>
 
@@ -482,11 +482,13 @@
 
 
 
+
 <!-- The public package detail page can use the same stored package object.
      admin.js exposes window.getStoredPackages() for other pages. -->
 
-<script src="../data/packages.js"></script>
-<script src="script.js"></script>
+<script src="../public/data/packages.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>

@@ -35,14 +35,35 @@ Since Drishya Travels is a static HTML/CSS/JS project, it requires no complex bu
 ## Project Structure
 ```text
 DRISHYATRAVELS/
-├── admin/                 # Admin panel interface (static HTML/CSS/JS)
-├── css/                   # Global and page-specific stylesheets
-├── data/                  # Static mock data (packages.js)
+├── admin/                 # Admin panel interface
+│   ├── css/
+│   │   └── style.css      # Admin panel styles
+│   ├── js/
+│   │   ├── script.js      # Admin panel logic
+│   │   └── utils.js       # Shared utilities (symlink or copy of public/js/utils.js)
+│   └── index.html         # Admin dashboard
 ├── docs/                  # Project documentation
-├── js/                    # Core logic and DOM manipulation scripts
-├── index.html             # Homepage
-├── package.html           # Reusable package detail template
-└── packages.html          # Package listing page
+│   ├── ARCHITECTURE.md
+│   ├── DECISIONS.md
+│   ├── DEVELOPMENT.md
+│   └── PROJECT_STATUS.md
+├── public/                # Public website (served as root)
+│   ├── assets/            # Static assets (images, fonts)
+│   ├── css/
+│   │   ├── global.css     # CSS variables, reset, utilities
+│   │   ├── home.css       # Homepage styles
+│   │   ├── packages.css   # Package listing page styles
+│   │   └── package-details.css  # Package detail page styles
+│   ├── data/
+│   │   └── packages.js    # Static package data (PACKAGES object + helpers)
+│   ├── js/
+│   │   ├── utils.js       # Shared utilities (escapeHTML)
+│   │   ├── main.js        # Homepage logic (trip planner, experience cards)
+│   │   ├── packages.js    # Package listing page logic
+│   │   └── package-details.js  # Package detail page logic
+│   ├── index.html         # Homepage
+│   ├── packages.html      # Package listing page
+│   └── package.html       # Package detail template
 ```
 
 ## Architecture

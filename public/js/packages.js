@@ -2,13 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("packageGrid");
   if (!grid || typeof getAllPackages !== "function") return;
 
-  const escapeHTML = value => String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-
   grid.innerHTML = getAllPackages().map(pkg => `
     <article class="package-card">
       <a href="package.html?id=${encodeURIComponent(pkg.id)}" aria-label="Explore ${escapeHTML(pkg.title)}">

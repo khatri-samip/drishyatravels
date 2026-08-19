@@ -26,6 +26,25 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     });
   }
+
+  // Event delegation for edit/delete buttons in package table
+  const packageList = document.getElementById("packageList");
+  if (packageList) {
+    packageList.addEventListener("click", (e) => {
+      const editBtn = e.target.closest(".edit-btn");
+      const deleteBtn = e.target.closest(".delete-btn");
+
+      if (editBtn) {
+        const id = editBtn.dataset.id;
+        if (id) editPackage(id);
+      }
+
+      if (deleteBtn) {
+        const id = deleteBtn.dataset.id;
+        if (id) deletePackage(id);
+      }
+    });
+  }
 });
 
 /* =========================
@@ -79,7 +98,7 @@ function renderPackages(packages) {
   }
 
   list.innerHTML = packages.map(pkg => `
-    <div class="package-row">
+    <div class="package-row" data-id="${escapeHTML(pkg.id)}">
       <div class="package-name">
         <img
           class="package-thumb"
@@ -100,8 +119,8 @@ function renderPackages(packages) {
         </span>
       </span>
       <span class="row-actions">
-        <button class="action-btn" onclick="editPackage('${pkg.id}')">Edit</button>
-        <button class="action-btn delete" onclick="deletePackage('${pkg.id}')">Delete</button>
+        <button class="action-btn edit-btn" data-id="${escapeHTML(pkg.id)}">Edit</button>
+        <button class="action-btn delete delete-btn" data-id="${escapeHTML(pkg.id)}">Delete</button>
       </span>
     </div>
   `).join("");
@@ -155,17 +174,4 @@ function updateStats(packages) {
 
   const draftEl = document.getElementById("draftPackages");
   if (draftEl) draftEl.textContent = drafts;
-}
-
-/* =========================
-   SECURITY
-========================= */
-
-function escapeHTML(value) {
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
 }
