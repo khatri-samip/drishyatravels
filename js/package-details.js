@@ -6,6 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!app) return;
 
+  const escapeHTML = value => String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
   if (!pkg) {
     document.title = "Package not found — Himalaya";
     app.innerHTML = `
@@ -22,12 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.title = `${pkg.title} — Himalaya`;
 
-  const escapeHTML = value => String(value)
-    .replaceAll("&","&amp;").replaceAll("<","&lt;")
-    .replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
-
   app.innerHTML = `
-    <section class="package-hero" style="background-image:url('${pkg.heroImage}')">
+    <section class="package-hero" style="background-image:url('${escapeHTML(pkg.heroImage)}')">
       <div class="container package-hero-content">
         <div class="kicker" style="color:#f1ad88">${escapeHTML(pkg.destination)}</div>
         <div class="package-title">
@@ -75,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           <div class="kicker" style="margin-top:55px">Gallery</div>
           <div class="gallery">
-            ${pkg.gallery.map((img, i) => `<img src="${img}" alt="${escapeHTML(pkg.title)} gallery ${i+1}" loading="lazy">`).join("")}
+            ${pkg.gallery.map((img, i) => `<img src="${escapeHTML(img)}" alt="${escapeHTML(pkg.title)} gallery ${i+1}" loading="lazy">`).join("")}
           </div>
 
           <div class="kicker">Questions</div>

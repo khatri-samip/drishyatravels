@@ -2,17 +2,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("packageGrid");
   if (!grid || typeof getAllPackages !== "function") return;
 
+  const escapeHTML = value => String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
   grid.innerHTML = getAllPackages().map(pkg => `
     <article class="package-card">
-      <a href="package.html?id=${encodeURIComponent(pkg.id)}" aria-label="Explore ${pkg.title}">
-        <img src="${pkg.heroImage}" alt="${pkg.title}" loading="lazy">
+      <a href="package.html?id=${encodeURIComponent(pkg.id)}" aria-label="Explore ${escapeHTML(pkg.title)}">
+        <img src="${escapeHTML(pkg.heroImage)}" alt="${escapeHTML(pkg.title)}" loading="lazy">
         <div class="package-card-body">
-          <div class="kicker">${pkg.destination}</div>
-          <h3>${pkg.title}</h3>
-          <p>${pkg.description}</p>
+          <div class="kicker">${escapeHTML(pkg.destination)}</div>
+          <h3>${escapeHTML(pkg.title)}</h3>
+          <p>${escapeHTML(pkg.description)}</p>
           <div class="package-info">
-            <span>${pkg.duration}</span>
-            <span>${pkg.price}</span>
+            <span>${escapeHTML(pkg.duration)}</span>
+            <span>${escapeHTML(pkg.price)}</span>
           </div>
           <span class="link">Explore →</span>
         </div>
