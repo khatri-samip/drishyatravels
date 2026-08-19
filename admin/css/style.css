@@ -1,3 +1,187 @@
+/* =========================
+   PRELOADER
+========================= */
+
+.preloader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:var(--accent2, #214f45);
+
+  opacity:1;
+  visibility:visible;
+
+  transition:
+    opacity .7s ease,
+    visibility .7s ease;
+}
+
+/* Hidden state */
+.preloader.loaded{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+/* Content */
+.preloader-content{
+  text-align:center;
+  color:#fff;
+}
+
+/* Logo */
+.preloader-logo{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:-1px;
+
+  animation:preloaderFade 1.2s ease-in-out infinite alternate;
+}
+
+.preloader-logo span{
+  color:var(--accent, #d66a3d);
+}
+
+/* =========================
+   MOUNTAIN LOADER
+========================= */
+
+.mountain-loader{
+  position:relative;
+
+  width:120px;
+  height:55px;
+
+  margin:25px auto 18px;
+
+  overflow:hidden;
+}
+
+/* Mountain shapes */
+.mountain-loader span{
+  position:absolute;
+  bottom:0;
+
+  width:0;
+  height:0;
+
+  border-left:30px solid transparent;
+  border-right:30px solid transparent;
+  border-bottom:45px solid rgba(255,255,255,.92);
+
+  transform-origin:center bottom;
+
+  animation:mountainPulse 1.5s ease-in-out infinite;
+}
+
+.mountain-loader span:nth-child(1){
+  left:0;
+  transform:scale(.8);
+  animation-delay:0s;
+}
+
+.mountain-loader span:nth-child(2){
+  left:30px;
+  border-left-width:40px;
+  border-right-width:40px;
+  border-bottom-width:55px;
+  animation-delay:.15s;
+}
+
+.mountain-loader span:nth-child(3){
+  right:0;
+  transform:scale(.75);
+  animation-delay:.3s;
+}
+
+/* Loading text */
+.preloader p{
+  margin:0;
+
+  font-size:11px;
+  font-weight:800;
+
+  text-transform:uppercase;
+  letter-spacing:3px;
+
+  color:rgba(255,255,255,.65);
+
+  animation:preloaderText 1.5s ease-in-out infinite;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes mountainPulse{
+
+  0%,
+  100%{
+    opacity:.45;
+    transform:translateY(5px) scale(.92);
+  }
+
+  50%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+@keyframes preloaderFade{
+
+  from{
+    opacity:.65;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+@keyframes preloaderText{
+
+  0%,
+  100%{
+    opacity:.45;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:520px){
+
+  .preloader-logo{
+    font-size:24px;
+  }
+
+  .mountain-loader{
+    width:105px;
+    height:50px;
+  }
+
+  .preloader p{
+    font-size:10px;
+    letter-spacing:2.5px;
+  }
+
+}
+
 :root {
   --ink:#10231f;
   --muted:#65736f;

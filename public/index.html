@@ -3,13 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Himalaya — Discover Nepal</title>
+<title>Drishya Travels — Book trips in Nepal</title>
+<link rel="icon" type="image/png" href="logo.jpeg">
 <meta name="description" content="Discover Nepal's mountains, culture, wildlife and unforgettable journeys.">
 <link rel="stylesheet" href="css/global.css">
 <link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
+  
+  <!-- =========================
+     PAGE PRELOADER
+========================= -->
+
+<div class="preloader" id="preloader">
+
+  <div class="preloader-content">
+
+    <div class="preloader-logo">
+      Drishya Travels<span>.</span>
+    </div>
+
+    <div class="mountain-loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <p>Discovering Nepal...</p>
+
+  </div>
+
+</div>
 
 <header class="nav">
   <div class="container nav-inner">
@@ -103,40 +129,6 @@
   </div>
 
 </section>
-<!-- =========================
-     FEATURED PACKAGES
-========================= -->
-
-<section class="section featured-packages" id="featured">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div>
-        <div class="kicker">
-          Recommended for you
-        </div>
-
-        <h2>
-          Featured journeys.
-        </h2>
-      </div>
-
-      <a class="link" href="packages.html">
-        View all packages →
-      </a>
-
-    </div>
-
-    <div class="featured-grid" id="featured-packages-container">
-      <!-- Featured / discounted packages loaded by JavaScript -->
-    </div>
-
-  </div>
-
-</section>
-
 <!-- =========================
      FEATURED PACKAGES
 ========================= -->
@@ -331,7 +323,7 @@
       <a
         class="exp"
         style="background-image:url('https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=900&q=80')"
-        href="package.html?id=mardi-trek">
+        href="package.html?id=pokhara-adventure">
 
         <div class="exp-content">
 
@@ -351,7 +343,7 @@
       <a
         class="exp"
         style="background-image:url('https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=900&q=80')"
-        href="package.html?id=rani-mahal">
+        href="package.html?id=kathmandu-heritage">
 
         <div class="exp-content">
 
@@ -567,8 +559,8 @@
     </div>
 
     <blockquote>
-      "You don't just see the mountains here. You feel how small,
-      alive and wonderfully human the world can be."
+      “You don't just see the mountains here. You feel how small,
+      alive and wonderfully human the world can be.”
     </blockquote>
 
     <cite>
@@ -595,7 +587,7 @@
       <div>
 
         <div class="logo">
-          HIMALAYA<span>.</span>
+          Drishya Travels<span>.</span>
         </div>
 
         <p style="margin-top:12px;max-width:300px">
@@ -654,16 +646,20 @@
           Connect
         </h4>
 
-        <a href="#">
-          Instagram
+        <a href="https://www.facebook.com/share/1EnaUqG3Lr/">
+          Facebook
         </a>
 
-        <a href="#">
-          YouTube
+        <a href="tel:+9779851349571">
+          9851349571
         </a>
 
-        <a href="mailto:hello@himalaya.example">
-          Contact us
+        <a href="tel:+9779851122871">
+          9851122871
+        </a>
+
+        <a href="mailto:drishyatravels111@gmail.com">
+          Email
         </a>
 
       </div>
@@ -672,7 +668,7 @@
 
 
     <div class="copyright">
-      © 2026 Himalaya. Built for Nepal.
+      © 2026 Drishya Travels. Built for Nepal.
     </div>
 
   </div>
@@ -680,12 +676,34 @@
 </footer>
 
 
+<!--whatsapp fixed botton -->
+
+<a
+  href="https://wa.me/9851349571?text=Hello%2C%20I%20am%20interested%20in%20your%20travel%20packages."
+  class="whatsapp-button"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Chat with us on WhatsApp"
+>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
 <!-- =========================
      JAVASCRIPT
 ========================= -->
 
+<script>
+window.addEventListener("load", function(){
+
+  const preloader = document.getElementById("preloader");
+
+  setTimeout(() => {
+    preloader.classList.add("loaded");
+  }, 500);
+
+});
+</script>
 <script src="data/packages.js"></script>
-<script src="js/utils.js"></script>
 <script src="js/main.js"></script>
 
 </body>

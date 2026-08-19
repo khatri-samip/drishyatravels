@@ -7,6 +7,29 @@
 <link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/package-details.css">
 </head>
 <body>
+    <!-- =========================
+     PAGE PRELOADER
+========================= -->
+
+<div class="preloader" id="preloader">
+
+  <div class="preloader-content">
+
+    <div class="preloader-logo">
+      Drishya Travels<span>.</span>
+    </div>
+
+    <div class="mountain-loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <p>Discovering Nepal...</p>
+
+  </div>
+
+</div>
 <header class="nav">
   <div class="container nav-inner">
     <a class="logo" href="index.html">HIMALAYA<span>.</span></a>
@@ -24,7 +47,21 @@
   <div><h4>Travel</h4><a href="#">Travel tips</a><a href="#">Best time to visit</a><a href="#">Visa information</a></div>
   <div><h4>Connect</h4><a href="#">Instagram</a><a href="#">YouTube</a><a href="mailto:hello@himalaya.example">Contact us</a></div>
 </div><div class="copyright">© 2026 Himalaya. Built for Nepal.</div></div></footer>
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
+<script>
+window.addEventListener("load", function(){
+
+  const preloader = document.getElementById("preloader");
+
+  setTimeout(() => {
+    preloader.classList.add("loaded");
+  }, 500);
+
+});
+</script>
 <script src="data/packages.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/main.js"></script>
