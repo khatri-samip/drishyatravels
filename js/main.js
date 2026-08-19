@@ -17,27 +17,80 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Trip planner
-  const planTripBtn = document.getElementById("planTripBtn");
-  if (planTripBtn) {
-    planTripBtn.addEventListener("click", () => {
-      const style = document.getElementById("style")?.value;
-      const days = document.getElementById("days")?.value;
-      const month = document.getElementById("month")?.value;
-      const people = document.getElementById("people")?.value;
-      const result = document.getElementById("result");
-      if (!result) return;
+ async function planTrip() {
 
-      let route = "Kathmandu → Pokhara → Chitwan";
-      if (style === "Adventure") route = "Kathmandu → Pokhara → Annapurna region";
-      if (style === "Culture") route = "Kathmandu → Bhaktapur → Patan → Bandipur";
-      if (style === "Wildlife") route = "Kathmandu → Chitwan → Pokhara";
-      if (style === "Relaxed") route = "Kathmandu → Pokhara → Bandipur";
+    const style = document.getElementById("style")?.value;
+    const days = document.getElementById("days")?.value;
+    const month = document.getElementById("month")?.value;
+    const people = document.getElementById("people")?.value;
 
-      result.innerHTML = `<strong>Your starting route:</strong> ${escapeHTML(route)}<br><small>${escapeHTML(days)} · ${escapeHTML(month)} · ${escapeHTML(people)} traveller(s). This demo uses local logic.</small>`;
-      result.style.display = "block";
-    });
-  }
+    const result = document.getElementById("result");
+
+    if (!result) return;
+
+
+    // Show loading state
+    result.innerHTML = "Planning your trip...";
+    result.style.display = "block";
+
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/api/trip-planner/",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    style: style,
+                    days: days,
+                    month: month,
+                    people: people
+                })
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || "Something went wrong."
+            );
+        }
+
+
+        result.innerHTML = `
+            <strong>Your starting route:</strong>
+            ${data.route}
+            <br>
+            <small>
+                ${data.days}
+                ·
+                ${data.month}
+                ·
+                ${data.people} traveller(s)
+            </small>
+        `;
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        result.innerHTML = `
+            <strong>Unable to plan your trip.</strong>
+            <br>
+            <small>Please try again.</small>
+        `;
+
+    }
+}
 
   // Load packages
   const packagesContainer = document.getElementById("packages-container");
