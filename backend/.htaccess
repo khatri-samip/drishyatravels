@@ -1,0 +1,18 @@
+# Security: Prevent access to sensitive files
+<FilesMatch "^\.env$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(php|sql|log|ini|sqlite3)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "(manage\.py|requirements\.txt|README\.md)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Disable directory listing
+Options -Indexes
