@@ -10,7 +10,29 @@
 </head>
 
 <body>
+ <!-- =========================
+     PAGE PRELOADER
+========================= -->
 
+<div class="preloader" id="preloader">
+
+  <div class="preloader-content">
+
+    <div class="preloader-logo">
+      Drishya Travels<span>.</span>
+    </div>
+
+    <div class="mountain-loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <p>Discovering Nepal...</p>
+
+  </div>
+
+</div>
 <div class="admin-layout">
 
   <!-- SIDEBAR -->
@@ -481,7 +503,21 @@
 </div>
 
 
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
+<script>
+window.addEventListener("load", function(){
+
+  const preloader = document.getElementById("preloader");
+
+  setTimeout(() => {
+    preloader.classList.add("loaded");
+  }, 500);
+
+});
+</script>
 
 <!-- The public package detail page can use the same stored package object.
      admin.js exposes window.getStoredPackages() for other pages. -->

@@ -1,3 +1,187 @@
+/* =========================
+   PRELOADER
+========================= */
+
+.preloader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:var(--accent2, #214f45);
+
+  opacity:1;
+  visibility:visible;
+
+  transition:
+    opacity .7s ease,
+    visibility .7s ease;
+}
+
+/* Hidden state */
+.preloader.loaded{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+/* Content */
+.preloader-content{
+  text-align:center;
+  color:#fff;
+}
+
+/* Logo */
+.preloader-logo{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:-1px;
+
+  animation:preloaderFade 1.2s ease-in-out infinite alternate;
+}
+
+.preloader-logo span{
+  color:var(--accent, #d66a3d);
+}
+
+/* =========================
+   MOUNTAIN LOADER
+========================= */
+
+.mountain-loader{
+  position:relative;
+
+  width:120px;
+  height:55px;
+
+  margin:25px auto 18px;
+
+  overflow:hidden;
+}
+
+/* Mountain shapes */
+.mountain-loader span{
+  position:absolute;
+  bottom:0;
+
+  width:0;
+  height:0;
+
+  border-left:30px solid transparent;
+  border-right:30px solid transparent;
+  border-bottom:45px solid rgba(255,255,255,.92);
+
+  transform-origin:center bottom;
+
+  animation:mountainPulse 1.5s ease-in-out infinite;
+}
+
+.mountain-loader span:nth-child(1){
+  left:0;
+  transform:scale(.8);
+  animation-delay:0s;
+}
+
+.mountain-loader span:nth-child(2){
+  left:30px;
+  border-left-width:40px;
+  border-right-width:40px;
+  border-bottom-width:55px;
+  animation-delay:.15s;
+}
+
+.mountain-loader span:nth-child(3){
+  right:0;
+  transform:scale(.75);
+  animation-delay:.3s;
+}
+
+/* Loading text */
+.preloader p{
+  margin:0;
+
+  font-size:11px;
+  font-weight:800;
+
+  text-transform:uppercase;
+  letter-spacing:3px;
+
+  color:rgba(255,255,255,.65);
+
+  animation:preloaderText 1.5s ease-in-out infinite;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes mountainPulse{
+
+  0%,
+  100%{
+    opacity:.45;
+    transform:translateY(5px) scale(.92);
+  }
+
+  50%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+@keyframes preloaderFade{
+
+  from{
+    opacity:.65;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+@keyframes preloaderText{
+
+  0%,
+  100%{
+    opacity:.45;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:520px){
+
+  .preloader-logo{
+    font-size:24px;
+  }
+
+  .mountain-loader{
+    width:105px;
+    height:50px;
+  }
+
+  .preloader p{
+    font-size:10px;
+    letter-spacing:2.5px;
+  }
+
+}
+
 /* Homepage styling preserved from the original mockup. */
 .hero{min-height:810px;display:flex;align-items:center;position:relative;overflow:hidden;color:#fff;
 background:linear-gradient(90deg,rgba(7,22,20,.76),rgba(7,22,20,.28)),url("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2200&q=85") center/cover}
@@ -283,9 +467,89 @@ h1{font-size:clamp(52px,7vw,92px);line-height:.95;letter-spacing:-4px;margin-bot
 .feature-list{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
 .feature-list div{border-top:1px solid rgba(255,255,255,.18);padding-top:14px;font-size:14px}
 .experiences{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.exp{height:320px;border-radius:20px;overflow:hidden;position:relative;background-size:cover;background-position:center;color:#fff}
-.exp:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(0,0,0,.72))}
-.exp-content{position:absolute;z-index:2;bottom:22px;left:20px}.exp h3{font-size:22px}.exp span{font-size:12px;color:#ddd}
+/* =========================
+   EXPERIENCES CARDS
+========================= */
+
+.exp{
+  height:320px;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  color:#fff;
+
+  background-size:cover;
+  background-position:center;
+
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+
+/* Zoom + blur the image */
+.exp::before{
+  content:"";
+  position:absolute;
+  inset:-8px;
+
+  background:inherit;
+  background-size:cover;
+  background-position:center;
+
+  filter:blur(0px);
+  transform:scale(1);
+
+  transition:
+    transform .5s ease,
+    filter .5s ease;
+}
+
+/* Dark overlay */
+.exp::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:linear-gradient(
+    transparent 35%,
+    rgba(0,0,0,.72)
+  );
+
+  transition:background .4s ease;
+}
+
+/* Hover effect */
+.exp:hover::before{
+  transform:scale(1.10);
+  filter:blur(4px);
+}
+
+.exp:hover::after{
+  background:rgba(0,0,0,.50);
+}
+
+/* Text */
+.exp-content{
+  position:absolute;
+  z-index:2;
+  bottom:22px;
+  left:20px;
+
+  transition:
+    transform .35s ease,
+    opacity .35s ease;
+}
+
+.exp:hover .exp-content{
+  transform:translateY(-5px);
+}
+
+.exp h3{
+  font-size:22px;
+}
+
+.exp span{
+  font-size:12px;
+  color:#ddd;
+}
 .planner{background:#ebe9df}
 .planner-box{background:#fff;border-radius:28px;padding:32px;box-shadow:var(--shadow)}
 .form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
@@ -296,6 +560,37 @@ h1{font-size:clamp(52px,7vw,92px);line-height:.95;letter-spacing:-4px;margin-bot
 .quote{max-width:850px;margin:auto;text-align:center;}
 .quote blockquote{font-size:clamp(30px,4vw,48px);line-height:1.12;letter-spacing:-1.5px}
 .quote cite{display:block;margin-top:22px;color:var(--muted);font-style:normal}
+.whatsapp-button {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #25D366;
+    color: white;
+
+    border-radius: 50%;
+    text-decoration: none;
+
+    font-size: 28px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+
+    z-index: 9999;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
 @media(max-width:850px){
   .hero{min-height:700px}.hero-content{padding-top:100px}
   .stats{gap:22px}.stat strong{font-size:18px}
