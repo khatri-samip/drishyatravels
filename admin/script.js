@@ -1,40 +1,22 @@
-const API_URL = "http://localhost:5000/api/packages";
-
-
 document.addEventListener("DOMContentLoaded", () => {
-
   loadPackages();
 
   const form = document.getElementById("packageForm");
-
   if (form) {
     form.addEventListener("submit", savePackage);
   }
 
-
-  const imageInput =
-    document.getElementById("heroImage");
-
+  const imageInput = document.getElementById("heroImage");
   if (imageInput) {
-
     imageInput.addEventListener("input", () => {
-
       const url = imageInput.value.trim();
-
-      const preview =
-        document.getElementById("imagePreview");
-
+      const preview = document.getElementById("imagePreview");
       if (!url) {
-
         preview.style.display = "none";
-
         preview.innerHTML = "";
-
         return;
       }
-
       preview.style.display = "block";
-
       preview.innerHTML = `
         <img
           src="${escapeHTML(url)}"
@@ -42,448 +24,148 @@ document.addEventListener("DOMContentLoaded", () => {
           onerror="this.parentElement.style.display='none'"
         >
       `;
-
     });
-
   }
-
 });
-
 
 /* =========================
    LOAD PACKAGES
 ========================= */
 
 async function loadPackages() {
-
   try {
-
-    const response =
-      await fetch(API_URL);
-
-    if (!response.ok) {
-      throw new Error("Failed to load packages");
+    // Note: The original code fetched from http://localhost:5000/api/packages.
+    // Since there is no backend, we fall back to reading from the static data file.
+    if (typeof getAllPackages !== "function") {
+      throw new Error("Missing data/packages.js dependency");
     }
 
-    const packages =
-      await response.json();
-
+    const packages = getAllPackages();
     renderPackages(packages);
-
     updateStats(packages);
-
-  }
-
-  catch (error) {
-
+  } catch (error) {
     console.error(error);
-
-    const list =
-      document.getElementById("packageList");
-
-    list.innerHTML = `
-
-      <div class="empty-state">
-
-        <div class="empty-icon">
-          !
+    const list = document.getElementById("packageList");
+    if (list) {
+      list.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">!</div>
+          <h3>Static Data Missing</h3>
+          <p>Could not load the static packages data.</p>
         </div>
-
-        <h3>
-          Could not connect to server
-        </h3>
-
-        <p>
-          Make sure your Express backend is running.
-        </p>
-
-      </div>
-
-    `;
-
+      `;
+    }
   }
-
 }
-
 
 /* =========================
    RENDER PACKAGES
 ========================= */
 
 function renderPackages(packages) {
-
-  const list =
-    document.getElementById("packageList");
-
+  const list = document.getElementById("packageList");
+  if (!list) return;
 
   if (!packages.length) {
-
     list.innerHTML = `
-
       <div class="empty-state">
-
-        <div class="empty-icon">
-          +
-        </div>
-
-        <h3>
-          No packages yet
-        </h3>
-
-        <p>
-          Add your first package to get started.
-        </p>
-
-        <a
-          href="#add-package"
-          class="btn btn-primary"
-        >
-          Add Package
-        </a>
-
+        <div class="empty-icon">+</div>
+        <h3>No packages yet</h3>
+        <p>Add your first package to get started.</p>
+        <a href="#add-package" class="btn btn-primary">Add Package</a>
       </div>
-
     `;
-
     return;
   }
 
-
   list.innerHTML = packages.map(pkg => `
-
     <div class="package-row">
-
       <div class="package-name">
-
         <img
           class="package-thumb"
           src="${escapeHTML(pkg.heroImage || "")}"
           alt="${escapeHTML(pkg.title)}"
         >
-
         <div>
-
-          <strong>
-            ${escapeHTML(pkg.title)}
-          </strong>
-
-          <small>
-            ${escapeHTML(pkg.destination || "")}
-          </small>
-
+          <strong>${escapeHTML(pkg.title)}</strong>
+          <small>${escapeHTML(pkg.destination || "")}</small>
         </div>
-
       </div>
-
-
+      <span>${escapeHTML(pkg.category || "Trekking")}</span>
+      <span>${escapeHTML(pkg.duration || "")}</span>
+      <span>${escapeHTML(pkg.price || "")}</span>
       <span>
-        ${escapeHTML(pkg.category || "")}
-      </span>
-
-
-      <span>
-        ${escapeHTML(pkg.duration || "")}
-      </span>
-
-
-      <span>
-        ${escapeHTML(pkg.price || "")}
-      </span>
-
-
-      <span>
-
-        <span
-          class="status ${
-            pkg.status === "published"
-              ? "published"
-              : "draft"
-          }"
-        >
-
-          ${
-            pkg.status === "published"
-              ? "Published"
-              : "Draft"
-          }
-
+        <span class="status ${pkg.status === "draft" ? "draft" : "published"}">
+          ${pkg.status === "draft" ? "Draft" : "Published"}
         </span>
-
       </span>
-
-
       <span class="row-actions">
-
-        <button
-          class="action-btn"
-          onclick="editPackage('${pkg._id}')"
-        >
-          Edit
-        </button>
-
-        <button
-          class="action-btn delete"
-          onclick="deletePackage('${pkg._id}')"
-        >
-          Delete
-        </button>
-
+        <button class="action-btn" onclick="editPackage('${pkg.id}')">Edit</button>
+        <button class="action-btn delete" onclick="deletePackage('${pkg.id}')">Delete</button>
       </span>
-
     </div>
-
   `).join("");
-
 }
-
 
 /* =========================
    SAVE PACKAGE
 ========================= */
 
 async function savePackage(event) {
-
   event.preventDefault();
 
-
-  const form =
-    document.getElementById("packageForm");
-
-  const message =
-    document.getElementById("formMessage");
-
-
-  const formData =
-    new FormData(form);
-
-
-  const packageData = {
-
-    title:
-      formData.get("title"),
-
-    category:
-      formData.get("category"),
-
-    destination:
-      formData.get("destination"),
-
-    description:
-      formData.get("description"),
-
-    duration:
-      formData.get("duration"),
-
-    price:
-      formData.get("price"),
-
-    heroImage:
-      formData.get("heroImage"),
-
-    difficulty:
-      formData.get("difficulty"),
-
-    bestSeason:
-      formData.get("bestSeason"),
-
-    status:
-      formData.get("status")
-
-  };
-
-
-  try {
-
-    const response =
-      await fetch(API_URL, {
-
-        method:"POST",
-
-        headers:{
-          "Content-Type":"application/json"
-        },
-
-        body:JSON.stringify(packageData)
-
-      });
-
-
-    const result =
-      await response.json();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        result.message ||
-        "Could not save package"
-      );
-
-    }
-
-
-    message.className =
-      "form-message success";
-
-    message.textContent =
-      "Package saved successfully.";
-
-
-    form.reset();
-
-
-    document.getElementById(
-      "imagePreview"
-    ).style.display = "none";
-
-
-    await loadPackages();
-
-
-    window.location.hash =
-      "packages";
-
-
+  const message = document.getElementById("formMessage");
+  if (message) {
+    message.className = "form-message error";
+    message.innerHTML = "<strong>Backend Required:</strong> Saving packages requires an active backend server, which is currently missing from this project.";
   }
-
-  catch (error) {
-
-    console.error(error);
-
-    message.className =
-      "form-message error";
-
-    message.textContent =
-      error.message ||
-      "Something went wrong.";
-
-  }
-
 }
-
 
 /* =========================
    DELETE
 ========================= */
 
 async function deletePackage(id) {
-
-  const confirmed =
-    confirm(
-      "Are you sure you want to delete this package?"
-    );
-
-
-  if (!confirmed) return;
-
-
-  try {
-
-    const response =
-      await fetch(
-        `${API_URL}/${id}`,
-        {
-          method:"DELETE"
-        }
-      );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        "Could not delete package"
-      );
-
-    }
-
-
-    await loadPackages();
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    alert(
-      "Could not delete package."
-    );
-
-  }
-
+  alert("Backend Required: Deleting packages requires an active backend server.");
 }
-
 
 /* =========================
    EDIT
 ========================= */
 
 async function editPackage(id) {
-
-  /*
-    This is intentionally kept simple for now.
-
-    Once the PUT endpoint exists,
-    this can populate the form with
-    the selected package and change
-    the Save button to Update.
-  */
-
-  alert(
-    "Edit functionality will be connected to the PUT API next."
-  );
-
+  alert("Backend Required: Editing packages requires an active backend server.");
 }
-
 
 /* =========================
    STATISTICS
 ========================= */
 
 function updateStats(packages) {
+  const total = packages.length;
+  // Fallback assuming everything is published unless explicitly draft
+  const published = packages.filter(pkg => pkg.status !== "draft").length;
+  const drafts = packages.filter(pkg => pkg.status === "draft").length;
 
-  const total =
-    packages.length;
+  const totalEl = document.getElementById("totalPackages");
+  if (totalEl) totalEl.textContent = total;
 
-  const published =
-    packages.filter(
-      pkg => pkg.status === "published"
-    ).length;
+  const pubEl = document.getElementById("publishedPackages");
+  if (pubEl) pubEl.textContent = published;
 
-  const drafts =
-    packages.filter(
-      pkg => pkg.status === "draft"
-    ).length;
-
-
-  document.getElementById(
-    "totalPackages"
-  ).textContent = total;
-
-
-  document.getElementById(
-    "publishedPackages"
-  ).textContent = published;
-
-
-  document.getElementById(
-    "draftPackages"
-  ).textContent = drafts;
-
+  const draftEl = document.getElementById("draftPackages");
+  if (draftEl) draftEl.textContent = drafts;
 }
-
 
 /* =========================
    SECURITY
 ========================= */
 
 function escapeHTML(value) {
-
   return String(value ?? "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
-
 }
