@@ -29,3 +29,135 @@ function planTrip(){
   result.innerHTML = `<strong>Your starting route:</strong> ${route}<br><small>${days} · ${month} · ${people} traveller(s). This demo can later be connected to your backend itinerary engine.</small>`;
   result.style.display = "block";
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const packagesContainer =
+    document.getElementById("packages-container");
+
+  if (!packagesContainer) return;
+
+  loadHomepagePackages();
+
+});
+
+
+async function loadHomepagePackages() {
+
+  const packagesContainer =
+    document.getElementById("packages-container");
+
+  try {
+
+    const response =
+      await fetch("http://localhost:5000/api/packages");
+
+    if (!response.ok) {
+      throw new Error("Failed to load packages");
+    }
+
+    const packages = await response.json();
+
+    /*
+      If MongoDB has no packages,
+      don't display anything.
+    */
+
+    if (!packages || packages.length === 0) {
+
+      packagesContainer.innerHTML = "";
+
+      return;
+    }
+
+
+    packagesContainer.innerHTML = packages.map(pkg => `
+
+      <article class="card">
+
+        <a
+          href="package.html?id=${encodeURIComponent(pkg._id)}"
+          aria-label="Explore ${escapeHTML(pkg.title)}"
+        >
+
+          <div class="card-img">
+
+            <div
+              class="card-img-bg"
+              style="background-image:url('${pkg.heroImage}')"
+            >
+            </div>
+
+            <span class="tag">
+              ${escapeHTML(pkg.category)}
+            </span>
+
+            <span class="explore-text">
+              Explore Now →
+            </span>
+
+          </div>
+
+
+          <div class="card-body">
+
+            <h3>
+              ${escapeHTML(pkg.title)}
+            </h3>
+
+            <p>
+              ${escapeHTML(pkg.description || "")}
+            </p>
+
+
+            <div class="card-meta">
+
+              <span>
+                ${escapeHTML(pkg.duration || "")}
+              </span>
+
+              <span>
+                → Explore
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+      </article>
+
+    `).join("");
+
+
+  } catch (error) {
+
+    console.error(
+      "Could not load packages:",
+      error
+    );
+
+    /*
+      If the backend isn't running or
+      there are no packages, don't show
+      any hardcoded cards.
+    */
+
+    packagesContainer.innerHTML = "";
+
+  }
+
+}
+
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}

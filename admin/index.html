@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Himalaya — Admin</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+      HIMALAYA<span>.</span>
+    </div>
+
+    <div class="sidebar-label">
+      ADMIN PANEL
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <a href="#dashboard" class="nav-item active">
+        <span class="nav-icon">⌂</span>
+        Dashboard
+      </a>
+
+      <a href="#packages" class="nav-item">
+        <span class="nav-icon">▣</span>
+        Packages
+      </a>
+
+      <a href="#add-package" class="nav-item">
+        <span class="nav-icon">＋</span>
+        Add Package
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <a href="../index.html" class="back-site">
+        ← View website
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+
+  <main class="admin-main">
+
+    <!-- TOP BAR -->
+
+    <header class="admin-header">
+
+      <div>
+
+        <div class="kicker">
+          Himalaya
+        </div>
+
+        <h1>
+          Admin Dashboard
+        </h1>
+
+      </div>
+
+      <div class="admin-user">
+
+        <div class="user-avatar">
+          A
+        </div>
+
+        <div>
+          <strong>
+            Administrator
+          </strong>
+
+          <span>
+            Website Manager
+          </span>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- DASHBOARD -->
+
+    <section id="dashboard" class="dashboard-section">
+
+      <div class="welcome">
+
+        <div>
+
+          <div class="kicker">
+            Welcome back
+          </div>
+
+          <h2>
+            Manage your journeys.
+          </h2>
+
+          <p>
+            Add, edit and manage the travel packages
+            displayed throughout the Himalaya website.
+          </p>
+
+        </div>
+
+        <a href="#add-package" class="btn btn-primary">
+          + Add Package
+        </a>
+
+      </div>
+
+
+      <!-- STAT CARDS -->
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Total Packages
+          </div>
+
+          <strong id="totalPackages">
+            0
+          </strong>
+
+          <span>
+            Currently in database
+          </span>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Published
+          </div>
+
+          <strong id="publishedPackages">
+            0
+          </strong>
+
+          <span>
+            Visible on website
+          </span>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Drafts
+          </div>
+
+          <strong id="draftPackages">
+            0
+          </strong>
+
+          <span>
+            Not visible publicly
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PACKAGES -->
+
+    <section id="packages" class="content-section">
+
+      <div class="section-title">
+
+        <div>
+
+          <div class="kicker">
+            Manage
+          </div>
+
+          <h2>
+            Packages
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div id="packageCards" class="package-cards"></div>
+
+      <div class="package-table">
+
+        <div class="table-header">
+
+          <span>
+            Package
+          </span>
+
+          <span>
+            Category
+          </span>
+
+          <span>
+            Duration
+          </span>
+
+          <span>
+            Price
+          </span>
+
+          <span>
+            Status
+          </span>
+
+          <span>
+            Actions
+          </span>
+
+        </div>
+
+
+        <div id="packageList">
+
+          <div class="empty-state">
+
+            <div class="empty-icon">
+              +
+            </div>
+
+            <h3>
+              No packages yet
+            </h3>
+
+            <p>
+              Add your first package to get started.
+            </p>
+
+            <a href="#add-package" class="btn btn-primary">
+              Add Package
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ADD PACKAGE -->
+
+    <section id="add-package" class="content-section">
+
+      <div class="section-title">
+        <div>
+          <div class="kicker">Create</div>
+          <h2>Add Package</h2>
+        </div>
+      </div>
+
+      <form id="packageForm" class="package-form">
+
+        <!-- BASIC INFORMATION -->
+        <div class="form-section">
+          <div class="form-section-heading">
+            <div>
+              <h3>Basic Information</h3>
+              <p>The main information displayed on package cards and detail pages.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+
+            <div class="field field-full">
+              <label for="title">Package Title</label>
+              <input id="title" name="title" type="text"
+                placeholder="e.g. Everest Base Camp Trek" required>
+            </div>
+
+            <div class="field">
+              <label for="category">Category</label>
+              <select id="category" name="category" required>
+                <option value="">Select category</option>
+                <option value="Trekking">Trekking</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Heritage">Heritage</option>
+                <option value="Culture">Culture</option>
+                <option value="Wildlife">Wildlife</option>
+                <option value="Tours">Tours</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="destination">Destination</label>
+              <input id="destination" name="destination" type="text"
+                placeholder="e.g. Everest Region, Nepal" required>
+            </div>
+
+            <div class="field">
+              <label for="duration">Duration</label>
+              <input id="duration" name="duration" type="text"
+                placeholder="e.g. 15 Days" required>
+            </div>
+
+            <div class="field">
+              <label for="price">Price</label>
+              <input id="price" name="price" type="text"
+                placeholder="e.g. USD 1,725" required>
+            </div>
+
+            <div class="field">
+              <label for="difficulty">Difficulty</label>
+              <select id="difficulty" name="difficulty">
+                <option value="">Select difficulty</option>
+                <option value="Easy">Easy</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Difficult">Difficult</option>
+                <option value="Extreme">Extreme</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="bestSeason">Best Season</label>
+              <input id="bestSeason" name="bestSeason" type="text"
+                placeholder="e.g. March–May, September–November">
+            </div>
+
+            <div class="field">
+              <label for="maxAltitude">Maximum Altitude</label>
+              <input id="maxAltitude" name="maxAltitude" type="text"
+                placeholder="e.g. 5,545m">
+            </div>
+
+            <div class="field">
+              <label for="startPoint">Starting Point</label>
+              <input id="startPoint" name="startPoint" type="text"
+                placeholder="e.g. Kathmandu">
+            </div>
+
+            <div class="field">
+              <label for="endPoint">Ending Point</label>
+              <input id="endPoint" name="endPoint" type="text"
+                placeholder="e.g. Kathmandu">
+            </div>
+
+            <div class="field field-full">
+              <label for="packageType">Package / Trek Type</label>
+              <input id="packageType" name="packageType" type="text"
+                placeholder="e.g. Himalayan Trekking">
+            </div>
+
+            <div class="field field-full">
+              <label for="description">Short Description</label>
+              <textarea id="description" name="description" rows="5"
+                placeholder="Short description shown on package cards..." required></textarea>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- FULL DESCRIPTION -->
+        <div class="form-section">
+          <div class="form-section-heading">
+            <div>
+              <h3>Full Package Description</h3>
+              <p>Detailed description displayed on the package detail page.</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="fullDescription">Detailed Description</label>
+            <textarea id="fullDescription" name="fullDescription" rows="12"
+              placeholder="Enter the complete package description..."></textarea>
+          </div>
+        </div>
+
+
+        <!-- IMAGE -->
+        <div class="form-section">
+          <div class="form-section-heading">
+            <div>
+              <h3>Package Image</h3>
+              <p>This image appears on the package card and package page.</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="heroImage">Hero Image URL</label>
+            <input id="heroImage" name="heroImage" type="url"
+              placeholder="https://..." required>
+          </div>
+
+          <div id="imagePreview" class="image-preview"></div>
+        </div>
+
+
+        <!-- ITINERARY -->
+        <div class="form-section">
+          <div class="form-section-heading">
+            <div>
+              <h3>Day-by-Day Itinerary</h3>
+              <p>Add, edit and remove individual itinerary days. The website will display them automatically.</p>
+            </div>
+
+            <button type="button" id="addDayBtn" class="btn btn-secondary">
+              + Add Day
+            </button>
+          </div>
+
+          <div id="itineraryList" class="itinerary-list"></div>
+
+          <div id="itineraryEmpty" class="empty-state">
+            <h3>No itinerary days yet</h3>
+            <p>Click “Add Day” to create the first day.</p>
+          </div>
+        </div>
+
+
+        <!-- PACKAGE DETAILS -->
+        <div class="form-section">
+          <div class="form-section-heading">
+            <div>
+              <h3>Package Details</h3>
+              <p>Additional information shown on the package detail page.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+
+            <div class="field">
+              <label for="status">Status</label>
+              <select id="status" name="status">
+                <option value="published">Published — visible on website</option>
+                <option value="draft">Draft — hidden from website</option>
+              </select>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- ACTIONS -->
+        <div class="form-actions">
+          <button type="reset" class="btn btn-secondary">Clear</button>
+
+          <button type="submit" class="btn btn-primary">
+            Save Package →
+          </button>
+        </div>
+
+        <div id="formMessage" class="form-message"></div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+
+<!-- The public package detail page can use the same stored package object.
+     admin.js exposes window.getStoredPackages() for other pages. -->
+
+<script src="admin.js"></script>
+
+</body>
+</html>
