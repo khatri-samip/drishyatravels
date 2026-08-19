@@ -1,0 +1,65 @@
+# Apache rewrite rules for Drishya Travels PHP API
+# Place this in the backend/api/ directory
+
+RewriteEngine On
+
+# Handle preflight OPTIONS requests
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^ - [L]
+
+# If the request is for an existing file or directory, serve it directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Route all other requests to the appropriate endpoint
+# Trip planner
+RewriteRule ^trip-planner/?$ trip-planner/index.php [L,QSA]
+
+# Packages list/create
+RewriteRule ^packages/?$ packages/index.php [L,QSA]
+
+# Package by ID (GET, PUT, PATCH, DELETE)
+RewriteRule ^packages/([^/]+)/?$ packages/[id].php [L,QSA]
+
+# Package relations
+RewriteRule ^packages/([^/]+)/itinerary/?$ packages/itinerary.php [L,QSA]
+RewriteRule ^packages/([^/]+)/highlights/?$ packages/highlights.php [L,QSA]
+RewriteRule ^packages/([^/]+)/inclusions/?$ packages/inclusions.php [L,QSA]
+RewriteRule ^packages/([^/]+)/exclusions/?$ packages/exclusions.php [L,QSA]
+RewriteRule ^packages/([^/]+)/gallery/?$ packages/gallery.php [L,QSA]
+RewriteRule ^packages/([^/]+)/faqs/?$ packages/faqs.php [L,QSA]
+
+# API root
+RewriteRule ^$ index.php [L,QSA]
+
+# Catch-all for 404
+RewriteRule ^.*$ index.php [L,QSA]
+
+# Security: Prevent access to sensitive files
+<FilesMatch "^\.env$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(php|sql|log|ini)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Allow access to API PHP files
+<Files "*.php">
+    Order allow,deny
+    Allow from all
+</Files>
+
+# Set default charset
+AddDefaultCharset UTF-8
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/javascript
+</IfModule>
