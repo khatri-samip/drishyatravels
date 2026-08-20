@@ -182,33 +182,7 @@ class Package
             throw new InvalidArgumentException('Validation failed: ' . json_encode($errors));
         }
 
-        // Build dynamic update query
-        $allowedFields = [
-            'title', 'category', 'destination', 'duration', 'price', 'currency',
-            'price_details', 'difficulty', 'best_season', 'maximum_altitude',
-            'starting_point', 'ending_point', 'package_type', 'short_description',
-            'description', 'hero_image_url', 'status'
-        ];
-
-        $setParts = [];
-        $params = [];
-
-        foreach ($allowedFields as $field) {
-            if (array_key_exists($field, $data)) {
-                $setParts[] = "`$field` = ?";
-                $params[] = $data[$field];
-            }
-        }
-
-        if (empty($setParts)) {
-            return self::getById($id); // No changes
-        }
-
-        $params[] = $id;
-        $sql = "UPDATE `packages` SET " . implode(', ', $setParts) . " WHERE `id` = ?";
-        dbExecute($sql, $params);
-
-        // Update relations if provided
+        // Update relations FIRST if provided (handles relation-only updates)
         if (array_key_exists('itinerary', $data) && is_array($data['itinerary'])) {
             self::replaceItinerary($id, $data['itinerary']);
         }
@@ -226,6 +200,31 @@ class Package
         }
         if (array_key_exists('faqs', $data) && is_array($data['faqs'])) {
             self::replaceFaqs($id, $data['faqs']);
+        }
+
+        // Build dynamic update query for scalar fields
+        $allowedFields = [
+            'title', 'category', 'destination', 'duration', 'price', 'currency',
+            'price_details', 'difficulty', 'best_season', 'maximum_altitude',
+            'starting_point', 'ending_point', 'package_type', 'short_description',
+            'description', 'hero_image_url', 'status'
+        ];
+
+        $setParts = [];
+        $params = [];
+
+        foreach ($allowedFields as $field) {
+            if (array_key_exists($field, $data)) {
+                $setParts[] = "`$field` = ?";
+                $params[] = $data[$field];
+            }
+        }
+
+        // Update scalar fields if any
+        if (!empty($setParts)) {
+            $params[] = $id;
+            $sql = "UPDATE `packages` SET " . implode(', ', $setParts) . " WHERE `id` = ?";
+            dbExecute($sql, $params);
         }
 
         return self::getById($id);
