@@ -22,7 +22,11 @@ handlePreflight();
 $requestUri = $_SERVER['REQUEST_URI'];
 $path = parse_url($requestUri, PHP_URL_PATH);
 // Handle both /api/packages/{id} and /{project}/api/packages/{id} deployments
-$basePaths = ['/api/packages/', '/drishya-travels-backend/api/packages/'];
+$basePaths = [
+    '/DRISHYATRAVELS/backend/api/packages/',
+    '/api/packages/',
+    '/drishya-travels-backend/api/packages/',
+];
 $id = '';
 
 foreach ($basePaths as $basePath) {

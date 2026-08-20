@@ -348,7 +348,24 @@
             <div class="field">
               <label for="price">Price</label>
               <input id="price" name="price" type="text"
-                placeholder="e.g. USD 1,725" required>
+                placeholder="e.g. 1725" required>
+            </div>
+
+            <div class="field">
+              <label for="currency">Currency</label>
+              <select id="currency" name="currency">
+                <option value="USD">USD</option>
+                <option value="NPR">NPR</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="INR">INR</option>
+              </select>
+            </div>
+
+            <div class="field field-full">
+              <label for="priceDetails">Price Details</label>
+              <input id="priceDetails" name="priceDetails" type="text"
+                placeholder="e.g. Per person, including Government Tax">
             </div>
 
             <div class="field">
@@ -357,8 +374,7 @@
                 <option value="">Select difficulty</option>
                 <option value="Easy">Easy</option>
                 <option value="Moderate">Moderate</option>
-                <option value="Difficult">Difficult</option>
-                <option value="Extreme">Extreme</option>
+                <option value="Challenging">Challenging</option>
               </select>
             </div>
 
@@ -482,6 +498,91 @@
           </div>
         </div>
 
+        <!-- HIGHLIGHTS -->
+        <div class="form-section">
+          <div class="form-section-heading">
+            <div>
+              <h3>Highlights</h3>
+              <p>Key highlights displayed on the package detail page (one per line).</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="highlightsInput">Highlights</label>
+            <textarea id="highlightsInput" name="highlightsInput" rows="6"
+              placeholder="Scenic mountain views&#10;Cultural village visits&#10;Wildlife spotting"></textarea>
+            <small>One highlight per line</small>
+          </div>
+        </div>
+
+        <!-- INCLUSIONS -->
+        <div class="form-section">
+          <div class="form-section-heading">
+            <div>
+              <h3>Inclusions</h3>
+              <p>What's included in the package price (one per line).</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="inclusionsInput">Inclusions</label>
+            <textarea id="inclusionsInput" name="inclusionsInput" rows="6"
+              placeholder="Accommodation&#10;Meals (breakfast & dinner)&#10;Transportation&#10;Guide services"></textarea>
+            <small>One inclusion per line</small>
+          </div>
+        </div>
+
+        <!-- EXCLUSIONS -->
+        <div class="form-section">
+          <div class="form-section-heading">
+            <div>
+              <h3>Exclusions</h3>
+              <p>What's not included in the package price (one per line).</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="exclusionsInput">Exclusions</label>
+            <textarea id="exclusionsInput" name="exclusionsInput" rows="6"
+              placeholder="Visa fees&#10;Travel insurance&#10;Personal expenses&#10;Beverages & tips"></textarea>
+            <small>One exclusion per line</small>
+          </div>
+        </div>
+
+        <!-- GALLERY -->
+        <div class="form-section">
+          <div class="form-section-heading">
+            <div>
+              <h3>Gallery Images</h3>
+              <p>Additional images for the package gallery (one URL per line).</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="galleryInput">Gallery URLs</label>
+            <textarea id="galleryInput" name="galleryInput" rows="6"
+              placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"></textarea>
+            <small>One image URL per line</small>
+          </div>
+        </div>
+
+        <!-- FAQS -->
+        <div class="form-section">
+          <div class="form-section-heading">
+            <div>
+              <h3>Frequently Asked Questions</h3>
+              <p>FAQs for the package (format: Question::Answer, one per line).</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="faqsInput">FAQs</label>
+            <textarea id="faqsInput" name="faqsInput" rows="8"
+              placeholder="How difficult is this trek?::Moderate difficulty, suitable for fit beginners&#10;What is included?::Accommodation, meals, transport, and guide"></textarea>
+            <small>Format: Question::Answer (one per line)</small>
+          </div>
+        </div>
+
 
         <!-- ACTIONS -->
         <div class="form-actions">
@@ -522,7 +623,6 @@ window.addEventListener("load", function(){
 <!-- The public package detail page can use the same stored package object.
      admin.js exposes window.getStoredPackages() for other pages. -->
 
-<script src="../public/data/packages.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/script.js"></script>
 

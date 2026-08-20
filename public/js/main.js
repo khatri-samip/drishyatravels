@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/api/trip-planner/",
+            "/DRISHYATRAVELS/backend/api/trip-planner/",
             {
                 method: "POST",
 
@@ -94,43 +94,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Load packages
   const packagesContainer = document.getElementById("packages-container");
-  if (packagesContainer && typeof getAllPackages === "function") {
+  if (packagesContainer) {
     loadHomepagePackages(packagesContainer);
   }
 });
 
 function loadHomepagePackages(container) {
-  try {
-    // Note: The original implementation attempted to fetch from http://localhost:5000/api/packages
-    // Since there is no backend, we use the static data fallback to ensure the site works.
-    const packages = getAllPackages();
+  fetch("/DRISHYATRAVELS/backend/api/packages/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch packages");
+      }
+      return response.json();
+    })
+    .then((result) => {
+      const packages = result.data || [];
 
-    if (!packages || packages.length === 0) {
-      container.innerHTML = "";
-      return;
-    }
+      if (!packages || packages.length === 0) {
+        container.innerHTML = "";
+        return;
+      }
 
-    container.innerHTML = packages.map(pkg => `
-      <article class="card">
-        <a href="package.html?id=${encodeURIComponent(pkg.id)}" aria-label="Explore ${escapeHTML(pkg.title)}">
-          <div class="card-img">
-            <div class="card-img-bg" style="background-image:url('${pkg.heroImage}')"></div>
-            <span class="tag">${escapeHTML(pkg.destination || "Nepal")}</span>
-            <span class="explore-text">Explore Now →</span>
-          </div>
-          <div class="card-body">
-            <h3>${escapeHTML(pkg.title)}</h3>
-            <p>${escapeHTML(pkg.description || "")}</p>
-            <div class="card-meta">
-              <span>${escapeHTML(pkg.duration || "")}</span>
-              <span>→ Explore</span>
+      container.innerHTML = packages.map(pkg => `
+        <article class="card">
+          <a href="package.html?id=${encodeURIComponent(pkg.id)}" aria-label="Explore ${escapeHTML(pkg.title)}">
+            <div class="card-img">
+              <div class="card-img-bg" style="background-image:url('${escapeHTML(pkg.hero_image_url || "")}')"></div>
+              <span class="tag">${escapeHTML(pkg.destination || "Nepal")}</span>
+              <span class="explore-text">Explore Now →</span>
             </div>
-          </div>
-        </a>
-      </article>
-    `).join("");
-  } catch (error) {
-    console.error("Could not load packages:", error);
-    container.innerHTML = "";
-  }
+            <div class="card-body">
+              <h3>${escapeHTML(pkg.title)}</h3>
+              <p>${escapeHTML(pkg.short_description || pkg.description || "")}</p>
+              <div class="card-meta">
+                <span>${escapeHTML(pkg.duration || "")}</span>
+                <span>→ Explore</span>
+              </div>
+            </div>
+          </a>
+        </article>
+      `).join("");
+    })
+    .catch((error) => {
+      console.error("Could not load packages:", error);
+      container.innerHTML = `
+        <div style="text-align: center; padding: 40px;">
+          <p style="color: #666; font-size: 18px;">Unable to load packages. Please try again later.</p>
+        </div>
+      `;
+    });
 }
