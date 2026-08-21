@@ -91,6 +91,9 @@ async function loadPackages() {
     updateStats(packages);
   } catch (error) {
     console.error(error);
+    // TODO: [Medium/Code Quality] Missing error handling - only shows generic message
+    // Should: show specific error type (network, 404, 500, validation), add retry button,
+    // implement toast/notification system, add loading states during API calls
     const list = document.getElementById("packageList");
     if (list) {
       list.innerHTML = `
@@ -249,6 +252,9 @@ async function savePackage(event) {
 
   } catch (error) {
     console.error(error);
+    // TODO: [Medium/Code Quality] Missing error handling - only shows generic error message
+    // Should: parse validation errors from API (422), show field-specific errors,
+    // add retry logic with exponential backoff, show toast notifications
     if (message) {
       message.className = "form-message error";
       message.innerHTML = `<strong>Error:</strong> ${escapeHTML(error.message)}`;
@@ -281,6 +287,8 @@ async function deletePackage(id) {
     loadPackages();
   } catch (error) {
     console.error(error);
+    // TODO: [Medium/Code Quality] Missing error handling - only shows generic alert
+    // Should: show specific error type, add toast notification, implement retry logic
     alert("Failed to delete package. Please try again.");
   }
 }
@@ -352,6 +360,8 @@ async function editPackage(id) {
 
   } catch (error) {
     console.error(error);
+    // TODO: [Medium/Code Quality] Missing error handling - only shows generic alert
+    // Should: show specific error type, add toast notification, implement retry logic
     alert("Failed to load package for editing. Please try again.");
   }
 }
