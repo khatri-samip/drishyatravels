@@ -204,7 +204,8 @@ VALUES (
     'Everest Base Camp trekking through the Everest region, Sherpa settlements and the high Himalayas.',
     'Everest Base Camp Trekking takes you to some of the highest navigable points on Earth, through the Everest region, Sherpa settlements, monasteries and the Himalayan giants including Everest, Lhotse, Makalu, Ama Dablam and Cho Oyu.',
     'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1800&q=85',
-    'published'
+    'published',
+    FALSE
 )
 ON DUPLICATE KEY UPDATE
     `title` = VALUES(`title`),
@@ -224,6 +225,7 @@ ON DUPLICATE KEY UPDATE
     `description` = VALUES(`description`),
     `hero_image_url` = VALUES(`hero_image_url`),
     `status` = VALUES(`status`),
+    `is_featured` = VALUES(`is_featured`),
     `updated_at` = CURRENT_TIMESTAMP;
 
 
@@ -255,7 +257,8 @@ VALUES (
     'A short Himalayan trek from Pokhara through Deurali, Low Camp and High Camp.',
     'A 4-night/5-day Mardi trek from Pokhara through Deurali, Low Camp and High Camp, with an excursion toward Mardi Himal Base Camp and a descent to Badal Danda and Siding.',
     'https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1800&q=85',
-    'published'
+    'published',
+    FALSE
 )
 ON DUPLICATE KEY UPDATE
     `title` = VALUES(`title`),
@@ -275,6 +278,7 @@ ON DUPLICATE KEY UPDATE
     `description` = VALUES(`description`),
     `hero_image_url` = VALUES(`hero_image_url`),
     `status` = VALUES(`status`),
+    `is_featured` = VALUES(`is_featured`),
     `updated_at` = CURRENT_TIMESTAMP;
 
 
@@ -306,7 +310,8 @@ VALUES (
     'Explore historic Tansen and the riverside Rani Mahal, known as the Taj of Nepal.',
     'Explore Tansen and Rani Mahal, the historic palace associated with Khadga Shumsher Jung Bahadur Rana and situated on the bank of the Kali Gandaki River. It is often called the Taj of Nepal.',
     'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=1800&q=85',
-    'published'
+    'published',
+    FALSE
 )
 ON DUPLICATE KEY UPDATE
     `title` = VALUES(`title`),
@@ -326,6 +331,7 @@ ON DUPLICATE KEY UPDATE
     `description` = VALUES(`description`),
     `hero_image_url` = VALUES(`hero_image_url`),
     `status` = VALUES(`status`),
+    `is_featured` = VALUES(`is_featured`),
     `updated_at` = CURRENT_TIMESTAMP;
 
 
@@ -357,7 +363,8 @@ VALUES (
     'Explore Chame, Pisang and the Manang Valley with scenic lakes, mountains and landscapes.',
     'A 4-night/5-day journey through Chame, Pisang and the Manang valley, including exploration around Green Lake, Blue Lake and Gangapurna.',
     'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=1800&q=85',
-    'published'
+    'published',
+    FALSE
 )
 ON DUPLICATE KEY UPDATE
     `title` = VALUES(`title`),
@@ -377,6 +384,7 @@ ON DUPLICATE KEY UPDATE
     `description` = VALUES(`description`),
     `hero_image_url` = VALUES(`hero_image_url`),
     `status` = VALUES(`status`),
+    `is_featured` = VALUES(`is_featured`),
     `updated_at` = CURRENT_TIMESTAMP;
 
 
