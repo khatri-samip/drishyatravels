@@ -122,9 +122,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const packagesContainer =
         document.getElementById("packages-container");
 
+    const featuredContainer =
+        document.getElementById("featured-packages-container");
+
     if (packagesContainer) {
 
-        loadHomepagePackages(packagesContainer);
+        loadHomepagePackages(packagesContainer, featuredContainer);
 
         setupPackagesCarousel(packagesContainer);
 
@@ -137,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
    LOAD HOMEPAGE PACKAGES
 ========================= */
 
-function loadHomepagePackages(container) {
+function loadHomepagePackages(container, featuredContainer) {
   fetch("/DRISHYATRAVELS/backend/api/packages/?featured=1", {
     method: "GET",
     headers: {
@@ -151,33 +154,24 @@ function loadHomepagePackages(container) {
       return response.json();
     })
 
-        .then((response) => {
+    .then((result) => {
 
-            if (!response.ok) {
-                throw new Error("Failed to fetch packages");
-            }
+        const packages = result.data || [];
 
-            return response.json();
+        if (!packages || packages.length === 0) {
 
-        })
+            container.innerHTML = "";
+            if (featuredContainer) featuredContainer.innerHTML = "";
+            updatePackageArrows(container);
 
-        .then((result) => {
+            return;
 
-            const packages = result.data || [];
+        }
 
-            if (!packages || packages.length === 0) {
-
-                container.innerHTML = "";
-                updatePackageArrows(container);
-
-                return;
-
-            }
-
-            /*
-             * Generate the cards using the classes
-             * from your new carousel CSS.
-             */
+        /*
+         * Generate the cards using the classes
+         * from your new carousel CSS.
+         */
 
       container.innerHTML = packages.map(pkg => `
         <article class="card">
@@ -199,6 +193,29 @@ function loadHomepagePackages(container) {
         </article>
       `).join("");
 
+      // Also populate the featured packages section on homepage
+      if (featuredContainer) {
+        featuredContainer.innerHTML = packages.slice(0, 3).map(pkg => `
+          <article class="card">
+            <a href="package.html?id=${encodeURIComponent(pkg.id)}" aria-label="Explore ${escapeHTML(pkg.title)}">
+              <div class="card-img">
+                <div class="card-img-bg" style="background-image:url('${escapeHTML(pkg.hero_image_url || "")}')"></div>
+                <span class="tag">${escapeHTML(pkg.destination || "Nepal")}</span>
+                <span class="explore-text">Explore Now →</span>
+              </div>
+              <div class="card-body">
+                <h3>${escapeHTML(pkg.title)}</h3>
+                <p>${escapeHTML(pkg.short_description || pkg.description || "")}</p>
+                <div class="card-meta">
+                  <span>${escapeHTML(pkg.duration || "")}</span>
+                  <span>→ Explore</span>
+                </div>
+              </div>
+            </a>
+          </article>
+        `).join("");
+      }
+
       window.dispatchEvent(new Event("resize"));
 
 
@@ -214,6 +231,11 @@ function loadHomepagePackages(container) {
     .catch((error) => {
       console.error("Could not load packages:", error);
       container.innerHTML = `
+        <div style="text-align: center; padding: 40px;">
+          <p style="color: #666; font-size: 18px;">Unable to load packages. Please try again later.</p>
+        </div>
+      `;
+      if (featuredContainer) featuredContainer.innerHTML = `
         <div style="text-align: center; padding: 40px;">
           <p style="color: #666; font-size: 18px;">Unable to load packages. Please try again later.</p>
         </div>
@@ -618,10 +640,10 @@ function getCarouselGap(container) {
 function escapeHTML(value) {
 
     return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
+        .replace(/&/g, "&")
+        .replace(/</g, "<")
+        .replace(/>/g, ">")
+        .replace(/"/g, """)
         .replace(/'/g, "&#039;");
 
 }
