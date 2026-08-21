@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function loadHomepagePackages(container) {
-  fetch("/DRISHYATRAVELS/backend/api/packages/", {
+  fetch("/DRISHYATRAVELS/backend/api/packages/?featured=1", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

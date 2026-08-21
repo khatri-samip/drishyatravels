@@ -24,6 +24,7 @@ if ($method === 'GET') {
         'status' => $_GET['status'] ?? null,
         'category' => $_GET['category'] ?? null,
         'difficulty' => $_GET['difficulty'] ?? null,
+        'featured' => $_GET['featured'] ?? null,
         'limit' => isset($_GET['limit']) ? max(1, min(100, (int)$_GET['limit'])) : 50,
         'offset' => isset($_GET['offset']) ? max(0, (int)$_GET['offset']) : 0,
     ];

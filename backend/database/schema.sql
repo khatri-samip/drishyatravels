@@ -49,6 +49,7 @@ CREATE TABLE `packages` (
     `description` TEXT NOT NULL,
     `hero_image_url` TEXT,
     `status` VARCHAR(20) NOT NULL DEFAULT 'draft',
+    `is_featured` BOOLEAN NOT NULL DEFAULT FALSE,
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     -- Constraints
@@ -607,6 +608,17 @@ VALUES
  'What is included?',
  'The supplied package includes four nights accommodation, breakfast and dinner, two-way transportation, and applicable government taxes and service charges.',
  1);
+
+-- ============================================================
+-- MIGRATIONS
+-- ============================================================
+
+-- Add is_featured column to packages table (if not exists)
+-- Run this separately if the table already exists
+-- ALTER TABLE `packages` ADD COLUMN `is_featured` BOOLEAN NOT NULL DEFAULT FALSE AFTER `status`;
+
+-- Add index for featured packages
+-- CREATE INDEX `idx_packages_featured` ON `packages`(`is_featured`);
 
 -- ============================================================
 -- VERIFICATION QUERIES
