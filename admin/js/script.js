@@ -510,6 +510,7 @@ function updateStats(packages) {
   // Fallback assuming everything is published unless explicitly draft
   const published = packages.filter(pkg => pkg.status !== "draft").length;
   const drafts = packages.filter(pkg => pkg.status === "draft").length;
+  const featured = packages.filter(pkg => pkg.is_featured === true || pkg.is_featured === 1).length;
 
   const totalEl = document.getElementById("totalPackages");
   if (totalEl) totalEl.textContent = total;
@@ -519,6 +520,9 @@ function updateStats(packages) {
 
   const draftEl = document.getElementById("draftPackages");
   if (draftEl) draftEl.textContent = drafts;
+
+  const featuredEl = document.getElementById("featuredPackages");
+  if (featuredEl) featuredEl.textContent = featured;
 }
 
 /* =========================
