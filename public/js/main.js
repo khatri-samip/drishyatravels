@@ -126,76 +126,108 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("featured-packages-container");
 
     if (packagesContainer) {
-
-        loadHomepagePackages(packagesContainer, featuredContainer);
-
-        setupPackagesCarousel(packagesContainer);
-
+        // Load featured packages into the featured grid
+        loadFeaturedPackages(featuredContainer);
+        // Load ALL packages into the carousel
+        loadAllPackagesCarousel(packagesContainer);
     }
 
 });
 
 
 /* =========================
-   LOAD HOMEPAGE PACKAGES
+   LOAD FEATURED PACKAGES (for featured grid)
 ========================= */
 
-function loadHomepagePackages(container, featuredContainer) {
-  fetch("/DRISHYATRAVELS/backend/api/packages/?featured=1", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to fetch packages");
-      }
-      return response.json();
+function loadFeaturedPackages(featuredContainer) {
+    if (!featuredContainer) return;
+
+    fetch("/DRISHYATRAVELS/backend/api/packages/?featured=1", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
     })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch packages");
+            }
+            return response.json();
+        })
 
-    .then((result) => {
+        .then((result) => {
 
-        const packages = result.data || [];
+            const packages = result.data || [];
 
-        if (!packages || packages.length === 0) {
+            if (!packages || packages.length === 0) {
+                featuredContainer.innerHTML = "";
+                return;
+            }
 
-            container.innerHTML = "";
-            if (featuredContainer) featuredContainer.innerHTML = "";
-            updatePackageArrows(container);
-
-            return;
-
-        }
-
-        /*
-         * Generate the cards using the classes
-         * from your new carousel CSS.
-         */
-
-      container.innerHTML = packages.map(pkg => `
-        <article class="card">
-          <a href="package.html?id=${encodeURIComponent(pkg.id)}" aria-label="Explore ${escapeHTML(pkg.title)}">
-            <div class="card-img">
-              <div class="card-img-bg" style="background-image:url('${escapeHTML(pkg.hero_image_url || "")}')"></div>
-              <span class="tag">${escapeHTML(pkg.destination || "Nepal")}</span>
-              <span class="explore-text">Explore Now →</span>
-            </div>
-            <div class="card-body">
-              <h3>${escapeHTML(pkg.title)}</h3>
-              <p>${escapeHTML(pkg.short_description || pkg.description || "")}</p>
-              <div class="card-meta">
-                <span>${escapeHTML(pkg.duration || "")}</span>
-                <span>→ Explore</span>
+            // Uses .featured-card structure matching home.css
+            featuredContainer.innerHTML = packages.slice(0, 3).map(pkg => `
+          <article class="featured-card">
+            <a href="package.html?id=${encodeURIComponent(pkg.id)}" aria-label="Explore ${escapeHTML(pkg.title)}">
+              <div class="featured-card-image" style="background-image:url('${escapeHTML(pkg.hero_image_url || "")}')"></div>
+              <div class="featured-card-content">
+                <div class="featured-meta">
+                  <span>${escapeHTML(pkg.duration || "")}</span>
+                  <span class="tag">${escapeHTML(pkg.destination || "Nepal")}</span>
+                </div>
+                <h3>${escapeHTML(pkg.title)}</h3>
+                <p>${escapeHTML(pkg.short_description || pkg.description || "")}</p>
+                <div class="featured-bottom">
+                  <strong>${escapeHTML(pkg.price ? (pkg.price + " " + (pkg.currency || "USD")) : "")}</strong>
+                  <span>Explore →</span>
+                </div>
               </div>
-            </div>
-          </a>
-        </article>
-      `).join("");
+            </a>
+          </article>
+        `).join("");
 
-      // Also populate the featured packages section on homepage
-      if (featuredContainer) {
-        featuredContainer.innerHTML = packages.slice(0, 3).map(pkg => `
+        })
+        .catch((error) => {
+            console.error("Could not load featured packages:", error);
+            featuredContainer.innerHTML = `
+        <div style="text-align: center; padding: 40px;">
+          <p style="color: #666; font-size: 18px;">Unable to load packages. Please try again later.</p>
+        </div>
+      `;
+        });
+}
+
+/* =========================
+   LOAD ALL PACKAGES CAROUSEL (Places Worth the Journey)
+========================= */
+
+function loadAllPackagesCarousel(container) {
+    if (!container) return;
+
+    fetch("/DRISHYATRAVELS/backend/api/packages/", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch packages");
+            }
+            return response.json();
+        })
+
+        .then((result) => {
+
+            const packages = result.data || [];
+
+            if (!packages || packages.length === 0) {
+                container.innerHTML = "";
+                updatePackageArrows(container);
+                return;
+            }
+
+            // Generate cards using .card structure matching home.css carousel
+            container.innerHTML = packages.map(pkg => `
           <article class="card">
             <a href="package.html?id=${encodeURIComponent(pkg.id)}" aria-label="Explore ${escapeHTML(pkg.title)}">
               <div class="card-img">
@@ -214,61 +246,68 @@ function loadHomepagePackages(container, featuredContainer) {
             </a>
           </article>
         `).join("");
-      }
 
-      window.dispatchEvent(new Event("resize"));
-
-
-            /*
-             * Update arrows after cards
-             * have been added to the DOM.
-             */
-
-            updatePackageArrows(container);
+            // Initialize the auto-swiping carousel
+            setupAutoCarousel(container);
 
         })
 
-    .catch((error) => {
-      console.error("Could not load packages:", error);
-      container.innerHTML = `
+        .catch((error) => {
+            console.error("Could not load packages:", error);
+            container.innerHTML = `
         <div style="text-align: center; padding: 40px;">
           <p style="color: #666; font-size: 18px;">Unable to load packages. Please try again later.</p>
         </div>
       `;
-      if (featuredContainer) featuredContainer.innerHTML = `
-        <div style="text-align: center; padding: 40px;">
-          <p style="color: #666; font-size: 18px;">Unable to load packages. Please try again later.</p>
-        </div>
-      `;
-
             updatePackageArrows(container);
-
         });
-
 }
 
 
 /* =========================
-   PACKAGE CAROUSEL
+   AUTO-SWIPING CAROUSEL (Places Worth the Journey)
 ========================= */
 
-function setupPackagesCarousel(container) {
-
+function setupAutoCarousel(container) {
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const pagination = document.getElementById("packagesPagination");
 
     if (!prevBtn || !nextBtn || !pagination) return;
 
+    let autoScrollInterval = null;
+    let isUserInteracting = false;
+    let interactionTimeout = null;
 
-    /* =========================
-       CREATE PAGINATION
-    ========================= */
+    // Get card width + gap for scrolling calculations
+    function getCardScrollAmount() {
+        const cards = container.querySelectorAll(".card");
+        if (!cards.length) return 0;
+        const card = cards[0];
+        const gap = parseFloat(window.getComputedStyle(container).gap) || 18;
+        return card.offsetWidth + gap;
+    }
 
+    // Update arrow visibility
+    function updateArrows() {
+        const cards = container.querySelectorAll(".card");
+        if (cards.length === 0) {
+            prevBtn.style.display = "none";
+            nextBtn.style.display = "none";
+            return;
+        }
+
+        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+        const atStart = container.scrollLeft <= 2;
+        const atEnd = container.scrollLeft >= maxScrollLeft - 2;
+
+        prevBtn.style.display = atStart ? "none" : "flex";
+        nextBtn.style.display = atEnd ? "none" : "flex";
+    }
+
+    // Create pagination dots
     function createPagination() {
-
         pagination.innerHTML = "";
-
         const cards = [...container.querySelectorAll(".card")];
 
         if (cards.length === 0) {
@@ -278,272 +317,152 @@ function setupPackagesCarousel(container) {
 
         pagination.style.display = "flex";
 
-
-        /*
-         * Find how many cards can be shown
-         * at the current screen size.
-         */
-
+        // Calculate visible cards
         const cardWidth = cards[0].offsetWidth;
-
-        const gap =
-            parseFloat(
-                window.getComputedStyle(container).gap
-            ) || 18;
-
-        const visibleCards =
-            Math.max(
-                1,
-                Math.round(
-                    container.clientWidth / (cardWidth + gap)
-                )
-            );
-
-
-        /*
-         * Number of pages.
-         */
-
-        const pageCount =
-            Math.ceil(cards.length / visibleCards);
-
+        const gap = parseFloat(window.getComputedStyle(container).gap) || 18;
+        const visibleCards = Math.max(1, Math.round(container.clientWidth / (cardWidth + gap)));
+        const pageCount = Math.ceil(cards.length / visibleCards);
 
         for (let i = 0; i < pageCount; i++) {
-
             const dot = document.createElement("button");
-
             dot.type = "button";
             dot.className = "carousel-dot";
-
-            dot.setAttribute(
-                "aria-label",
-                `Go to package page ${i + 1}`
-            );
+            dot.setAttribute("aria-label", `Go to package page ${i + 1}`);
 
             dot.addEventListener("click", () => {
-
-                const targetCard = cards[
-                    Math.min(
-                        i * visibleCards,
-                        cards.length - 1
-                    )
-                ];
-
+                // User interaction - pause auto-scroll temporarily
+                pauseAutoScroll();
+                const targetCard = cards[Math.min(i * visibleCards, cards.length - 1)];
                 container.scrollTo({
                     left: targetCard.offsetLeft,
                     behavior: "smooth"
                 });
-
             });
 
             pagination.appendChild(dot);
         }
-
         updatePagination();
-
     }
 
-
-    /* =========================
-       UPDATE ACTIVE DOT
-    ========================= */
-
+    // Update active pagination dot
     function updatePagination() {
-
-        const dots =
-            [...pagination.querySelectorAll(".carousel-dot")];
-
+        const dots = [...pagination.querySelectorAll(".carousel-dot")];
         if (dots.length === 0) return;
 
-        const cards =
-            [...container.querySelectorAll(".card")];
-
+        const cards = [...container.querySelectorAll(".card")];
         if (cards.length === 0) return;
-
 
         let closestIndex = 0;
         let smallestDistance = Infinity;
 
-
         cards.forEach((card, index) => {
-
-            const distance =
-                Math.abs(
-                    container.scrollLeft - card.offsetLeft
-                );
-
+            const distance = Math.abs(container.scrollLeft - card.offsetLeft);
             if (distance < smallestDistance) {
-
                 smallestDistance = distance;
                 closestIndex = index;
-
             }
-
         });
-
 
         const cardWidth = cards[0].offsetWidth;
-
-        const gap =
-            parseFloat(
-                window.getComputedStyle(container).gap
-            ) || 18;
-
-        const visibleCards =
-            Math.max(
-                1,
-                Math.round(
-                    container.clientWidth / (cardWidth + gap)
-                )
-            );
-
-
-        const pageIndex =
-            Math.floor(closestIndex / visibleCards);
-
+        const gap = parseFloat(window.getComputedStyle(container).gap) || 18;
+        const visibleCards = Math.max(1, Math.round(container.clientWidth / (cardWidth + gap)));
+        const pageIndex = Math.floor(closestIndex / visibleCards);
 
         dots.forEach((dot, index) => {
-
-            dot.classList.toggle(
-                "active",
-                index === pageIndex
-            );
-
+            dot.classList.toggle("active", index === pageIndex);
         });
-
     }
 
+    // Auto-scroll to next card
+    function autoScroll() {
+        if (isUserInteracting) return;
 
-    /* =========================
-       UPDATE ARROWS
-    ========================= */
+        const scrollAmount = getCardScrollAmount();
+        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+        const atEnd = container.scrollLeft >= maxScrollLeft - 2;
 
-    function updateArrows() {
-
-        const cards =
-            container.querySelectorAll(".card");
-
-
-        /*
-         * No cards
-         */
-
-        if (cards.length === 0) {
-
-            prevBtn.style.display = "none";
-            nextBtn.style.display = "none";
-
-            return;
+        if (atEnd) {
+            // Loop back to start
+            container.scrollTo({
+                left: 0,
+                behavior: "smooth"
+            });
+        } else {
+            container.scrollBy({
+                left: scrollAmount,
+                behavior: "smooth"
+            });
         }
-
-
-        const maxScrollLeft =
-            container.scrollWidth -
-            container.clientWidth;
-
-
-        const atStart =
-            container.scrollLeft <= 2;
-
-
-        const atEnd =
-            container.scrollLeft >= maxScrollLeft - 2;
-
-
-        prevBtn.style.display =
-            atStart ? "none" : "flex";
-
-        nextBtn.style.display =
-            atEnd ? "none" : "flex";
-
     }
 
+    // Start auto-scroll
+    function startAutoScroll() {
+        if (autoScrollInterval) return;
+        autoScrollInterval = setInterval(autoScroll, 6000); // 6 seconds
+    }
 
-    /* =========================
-       NEXT
-    ========================= */
+    // Pause auto-scroll (on user interaction)
+    function pauseAutoScroll() {
+        isUserInteracting = true;
+        if (autoScrollInterval) {
+            clearInterval(autoScrollInterval);
+            autoScrollInterval = null;
+        }
+        // Resume after 3 seconds of no interaction
+        clearTimeout(interactionTimeout);
+        interactionTimeout = setTimeout(() => {
+            isUserInteracting = false;
+            startAutoScroll();
+        }, 3000);
+    }
 
+    // Arrow click handlers
     nextBtn.addEventListener("click", () => {
+        pauseAutoScroll();
+        const scrollAmount = getCardScrollAmount();
+        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+        const atEnd = container.scrollLeft >= maxScrollLeft - 2;
 
-        const cards =
-            container.querySelectorAll(".card");
-
-        if (!cards.length) return;
-
-        const card = cards[0];
-
-        const gap =
-            parseFloat(
-                window.getComputedStyle(container).gap
-            ) || 18;
-
-
-        container.scrollBy({
-            left: card.offsetWidth + gap,
-            behavior: "smooth"
-        });
-
+        if (atEnd) {
+            container.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+            container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
     });
-
-
-    /* =========================
-       PREVIOUS
-    ========================= */
 
     prevBtn.addEventListener("click", () => {
+        pauseAutoScroll();
+        const scrollAmount = getCardScrollAmount();
+        const atStart = container.scrollLeft <= 2;
 
-        const cards =
-            container.querySelectorAll(".card");
-
-        if (!cards.length) return;
-
-        const card = cards[0];
-
-        const gap =
-            parseFloat(
-                window.getComputedStyle(container).gap
-            ) || 18;
-
-
-        container.scrollBy({
-            left: -(card.offsetWidth + gap),
-            behavior: "smooth"
-        });
-
+        if (atStart) {
+            // Loop to end
+            container.scrollTo({ left: container.scrollWidth, behavior: "smooth" });
+        } else {
+            container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+        }
     });
 
-
-    /* =========================
-       SCROLL
-    ========================= */
-
+    // Scroll event - update arrows and pagination
     container.addEventListener("scroll", () => {
-
         updateArrows();
         updatePagination();
-
     });
 
-
-    /* =========================
-       RESIZE
-    ========================= */
-
+    // Resize event - recreate pagination
     window.addEventListener("resize", () => {
-
         createPagination();
         updateArrows();
-
     });
 
+    // Pause on hover/focus for accessibility
+    container.addEventListener("mouseenter", pauseAutoScroll);
+    container.addEventListener("focusin", pauseAutoScroll);
 
-    /* =========================
-       INITIALIZE
-    ========================= */
-
+    // Initialize
     createPagination();
     updateArrows();
-
+    startAutoScroll();
 }
 
 
@@ -640,10 +559,10 @@ function getCarouselGap(container) {
 function escapeHTML(value) {
 
     return String(value ?? "")
-        .replace(/&/g, "&")
-        .replace(/</g, "<")
-        .replace(/>/g, ">")
-        .replace(/"/g, """)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 
 }
