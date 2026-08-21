@@ -1,3 +1,6 @@
+// TODO: [High/Architecture] Data duplication - this static data duplicates the SQL seed in docs/database/001_initial_schema.sql
+// Both must be kept in sync manually. Once backend API is fully functional, remove this file
+// and switch frontend to consume the API (with fallback to this file for graceful degradation).
 const PACKAGES = {
   "everest-base-camp": {
     id: "everest-base-camp",

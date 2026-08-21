@@ -37,5 +37,5 @@ urlpatterns = [
     path(
         "api/trip-planner/",
         include("trip_planner.urls")
-    ),
+    ),  # TODO: [Medium/Code Quality] trip_planner app doesn't exist - create it or remove this include
 ]

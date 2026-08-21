@@ -1,5 +1,5 @@
 -- ============================================================
--- DRISHYA TRAVELS
+-- DRISHYATRAVELS
 -- Initial Supabase PostgreSQL Schema
 -- ============================================================
 --
@@ -14,6 +14,12 @@
 --   2. Seeds the 4 existing frontend packages
 --
 -- ============================================================
+--
+-- TODO: [High/Architecture] PostgreSQL vs MySQL schema mismatch
+-- This schema uses PostgreSQL-specific syntax (TIMESTAMPTZ, GENERATED ALWAYS AS IDENTITY,
+-- ON CONFLICT, BIGINT) but the PHP backend uses MySQL/MariaDB.
+-- The schema will NOT run on MySQL as-is. Either convert to MySQL dialect or switch
+-- PHP backend to PostgreSQL. Current XAMPP setup requires MySQL dialect.
 
 
 -- ============================================================

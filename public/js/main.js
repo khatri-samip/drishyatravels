@@ -60,7 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
 
             const response = await fetch(
-                "/DRISHYATRAVELS/backend/api/trip-planner/",
+                // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
+                "/DRISHYATRAVELS/backend/api/trip-planner/", // why: hardcoded project subdirectory; breaks if deployed to root or different subpath
                 {
                     method: "POST",
 
@@ -142,7 +143,10 @@ document.addEventListener("DOMContentLoaded", () => {
 function loadFeaturedPackages(featuredContainer) {
     if (!featuredContainer) return;
 
-    fetch("/DRISHYATRAVELS/backend/api/packages/?featured=1", {
+    fetch(
+      // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
+      "/DRISHYATRAVELS/backend/api/packages/?featured=1",
+      { // why: ?featured=1 returns featured packages; ?limit=3 would return first 3 of all packages — not interchangeable
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -203,7 +207,10 @@ function loadFeaturedPackages(featuredContainer) {
 function loadAllPackagesCarousel(container) {
     if (!container) return;
 
-    fetch("/DRISHYATRAVELS/backend/api/packages/", {
+    fetch(
+      // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
+      "/DRISHYATRAVELS/backend/api/packages/",
+      {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -556,8 +563,10 @@ function getCarouselGap(container) {
    HTML ESCAPE
 ========================= */
 
+// TODO: [Medium/Code Quality] Duplicate escapeHTML implementation - also in admin/js/utils.js and public/js/utils.js
+// This should be removed and use the shared version from public/js/utils.js (loaded before this script)
 function escapeHTML(value) {
-
+  // why: duplicate of public/js/utils.js and admin/js/utils.js — keep in sync; .card vs .featured-card in CSS are not interchangeable (different structure/styling)
     return String(value ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")

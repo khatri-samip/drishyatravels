@@ -71,7 +71,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadPackages() {
   try {
-    const response = await fetch("/DRISHYATRAVELS/backend/api/packages/", {
+    // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
+    // Should use a configurable API_BASE constant from a shared config module
+    const response = await fetch("/DRISHYATRAVELS/backend/api/packages/", { // why: hardcoded project subdirectory; breaks if deployed to root or different subpath
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -89,6 +91,9 @@ async function loadPackages() {
     updateStats(packages);
   } catch (error) {
     console.error(error);
+    // TODO: [Medium/Code Quality] Missing error handling - only shows generic message
+    // Should: show specific error type (network, 404, 500, validation), add retry button,
+    // implement toast/notification system, add loading states during API calls
     const list = document.getElementById("packageList");
     if (list) {
       list.innerHTML = `
@@ -205,6 +210,8 @@ async function savePackage(event) {
     const url = isEdit
       ? `/DRISHYATRAVELS/backend/api/packages/${encodeURIComponent(isEdit)}`
       : "/DRISHYATRAVELS/backend/api/packages/";
+    // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
+    // Should use a configurable API_BASE constant from a shared config module
 
     const method = isEdit ? "PUT" : "POST";
 
@@ -245,6 +252,9 @@ async function savePackage(event) {
 
   } catch (error) {
     console.error(error);
+    // TODO: [Medium/Code Quality] Missing error handling - only shows generic error message
+    // Should: parse validation errors from API (422), show field-specific errors,
+    // add retry logic with exponential backoff, show toast notifications
     if (message) {
       message.className = "form-message error";
       message.innerHTML = `<strong>Error:</strong> ${escapeHTML(error.message)}`;
@@ -262,6 +272,7 @@ async function deletePackage(id) {
   }
 
   try {
+    // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
     const response = await fetch(`/DRISHYATRAVELS/backend/api/packages/${encodeURIComponent(id)}`, {
       method: "DELETE",
       headers: {
@@ -276,6 +287,8 @@ async function deletePackage(id) {
     loadPackages();
   } catch (error) {
     console.error(error);
+    // TODO: [Medium/Code Quality] Missing error handling - only shows generic alert
+    // Should: show specific error type, add toast notification, implement retry logic
     alert("Failed to delete package. Please try again.");
   }
 }
@@ -286,6 +299,7 @@ async function deletePackage(id) {
 
 async function editPackage(id) {
   try {
+    // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
     const response = await fetch(`/DRISHYATRAVELS/backend/api/packages/${encodeURIComponent(id)}`, {
       method: "GET",
       headers: {
@@ -346,6 +360,8 @@ async function editPackage(id) {
 
   } catch (error) {
     console.error(error);
+    // TODO: [Medium/Code Quality] Missing error handling - only shows generic alert
+    // Should: show specific error type, add toast notification, implement retry logic
     alert("Failed to load package for editing. Please try again.");
   }
 }
