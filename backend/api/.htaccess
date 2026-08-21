@@ -29,6 +29,20 @@ RewriteRule ^packages/([^/]+)/inclusions/?$ packages/inclusions.php [L,QSA]
 RewriteRule ^packages/([^/]+)/exclusions/?$ packages/exclusions.php [L,QSA]
 RewriteRule ^packages/([^/]+)/gallery/?$ packages/gallery.php [L,QSA]
 RewriteRule ^packages/([^/]+)/faqs/?$ packages/faqs.php [L,QSA]
+RewriteRule ^packages/([^/]+)/related/?$ packages/related.php [L,QSA]
+
+# Content management endpoints
+RewriteRule ^content-pages/?$ content-pages/index.php [L,QSA]
+RewriteRule ^content-pages/([^/]+)/?$ content-pages/index.php [L,QSA]
+
+RewriteRule ^travel-tips/?$ travel-tips/index.php [L,QSA]
+RewriteRule ^travel-tips/([^/]+)/?$ travel-tips/index.php [L,QSA]
+
+RewriteRule ^visa-rules/?$ visa-rules/index.php [L,QSA]
+RewriteRule ^visa-rules/([^/]+)/?$ visa-rules/index.php [L,QSA]
+
+RewriteRule ^seasons/?$ seasons/index.php [L,QSA]
+RewriteRule ^seasons/([^/]+)/?$ seasons/index.php [L,QSA]
 
 # API root
 RewriteRule ^$ index.php [L,QSA]

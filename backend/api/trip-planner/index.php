@@ -7,6 +7,7 @@
  */
 
 require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/../../models/Package.php';
 require_once __DIR__ . '/../../utils/response.php';
 require_once __DIR__ . '/../../utils/validation.php';
 require_once __DIR__ . '/../../middleware/cors.php';
@@ -45,12 +46,53 @@ if (!$route) {
 
 $people = (int)$input['people'];
 
+// Map trip styles to package categories for recommendations
+$styleToCategory = [
+    'Adventure' => ['Adventure Tour', 'Trekking'],
+    'Culture' => ['Cultural Tour'],
+    'Wildlife' => ['Adventure Tour'], // Closest match
+    'Relaxed' => ['Cultural Tour'],
+];
+
+// Fetch matching packages
+$recommendedPackages = [];
+$categories = $styleToCategory[$style] ?? [];
+
+if (!empty($categories)) {
+    foreach ($categories as $category) {
+        $filters = [
+            'category' => $category,
+            'status' => 'published',
+            'limit' => 2, // Limit per category
+            'offset' => 0,
+        ];
+        [$packages] = Package::getAll($filters);
+        $recommendedPackages = array_merge($recommendedPackages, $packages);
+        if (count($recommendedPackages) >= 4) break; // Max 4 recommendations
+    }
+}
+
+// Format package data for frontend
+$recommended = array_map(function($pkg) {
+    return [
+        'id' => $pkg['id'],
+        'title' => $pkg['title'],
+        'destination' => $pkg['destination'],
+        'duration' => $pkg['duration'],
+        'price' => $pkg['price'],
+        'currency' => $pkg['currency'],
+        'difficulty' => $pkg['difficulty'],
+        'hero_image_url' => $pkg['hero_image_url'],
+    ];
+}, $recommendedPackages);
+
 $response = [
     'route' => $route,
     'style' => $style,
     'days' => $input['days'],
     'month' => $input['month'],
     'people' => $people,
+    'recommended_packages' => $recommended,
 ];
 
 jsonResponse($response);

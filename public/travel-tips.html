@@ -369,211 +369,10 @@
 
     <div class="travel-grid">
 
-
-      <article class="travel-card">
-
-        <h2>
-          Pack for the Journey
-        </h2>
-
-        <p>
-          Nepal's climate varies significantly with altitude and
-          season. Pack according to your destination and activities.
-        </p>
-
-        <ul>
-
-          <li>
-            Comfortable walking shoes are useful for sightseeing
-            and city exploration.
-          </li>
-
-          <li>
-            Bring layers when travelling to mountainous regions.
-          </li>
-
-          <li>
-            Carry rain protection during the monsoon season.
-          </li>
-
-          <li>
-            Sunscreen, sunglasses and a reusable water bottle are
-            useful for outdoor activities.
-          </li>
-
-        </ul>
-
-      </article>
-
-
-      <article class="travel-card">
-
-        <h2>
-          Money & Payments
-        </h2>
-
-        <p>
-          Nepal uses the Nepalese Rupee (NPR). Cards are accepted
-          at many hotels, restaurants and larger businesses, but
-          cash remains useful, especially outside major cities.
-        </p>
-
-        <ul>
-
-          <li>
-            Carry some Nepalese Rupees for smaller purchases.
-          </li>
-
-          <li>
-            ATMs are more readily available in major cities and
-            tourist areas.
-          </li>
-
-          <li>
-            Keep your foreign exchange receipts when exchanging
-            currency.
-          </li>
-
-        </ul>
-
-      </article>
-
-
-      <article class="travel-card">
-
-        <h2>
-          Altitude & Trekking
-        </h2>
-
-        <p>
-          If your journey includes high-altitude trekking, allow
-          enough time for acclimatization and avoid increasing
-          altitude too quickly.
-        </p>
-
-        <ul>
-
-          <li>
-            Stay hydrated.
-          </li>
-
-          <li>
-            Follow your guide's recommendations.
-          </li>
-
-          <li>
-            Take acclimatization days seriously.
-          </li>
-
-          <li>
-            Inform your travel company about relevant medical or
-            fitness concerns before departure.
-          </li>
-
-        </ul>
-
-      </article>
-
-
-      <article class="travel-card">
-
-        <h2>
-          Respect Local Culture
-        </h2>
-
-        <p>
-          Nepal has diverse cultures, religions and traditions.
-          Travelling respectfully helps preserve the places and
-          communities you visit.
-        </p>
-
-        <ul>
-
-          <li>
-            Dress appropriately when visiting religious sites.
-          </li>
-
-          <li>
-            Ask before photographing people.
-          </li>
-
-          <li>
-            Remove shoes where local customs require it.
-          </li>
-
-          <li>
-            Respect local religious practices and monuments.
-          </li>
-
-        </ul>
-
-      </article>
-
-
-      <article class="travel-card">
-
-        <h2>
-          Stay Connected
-        </h2>
-
-        <p>
-          Mobile connectivity is generally available in populated
-          areas, while connectivity can become limited in remote
-          trekking regions.
-        </p>
-
-        <ul>
-
-          <li>
-            Download important maps before heading into remote areas.
-          </li>
-
-          <li>
-            Keep important documents backed up digitally.
-          </li>
-
-          <li>
-            Carry a power bank for longer journeys.
-          </li>
-
-        </ul>
-
-      </article>
-
-
-      <article class="travel-card">
-
-        <h2>
-          Travel Responsibly
-        </h2>
-
-        <p>
-          Help keep Nepal's natural and cultural destinations
-          beautiful for future generations.
-        </p>
-
-        <ul>
-
-          <li>
-            Avoid unnecessary single-use plastics.
-          </li>
-
-          <li>
-            Dispose of waste properly.
-          </li>
-
-          <li>
-            Support local businesses and communities.
-          </li>
-
-          <li>
-            Follow rules in national parks and protected areas.
-          </li>
-
-        </ul>
-
-      </article>
-
+      <!-- Travel tips are loaded dynamically from the API -->
+      <noscript>
+        <p>Please enable JavaScript to view our travel tips.</p>
+      </noscript>
 
     </div>
 
@@ -671,6 +470,7 @@
 
 </footer>
 
+<script src="js/travel-tips.js"></script>
 <script>
 window.addEventListener("load", function(){
 
@@ -680,6 +480,8 @@ window.addEventListener("load", function(){
     preloader.classList.add("loaded");
   }, 500);
 
+  // Initialize travel tips
+  TravelTips.initTravelTips();
 });
 </script>
 </body>

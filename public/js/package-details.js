@@ -139,6 +139,15 @@ document.addEventListener("DOMContentLoaded", () => {
             </aside>
           </div>
         </section>
+
+        <!-- Related/Recommended Packages Section -->
+        <section class="section" id="related-packages-section" style="display: none;">
+          <div class="container">
+            <div class="kicker" style="margin-bottom: 16px;">You may also like</div>
+            <h2>Related Packages</h2>
+            <div class="package-grid" id="related-packages-grid"></div>
+          </div>
+        </section>
       `;
 
       app.querySelectorAll(".faq button").forEach(button => {
@@ -148,6 +157,9 @@ document.addEventListener("DOMContentLoaded", () => {
           button.setAttribute("aria-expanded", String(open));
         });
       });
+
+      // Load related/recommended packages
+      loadRelatedPackages(pkg.id);
     })
     .catch((error) => {
       console.error("Error loading package:", error);
@@ -163,3 +175,53 @@ document.addEventListener("DOMContentLoaded", () => {
         </section>`;
     });
 });
+
+// Load related packages for a given package ID
+async function loadRelatedPackages(packageId) {
+  const section = document.getElementById("related-packages-section");
+  const grid = document.getElementById("related-packages-grid");
+
+  if (!section || !grid) return;
+
+  try {
+    const response = await fetch(`/DRISHYATRAVELS/backend/api/packages/${encodeURIComponent(packageId)}/related`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      // Silently fail if related endpoint doesn't exist or returns error
+      return;
+    }
+
+    const result = await response.json();
+    const relatedPackages = result.data || [];
+
+    if (relatedPackages.length > 0) {
+      grid.innerHTML = relatedPackages.map(pkg => `
+        <article class="package-card">
+          <a href="package.html?id=${encodeURIComponent(pkg.id)}" aria-label="Explore ${escapeHTML(pkg.title)}">
+            <img src="${escapeHTML(pkg.hero_image_url || "")}" alt="${escapeHTML(pkg.title)}" loading="lazy">
+            <div class="package-card-body">
+              <div class="kicker">${escapeHTML(pkg.destination || "")}</div>
+              <h3>${escapeHTML(pkg.title)}</h3>
+              <p>${escapeHTML(pkg.short_description || "")}</p>
+              <div class="package-info">
+                <span>${escapeHTML(pkg.duration || "")}</span>
+                <span>${escapeHTML(pkg.price || "")} ${escapeHTML(pkg.currency || "")}</span>
+              </div>
+              <span class="link">Explore →</span>
+            </div>
+          </a>
+        </article>
+      `).join("");
+
+      section.style.display = "block";
+    }
+  } catch (error) {
+    console.warn("Could not load related packages:", error);
+    // Silently fail - related packages are optional
+  }
+}
