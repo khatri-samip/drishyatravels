@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
 
             const response = await fetch(
-                "/DRISHYATRAVELS/backend/api/trip-planner/",
+                "/DRISHYATRAVELS/backend/api/trip-planner/", // why: hardcoded project subdirectory; breaks if deployed to root or different subpath
                 {
                     method: "POST",
 
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function loadFeaturedPackages(featuredContainer) {
     if (!featuredContainer) return;
 
-    fetch("/DRISHYATRAVELS/backend/api/packages/?featured=1", {
+    fetch("/DRISHYATRAVELS/backend/api/packages/?featured=1", { // why: ?featured=1 returns featured packages; ?limit=3 would return first 3 of all packages — not interchangeable
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -203,7 +203,7 @@ function loadFeaturedPackages(featuredContainer) {
 function loadAllPackagesCarousel(container) {
     if (!container) return;
 
-    fetch("/DRISHYATRAVELS/backend/api/packages/", {
+    fetch("/DRISHYATRAVELS/backend/api/packages/", { // why: hardcoded project subdirectory; breaks if deployed to root or different subpath
         method: "GET",
         headers: {
             "Content-Type": "application/json",

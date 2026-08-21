@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentDifficulty) params.append("difficulty", currentDifficulty);
 
     try {
-      const response = await fetch(`/DRISHYATRAVELS/backend/api/packages/?${params.toString()}`, {
+      const response = await fetch(`/DRISHYATRAVELS/backend/api/packages/?${params.toString()}`, { // why: hardcoded project subdirectory; breaks if deployed to root or different subpath // why: hardcoded project subdirectory; breaks if deployed to root or different subpath
         method: "GET",
         headers: {
           "Content-Type": "application/json",
