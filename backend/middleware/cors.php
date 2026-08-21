@@ -6,6 +6,11 @@
  * Reads configuration from environment variables
  */
 
+// TODO: [High/Security/DevOps] Fragile CORS config for production
+// - Defaults to wildcard origin (*) with credentials=true which is INVALID per spec
+// - Credentials not allowed with wildcard origin - browsers will reject
+// - No validation that CORS_ALLOW_ORIGIN is set in production
+// - Should separate dev/prod configs, require explicit origin list in production
 function corsHeaders(): void
 {
     $allowOrigin = $_ENV['CORS_ALLOW_ORIGIN'] ?? '*';
@@ -16,6 +21,8 @@ function corsHeaders(): void
     // Allow all origins in development, specific origin in production
     if ($allowOrigin === '*') {
         header('Access-Control-Allow-Origin: *');
+        // WARNING: Access-Control-Allow-Credentials: true with wildcard origin is INVALID
+        // Browsers will reject this combination. Only enable credentials with specific origins.
     } else {
         $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
         $allowedOrigins = array_map('trim', explode(',', $allowOrigin));

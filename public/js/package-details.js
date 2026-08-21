@@ -28,7 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     </section>`;
 
-  fetch(`/DRISHYATRAVELS/backend/api/packages/${encodeURIComponent(id)}`, { // why: hardcoded project subdirectory; breaks if deployed to root or different subpath
+  fetch(
+    // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
+    `/DRISHYATRAVELS/backend/api/packages/${encodeURIComponent(id)}`,
+    {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

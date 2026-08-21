@@ -566,7 +566,7 @@ function getCarouselGap(container) {
 // TODO: [Medium/Code Quality] Duplicate escapeHTML implementation - also in admin/js/utils.js and public/js/utils.js
 // This should be removed and use the shared version from public/js/utils.js (loaded before this script)
 function escapeHTML(value) {
-
+  // why: duplicate of public/js/utils.js and admin/js/utils.js — keep in sync; .card vs .featured-card in CSS are not interchangeable (different structure/styling)
     return String(value ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
