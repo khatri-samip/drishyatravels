@@ -132,6 +132,7 @@ function renderPackages(packages) {
         >
         <div>
           <strong>${escapeHTML(pkg.title)}</strong>
+          ${pkg.is_featured ? '<span class="featured-badge">★ Featured</span>' : ''}
           <small>${escapeHTML(pkg.destination || "")}</small>
         </div>
       </div>
@@ -189,6 +190,7 @@ async function savePackage(event) {
     description: data.fullDescription || data.description,
     hero_image_url: data.heroImage,
     status: data.status || 'draft',
+    is_featured: data.isFeatured === '1',
     itinerary: collectItinerary(),
     highlights: collectHighlights(),
     inclusions: collectInclusions(),
@@ -320,6 +322,7 @@ async function editPackage(id) {
     form.querySelector("#fullDescription").value = pkg.description || "";
     form.querySelector("#heroImage").value = pkg.hero_image_url || "";
     form.querySelector("#status").value = pkg.status || "draft";
+    form.querySelector("#isFeatured").checked = pkg.is_featured === true || pkg.is_featured === 1;
 
     // Trigger image preview
     form.querySelector("#heroImage").dispatchEvent(new Event("input"));

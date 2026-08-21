@@ -138,12 +138,17 @@ document.addEventListener("DOMContentLoaded", () => {
 ========================= */
 
 function loadHomepagePackages(container) {
-
-    fetch("/DRISHYATRAVELS/backend/api/packages/", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
+  fetch("/DRISHYATRAVELS/backend/api/packages/?featured=1", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch packages");
+      }
+      return response.json();
     })
 
         .then((response) => {

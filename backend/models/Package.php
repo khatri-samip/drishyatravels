@@ -13,7 +13,7 @@ class Package
     /**
      * Get all packages with optional filtering
      *
-     * @param array $filters Filter options: status, category, difficulty, limit, offset
+     * @param array $filters Filter options: status, category, difficulty, featured, limit, offset
      * @return array [data, total]
      */
     public static function getAll(array $filters = []): array
@@ -34,6 +34,10 @@ class Package
         if (!empty($filters['difficulty'])) {
             $where[] = '`difficulty` = ?';
             $params[] = $filters['difficulty'];
+        }
+
+        if (isset($filters['featured']) && $filters['featured'] === '1') {
+            $where[] = '`is_featured` = TRUE';
         }
 
         $whereClause = implode(' AND ', $where);
@@ -111,8 +115,8 @@ class Package
                 `id`, `title`, `category`, `destination`, `duration`, `price`, `currency`,
                 `price_details`, `difficulty`, `best_season`, `maximum_altitude`,
                 `starting_point`, `ending_point`, `package_type`, `short_description`,
-                `description`, `hero_image_url`, `status`
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                `description`, `hero_image_url`, `status`, `is_featured`
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
@@ -134,6 +138,7 @@ class Package
                 $data['description'],
                 $data['hero_image_url'] ?? null,
                 $data['status'] ?? 'draft',
+                $data['is_featured'] ?? false,
             ]);
 
             $packageId = $data['id'];
@@ -207,7 +212,7 @@ class Package
             'title', 'category', 'destination', 'duration', 'price', 'currency',
             'price_details', 'difficulty', 'best_season', 'maximum_altitude',
             'starting_point', 'ending_point', 'package_type', 'short_description',
-            'description', 'hero_image_url', 'status'
+            'description', 'hero_image_url', 'status', 'is_featured'
         ];
 
         $setParts = [];

@@ -49,6 +49,7 @@ CREATE TABLE `packages` (
     `description` TEXT NOT NULL,
     `hero_image_url` TEXT,
     `status` VARCHAR(20) NOT NULL DEFAULT 'draft',
+    `is_featured` BOOLEAN NOT NULL DEFAULT FALSE,
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     -- Constraints
@@ -160,6 +161,7 @@ CREATE INDEX `idx_packages_status` ON `packages`(`status`);
 CREATE INDEX `idx_packages_category` ON `packages`(`category`);
 CREATE INDEX `idx_packages_difficulty` ON `packages`(`difficulty`);
 CREATE INDEX `idx_packages_currency` ON `packages`(`currency`);
+CREATE INDEX `idx_packages_featured` ON `packages`(`is_featured`);
 CREATE INDEX `idx_itinerary_days_package_id` ON `itinerary_days`(`package_id`);
 CREATE INDEX `idx_package_highlights_package_id` ON `package_highlights`(`package_id`);
 CREATE INDEX `idx_package_inclusions_package_id` ON `package_inclusions`(`package_id`);
@@ -182,7 +184,7 @@ INSERT INTO `packages` (
     `id`, `title`, `category`, `destination`, `duration`, `price`, `currency`,
     `price_details`, `difficulty`, `best_season`, `maximum_altitude`,
     `starting_point`, `ending_point`, `package_type`, `short_description`,
-    `description`, `hero_image_url`, `status`
+    `description`, `hero_image_url`, `status`, `is_featured`
 )
 VALUES (
     'everest-base-camp',
@@ -202,7 +204,8 @@ VALUES (
     'Everest Base Camp trekking through the Everest region, Sherpa settlements and the high Himalayas.',
     'Everest Base Camp Trekking takes you to some of the highest navigable points on Earth, through the Everest region, Sherpa settlements, monasteries and the Himalayan giants including Everest, Lhotse, Makalu, Ama Dablam and Cho Oyu.',
     'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1800&q=85',
-    'published'
+    'published',
+    FALSE
 )
 ON DUPLICATE KEY UPDATE
     `title` = VALUES(`title`),
@@ -222,6 +225,7 @@ ON DUPLICATE KEY UPDATE
     `description` = VALUES(`description`),
     `hero_image_url` = VALUES(`hero_image_url`),
     `status` = VALUES(`status`),
+    `is_featured` = VALUES(`is_featured`),
     `updated_at` = CURRENT_TIMESTAMP;
 
 
@@ -233,7 +237,7 @@ INSERT INTO `packages` (
     `id`, `title`, `category`, `destination`, `duration`, `price`, `currency`,
     `price_details`, `difficulty`, `best_season`, `maximum_altitude`,
     `starting_point`, `ending_point`, `package_type`, `short_description`,
-    `description`, `hero_image_url`, `status`
+    `description`, `hero_image_url`, `status`, `is_featured`
 )
 VALUES (
     'mardi-trek',
@@ -253,7 +257,8 @@ VALUES (
     'A short Himalayan trek from Pokhara through Deurali, Low Camp and High Camp.',
     'A 4-night/5-day Mardi trek from Pokhara through Deurali, Low Camp and High Camp, with an excursion toward Mardi Himal Base Camp and a descent to Badal Danda and Siding.',
     'https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1800&q=85',
-    'published'
+    'published',
+    FALSE
 )
 ON DUPLICATE KEY UPDATE
     `title` = VALUES(`title`),
@@ -273,6 +278,7 @@ ON DUPLICATE KEY UPDATE
     `description` = VALUES(`description`),
     `hero_image_url` = VALUES(`hero_image_url`),
     `status` = VALUES(`status`),
+    `is_featured` = VALUES(`is_featured`),
     `updated_at` = CURRENT_TIMESTAMP;
 
 
@@ -284,7 +290,7 @@ INSERT INTO `packages` (
     `id`, `title`, `category`, `destination`, `duration`, `price`, `currency`,
     `price_details`, `difficulty`, `best_season`, `maximum_altitude`,
     `starting_point`, `ending_point`, `package_type`, `short_description`,
-    `description`, `hero_image_url`, `status`
+    `description`, `hero_image_url`, `status`, `is_featured`
 )
 VALUES (
     'rani-mahal',
@@ -304,7 +310,8 @@ VALUES (
     'Explore historic Tansen and the riverside Rani Mahal, known as the Taj of Nepal.',
     'Explore Tansen and Rani Mahal, the historic palace associated with Khadga Shumsher Jung Bahadur Rana and situated on the bank of the Kali Gandaki River. It is often called the Taj of Nepal.',
     'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=1800&q=85',
-    'published'
+    'published',
+    FALSE
 )
 ON DUPLICATE KEY UPDATE
     `title` = VALUES(`title`),
@@ -324,6 +331,7 @@ ON DUPLICATE KEY UPDATE
     `description` = VALUES(`description`),
     `hero_image_url` = VALUES(`hero_image_url`),
     `status` = VALUES(`status`),
+    `is_featured` = VALUES(`is_featured`),
     `updated_at` = CURRENT_TIMESTAMP;
 
 
@@ -335,7 +343,7 @@ INSERT INTO `packages` (
     `id`, `title`, `category`, `destination`, `duration`, `price`, `currency`,
     `price_details`, `difficulty`, `best_season`, `maximum_altitude`,
     `starting_point`, `ending_point`, `package_type`, `short_description`,
-    `description`, `hero_image_url`, `status`
+    `description`, `hero_image_url`, `status`, `is_featured`
 )
 VALUES (
     'manang',
@@ -355,7 +363,8 @@ VALUES (
     'Explore Chame, Pisang and the Manang Valley with scenic lakes, mountains and landscapes.',
     'A 4-night/5-day journey through Chame, Pisang and the Manang valley, including exploration around Green Lake, Blue Lake and Gangapurna.',
     'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=1800&q=85',
-    'published'
+    'published',
+    FALSE
 )
 ON DUPLICATE KEY UPDATE
     `title` = VALUES(`title`),
@@ -375,6 +384,7 @@ ON DUPLICATE KEY UPDATE
     `description` = VALUES(`description`),
     `hero_image_url` = VALUES(`hero_image_url`),
     `status` = VALUES(`status`),
+    `is_featured` = VALUES(`is_featured`),
     `updated_at` = CURRENT_TIMESTAMP;
 
 
@@ -607,6 +617,17 @@ VALUES
  'What is included?',
  'The supplied package includes four nights accommodation, breakfast and dinner, two-way transportation, and applicable government taxes and service charges.',
  1);
+
+-- ============================================================
+-- MIGRATIONS
+-- ============================================================
+
+-- Add is_featured column to packages table (if not exists)
+-- Run this separately if the table already exists
+-- ALTER TABLE `packages` ADD COLUMN `is_featured` BOOLEAN NOT NULL DEFAULT FALSE AFTER `status`;
+
+-- Add index for featured packages
+-- CREATE INDEX `idx_packages_featured` ON `packages`(`is_featured`);
 
 -- ============================================================
 -- VERIFICATION QUERIES

@@ -49,7 +49,38 @@
     <div><div class="kicker">Our journeys</div><h2>Explore Nepal.</h2></div>
     <p>Every card below opens the same reusable package-details template. The content changes from the package ID in the URL.</p>
   </div>
+
+  <!-- Filter controls -->
+  <div class="package-filters" style="margin-bottom: 30px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+    <div class="filter-group" style="display: flex; gap: 8px; align-items: center;">
+      <label for="categoryFilter" style="font-weight: 600; color: var(--ink);">Category:</label>
+      <select id="categoryFilter" style="padding: 10px 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); font-size: 14px;">
+        <option value="">All Categories</option>
+        <option value="Trekking">Trekking</option>
+        <option value="Cultural Tour">Cultural Tour</option>
+        <option value="Adventure Tour">Adventure Tour</option>
+      </select>
+    </div>
+    <div class="filter-group" style="display: flex; gap: 8px; align-items: center;">
+      <label for="difficultyFilter" style="font-weight: 600; color: var(--ink);">Difficulty:</label>
+      <select id="difficultyFilter" style="padding: 10px 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); font-size: 14px;">
+        <option value="">All Difficulties</option>
+        <option value="Easy">Easy</option>
+        <option value="Moderate">Moderate</option>
+        <option value="Challenging">Challenging</option>
+      </select>
+    </div>
+    <button id="clearFilters" class="btn btn-light" style="padding: 10px 16px;">Clear Filters</button>
+  </div>
+
   <div class="package-grid" id="packageGrid"></div>
+
+  <!-- Pagination controls -->
+  <div class="pagination" id="pagination" style="margin-top: 40px; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap;">
+    <button id="prevPage" class="btn btn-light" disabled style="min-width: 120px;">← Previous</button>
+    <span id="pageInfo" style="color: var(--muted); font-size: 14px;">Page 1 of 1</span>
+    <button id="nextPage" class="btn btn-light" disabled style="min-width: 120px;">Next →</button>
+  </div>
 </div></main>
 
 <footer><div class="container"><div class="footer-grid">
