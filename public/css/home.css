@@ -606,3 +606,302 @@ h1{font-size:clamp(52px,7vw,92px);line-height:.95;letter-spacing:-4px;margin-bot
   .stats .stat:nth-child(3){display:none}
   .planner-box{padding:20px}
 }
+
+
+
+
+/* =========================
+   CAROUSEL
+========================= */
+
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+
+/*
+    IMPORTANT:
+
+    3 cards are visible on desktop.
+*/
+
+.places-carousel {
+    display: flex;
+    gap: 18px;
+
+    width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+
+    scrollbar-width: none;
+
+    padding: 2px 2px 15px;
+}
+
+.places-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    /*
+       3 cards visible.
+
+       Container = 1100px
+       Gap = 18px
+
+       (1100 - 36) / 3 = ~354px
+    */
+
+    flex: 0 0 calc((100% - 36px) / 3);
+
+    min-width: 0;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+
+    scroll-snap-align: start;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+
+
+
+
+/* =========================
+   LOCATION TAG
+========================= */
+
+.location-tag {
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+
+    padding: 8px 13px;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    border-radius: 30px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    color: #17231f;
+}
+
+
+
+
+
+
+
+
+/* =========================
+   ARROWS
+========================= */
+
+.carousel-btn {
+    position: absolute;
+
+    top: 45%;
+
+    z-index: 10;
+
+    width: 45px;
+    height: 45px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: #17231f;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.carousel-btn:hover {
+    transform: scale(1.08);
+
+    background: #17231f;
+
+    color: #ffffff;
+}
+
+.carousel-btn.prev {
+    left: -22px;
+}
+
+.carousel-btn.next {
+    right: -22px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .places-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .places-heading h2 {
+        font-size: 40px;
+    }
+
+    .card {
+        flex: 0 0 calc((100% - 18px) / 2);
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .places-section {
+        padding: 55px 15px;
+    }
+
+    .places-heading {
+        margin-bottom: 30px;
+    }
+
+    .places-heading h2 {
+        font-size: 36px;
+        letter-spacing: -1.5px;
+    }
+
+    .places-heading p {
+        font-size: 14px;
+        margin: 0;
+    }
+
+
+    /*
+       ONE CARD AT A TIME ON MOBILE
+    */
+
+    .card {
+        flex: 0 0 100%;
+    }
+
+    .card-img {
+        height: 280px;
+    }
+
+
+    /*
+       Hide arrows on phones.
+       User can swipe with their finger.
+    */
+
+    .carousel-btn {
+        display: none;
+    }
+
+
+    /*
+       Make touch scrolling feel natural.
+    */
+
+    .places-carousel {
+        gap: 15px;
+
+        scroll-snap-type: x mandatory;
+
+        -webkit-overflow-scrolling: touch;
+
+        touch-action: pan-x;
+    }
+
+}
+
+/* =========================
+   PAGINATION
+========================= */
+
+.carousel-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 22px;
+}
+
+.carousel-dot {
+    width: 8px;
+    height: 8px;
+
+    padding: 0;
+    border: none;
+
+    border-radius: 50%;
+
+    background: #cfd5d2;
+
+    cursor: pointer;
+
+    transition:
+        width 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.carousel-dot.active {
+    width: 24px;
+
+    border-radius: 20px;
+
+    background: #e76f35;
+}
+
+.carousel-dot:hover {
+    transform: scale(1.15);
+}
