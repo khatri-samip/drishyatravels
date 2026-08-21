@@ -64,36 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
             );
         }
 
-        // Build recommended packages HTML
-        let recommendedHtml = '';
-        if (data.recommended_packages && data.recommended_packages.length > 0) {
-            recommendedHtml = `
-                <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line);">
-                    <h4 style="margin-bottom: 16px; color: var(--ink);">Recommended Packages</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
-                        ${data.recommended_packages.map(pkg => `
-                            <article style="background: var(--bg); border-radius: 16px; overflow: hidden; border: 1px solid var(--line);">
-                                <a href="package.html?id=${encodeURIComponent(pkg.id)}" style="display: block; text-decoration: none; color: inherit;">
-                                    <div style="height: 160px; background-image: url('${escapeHTML(pkg.hero_image_url || "")}'); background-size: cover; background-position: center;"></div>
-                                    <div style="padding: 16px;">
-                                        <div class="kicker" style="color: var(--accent);">${escapeHTML(pkg.destination || "")}</div>
-                                        <h4 style="margin: 8px 0; font-size: 16px;">${escapeHTML(pkg.title)}</h4>
-                                        <div style="display: flex; gap: 12px; font-size: 13px; color: var(--muted); margin-bottom: 12px;">
-                                            <span>${escapeHTML(pkg.duration || "")}</span>
-                                            <span>${escapeHTML(pkg.difficulty || "")}</span>
-                                        </div>
-                                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                                            <strong>${escapeHTML(pkg.price || "")} ${escapeHTML(pkg.currency || "")}</strong>
-                                            <span style="font-size: 13px; color: var(--accent); font-weight: 600;">View Package →</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </article>
-                        `).join("")}
-                    </div>
-                </div>
-            `;
-        }
 
         result.innerHTML = `
             <strong>Your starting route:</strong>
@@ -106,7 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 ·
                 ${data.people} traveller(s)
             </small>
-            ${recommendedHtml}
         `;
 
 

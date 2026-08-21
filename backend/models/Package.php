@@ -310,40 +310,6 @@ class Package
         );
     }
 
-    /**
-     * Get related/recommended packages for a package.
-     *
-     * Strategy: prefer published packages sharing the same category,
-     * then same destination, then any other published packages,
-     * excluding the package itself. Limited to $limit results.
-     *
-     * @param string $packageId Package ID
-     * @param int $limit Maximum number of related packages
-     * @return array
-     */
-    public static function getRelated(string $packageId, int $limit = 3): array
-    {
-        $limit = max(1, min(10, $limit));
-
-        // Fetch the source package to base the relationship on
-        $source = self::getByIdSimple($packageId);
-        if (!$source) {
-            return [];
-        }
-
-        $sql = "SELECT `id`, `title`, `category`, `destination`, `duration`, `price`, `currency`,
-                       `difficulty`, `short_description`, `hero_image_url`
-                FROM `packages`
-                WHERE `id` != ? AND `status` = 'published'
-                ORDER BY
-                    (CASE WHEN `category` = ? THEN 0 ELSE 1 END),
-                    (CASE WHEN `destination` = ? THEN 0 ELSE 1 END),
-                    `created_at` DESC
-                LIMIT ?";
-
-        return dbSelect($sql, [$packageId, $source['category'], $source['destination'], $limit]);
-    }
-
     // ==================== Private Insert/Replace Methods ====================
 
     private static function insertItinerary(PDO $pdo, string $packageId, array $items): void
