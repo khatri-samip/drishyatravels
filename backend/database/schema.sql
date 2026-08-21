@@ -161,6 +161,7 @@ CREATE INDEX `idx_packages_status` ON `packages`(`status`);
 CREATE INDEX `idx_packages_category` ON `packages`(`category`);
 CREATE INDEX `idx_packages_difficulty` ON `packages`(`difficulty`);
 CREATE INDEX `idx_packages_currency` ON `packages`(`currency`);
+CREATE INDEX `idx_packages_featured` ON `packages`(`is_featured`);
 CREATE INDEX `idx_itinerary_days_package_id` ON `itinerary_days`(`package_id`);
 CREATE INDEX `idx_package_highlights_package_id` ON `package_highlights`(`package_id`);
 CREATE INDEX `idx_package_inclusions_package_id` ON `package_inclusions`(`package_id`);
@@ -183,7 +184,7 @@ INSERT INTO `packages` (
     `id`, `title`, `category`, `destination`, `duration`, `price`, `currency`,
     `price_details`, `difficulty`, `best_season`, `maximum_altitude`,
     `starting_point`, `ending_point`, `package_type`, `short_description`,
-    `description`, `hero_image_url`, `status`
+    `description`, `hero_image_url`, `status`, `is_featured`
 )
 VALUES (
     'everest-base-camp',
@@ -234,7 +235,7 @@ INSERT INTO `packages` (
     `id`, `title`, `category`, `destination`, `duration`, `price`, `currency`,
     `price_details`, `difficulty`, `best_season`, `maximum_altitude`,
     `starting_point`, `ending_point`, `package_type`, `short_description`,
-    `description`, `hero_image_url`, `status`
+    `description`, `hero_image_url`, `status`, `is_featured`
 )
 VALUES (
     'mardi-trek',
@@ -285,7 +286,7 @@ INSERT INTO `packages` (
     `id`, `title`, `category`, `destination`, `duration`, `price`, `currency`,
     `price_details`, `difficulty`, `best_season`, `maximum_altitude`,
     `starting_point`, `ending_point`, `package_type`, `short_description`,
-    `description`, `hero_image_url`, `status`
+    `description`, `hero_image_url`, `status`, `is_featured`
 )
 VALUES (
     'rani-mahal',
@@ -336,7 +337,7 @@ INSERT INTO `packages` (
     `id`, `title`, `category`, `destination`, `duration`, `price`, `currency`,
     `price_details`, `difficulty`, `best_season`, `maximum_altitude`,
     `starting_point`, `ending_point`, `package_type`, `short_description`,
-    `description`, `hero_image_url`, `status`
+    `description`, `hero_image_url`, `status`, `is_featured`
 )
 VALUES (
     'manang',
