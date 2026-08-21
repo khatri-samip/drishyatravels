@@ -185,25 +185,47 @@
     </div>
 
 
-    <!--
-      IMPORTANT:
 
-      Package cards are NOT hardcoded here.
+    <div class="carousel-wrapper">
 
-      JavaScript will load the packages from:
+        <!-- LEFT ARROW -->
+        <button
+            class="carousel-btn prev"
+            id="prevBtn"
+            type="button"
+            aria-label="Previous packages">
+            &#8592;
+        </button>
 
-      GET /api/packages
 
-      and insert the cards into this container.
+        <!--
+            Package cards are NOT hardcoded here.
 
-      If there are no packages in the database,
-      this container remains empty.
-    -->
+            JavaScript will load packages from:
 
-    <div class="cards" id="packages-container"></div>
+            GET /api/packages
 
-  </div>
+            and insert the generated cards into
+            this container.
+        -->
+        <div
+            class="places-carousel"
+            id="packages-container">
+        </div>
 
+
+        <!-- RIGHT ARROW -->
+        <button
+            class="carousel-btn next"
+            id="nextBtn"
+            type="button"
+            aria-label="Next packages">
+            &#8594;
+        </button>
+
+    </div>
+<!-- PAGINATION -->
+<div class="carousel-pagination" id="packagesPagination"></div>
 </section>
 
 
