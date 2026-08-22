@@ -9,10 +9,10 @@ Comprehensive analysis of the Drishya Travels codebase with actionable findings.
 | Severity | Count |
 |----------|-------|
 | Critical | 2 |
-| High | 4 |
-| Medium | 5 |
+| High | 3 |
+| Medium | 4 |
 | Low | 2 |
-| **Total** | **13** |
+| **Total** | **11** |
 
 ---
 
@@ -26,16 +26,16 @@ Comprehensive analysis of the Drishya Travels codebase with actionable findings.
 
 ---
 
-### 2. [Critical] PostgreSQL Schema vs MySQL Runtime Mismatch
-**File:** `docs/database/001_initial_schema.sql` (PostgreSQL) vs `backend/config/database.php` (MySQL)
+### 2. [Critical] Legacy PostgreSQL Schema Exists But Is Not Used
+**File:** `docs/database/001_initial_schema.sql` (PostgreSQL — legacy) vs `backend/database/schema.sql` (MySQL — canonical)
 **Category:** Architecture
-**Description:** The canonical schema in `docs/database/001_initial_schema.sql` is written for PostgreSQL (Supabase target) but the PHP backend connects to MySQL/MariaDB via XAMPP. Key incompatibilities:
-- `TEXT PRIMARY KEY` → MySQL needs `VARCHAR(100) PRIMARY KEY`
-- `BIGINT GENERATED ALWAYS AS IDENTITY` → MySQL needs `BIGINT AUTO_INCREMENT`
-- `TIMESTAMPTZ` → MySQL needs `TIMESTAMP DEFAULT CURRENT_TIMESTAMP`
-- `ON CONFLICT DO UPDATE` → MySQL needs `ON DUPLICATE KEY UPDATE`
-- `CHECK` constraints require MySQL 8.0.16+
-**Suggested Fix:** Maintain a MySQL-specific schema file alongside PostgreSQL, or use a migration tool that handles dialect translation. Document the exact translation rules in DEVELOPMENT.md.
+**Description:** A PostgreSQL schema exists at `docs/database/001_initial_schema.sql` from the original Supabase/Django plan, but the **canonical schema is the MySQL file at `backend/database/schema.sql`** which is what the PHP backend actually uses. The PostgreSQL file is a historical artifact and should not be treated as canonical. Key differences from the MySQL schema:
+- PostgreSQL: `TEXT PRIMARY KEY` → MySQL: `VARCHAR(100) PRIMARY KEY`
+- PostgreSQL: `BIGINT GENERATED ALWAYS AS IDENTITY` → MySQL: `BIGINT AUTO_INCREMENT`
+- PostgreSQL: `TIMESTAMPTZ` → MySQL: `TIMESTAMP DEFAULT CURRENT_TIMESTAMP`
+- PostgreSQL: `ON CONFLICT DO UPDATE` → MySQL: `ON DUPLICATE KEY UPDATE`
+- PostgreSQL: `CHECK` constraints require MySQL 8.0.16+ (MySQL schema uses them)
+**Suggested Fix:** Remove or clearly mark `docs/database/001_initial_schema.sql` as historical/legacy. Ensure all documentation references `backend/database/schema.sql` as canonical.
 
 ---
 
@@ -71,26 +71,10 @@ Comprehensive analysis of the Drishya Travels codebase with actionable findings.
 ---
 
 ### 5. [High] Data Duplication: Static JS Mirrors SQL Seed Data
-**Files:** `public/data/packages.js` (4 packages) vs `docs/database/001_initial_schema.sql` (seed data for same 4 packages)
+**Files:** `public/data/packages.js` (4 packages) vs `backend/database/schema.sql` (seed data for same 4 packages)
 **Category:** Architecture
 **Description:** The static fallback data in `public/data/packages.js` duplicates the 4 seed packages from the SQL schema (Everest Base Camp, Mardi Trek, Rani Mahal, Manang). Any update to package data requires changes in two places.
 **Suggested Fix:** Remove `public/data/packages.js` and have the frontend always fetch from the API. If offline fallback is needed, generate the JS file from the database at build/deploy time, or use Service Worker caching.
-
----
-
-### 6. [High] Empty Django `models.py` — Trip Planner Doesn't Persist Data
-**File:** `backend/trip_planner/models.py` (empty, 0 bytes)
-**Category:** Architecture
-**Description:** The Django app has no models — the trip planner endpoint (`plan_trip`) only reads from a hardcoded Python dictionary and returns a route. No trip requests are stored, no user history, no analytics.
-**Suggested Fix:** If trip planning history is needed, add a `TripRequest` model with fields for style, days, month, people, route, created_at. If not needed, document that the Django app is intentionally stateless and consider simplifying to a PHP endpoint.
-
----
-
-### 7. [Medium] Inconsistent Response Patterns: PHP Helpers vs Django JsonResponse
-**Files:** `backend/utils/response.php` (jsonResponse, jsonError, jsonValidationError, etc.) vs `backend/trip_planner/views.py` (uses `JsonResponse` directly)
-**Category:** Code Quality
-**Description:** The PHP API uses a comprehensive set of response helpers (`jsonResponse`, `jsonError`, `jsonNotFound`, `jsonValidationError`, `jsonServerError`, `jsonCreated`, `jsonNoContent`, `handleException`) with consistent structure (`{success: true, data: ...}` / `{success: false, error: ..., errors: ...}`). The Django endpoint returns raw `JsonResponse` with different structure.
-**Suggested Fix:** Either create similar helpers for Django, or document the intentional difference. For consistency, the Django endpoint should match the PHP response format.
 
 ---
 
@@ -115,7 +99,6 @@ Comprehensive analysis of the Drishya Travels codebase with actionable findings.
 | PHP (DB/Model) | snake_case | `hero_image_url`, `is_featured`, `short_description` |
 | PHP (API Response) | snake_case | `{ "hero_image_url": "...", "is_featured": true }` |
 | JavaScript | camelCase | `pkg.heroImageUrl`, `pkg.isFeatured` (manual mapping needed) |
-| Python/Django | snake_case | `plan_trip`, `style`, `days` |
 | CSS | kebab-case | `.featured-card`, `.card-img-bg` |
 **Impact:** Frontend must manually map snake_case API responses to camelCase JS objects (see `package-details.js:55-60`).
 **Suggested Fix:** Pick one convention for API responses. If keeping snake_case (standard for REST), add a utility to convert to camelCase in JS, or document the mapping pattern.
@@ -126,13 +109,11 @@ Comprehensive analysis of the Drishya Travels codebase with actionable findings.
 **Category:** Testing
 **Description:** Zero test files found:
 - No PHPUnit tests for PHP API
-- No pytest tests for Django
 - No Jest/Vitest for JavaScript
 - No Cypress/Playwright for E2E
 - No API contract tests
 **Suggested Fix:** Add at minimum:
 - PHPUnit for `Package.php` model methods
-- pytest for Django `plan_trip` view
 - Vitest for `escapeHTML` and utility functions
 - GitHub Actions workflow for CI
 
@@ -178,8 +159,8 @@ Comprehensive analysis of the Drishya Travels codebase with actionable findings.
 
 5. Create `public/js/config.js` with runtime `API_BASE` detection
 6. Update all 9 fetch calls to use `API_BASE`
-7. Add MySQL-specific schema file (`backend/database/schema_mysql.sql`)
-8. Add PHPUnit + pytest + Vitest boilerplate
+7. Ensure canonical MySQL schema at `backend/database/schema.sql` is used (already exists)
+8. Add PHPUnit + Vitest boilerplate
 9. Add authentication middleware skeleton (even if not fully implemented yet)
 
 ---
@@ -188,6 +169,5 @@ Comprehensive analysis of the Drishya Travels codebase with actionable findings.
 
 10. Full authentication system (JWT + login page)
 11. Remove static `public/data/packages.js` — generate from DB or use SW cache
-12. Add Django `TripRequest` model if history needed
-13. Production CORS config documentation
-14. CI/CD pipeline with tests
+12. Production CORS config documentation
+13. CI/CD pipeline with tests

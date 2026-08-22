@@ -1,6 +1,6 @@
 # API Reference
 
-Complete, verified field-level documentation for all API endpoints. All field names and response shapes verified against live PHP/Django code.
+Complete, verified field-level documentation for all API endpoints. All field names and response shapes verified against live PHP code.
 
 ---
 
@@ -28,7 +28,7 @@ Base URL: `/DRISHYATRAVELS/backend/api/` (local) or `/drishya-travels-backend/ap
 
 ---
 
-### Trip Planner (Ported from Django)
+### Trip Planner (PHP)
 
 **POST** `/api/trip-planner/`
 
@@ -279,39 +279,6 @@ All return `{ "success": true, "data": [...] }`
 
 ---
 
-## Django Backend API
-
-Base URL: `http://localhost:8000/api/` (dev) or production equivalent
-
-### Trip Planner
-
-**POST** `/api/trip-planner/`
-
-**Request:**
-```json
-{
-  "style": "Adventure|Culture|Wildlife|Relaxed",
-  "days": "7",
-  "month": "October",
-  "people": 2
-}
-```
-
-**Response (200):**
-```json
-{
-  "route": "Kathmandu → Pokhara → Annapurna region",
-  "style": "Adventure",
-  "days": "7",
-  "month": "October",
-  "people": 2
-}
-```
-
-**Note:** Django response does **not** use the `{success: true, data: ...}` envelope — it returns the route object directly.
-
----
-
 ## Field Name Reference
 
 ### Package Core Fields
@@ -424,11 +391,6 @@ curl http://localhost/DRISHYATRAVELS/backend/api/packages/everest-base-camp/itin
 
 # Trip planner (PHP)
 curl -X POST http://localhost/DRISHYATRAVELS/backend/api/trip-planner/ \
-  -H "Content-Type: application/json" \
-  -d '{"style":"Adventure","days":"7","month":"October","people":2}'
-
-# Trip planner (Django)
-curl -X POST http://localhost:8000/api/trip-planner/ \
   -H "Content-Type: application/json" \
   -d '{"style":"Adventure","days":"7","month":"October","people":2}'
 ```

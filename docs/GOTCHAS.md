@@ -227,4 +227,31 @@ fetch(`${API_BASE}/packages/?featured=1`)
 
 ---
 
+## 6. `admin/login.html` Is a Static Placeholder — Not Wired to Backend
+
+**File:** `admin/login.html` (lines 42–53)
+
+**What it does:** Client-side only password check (`password === "drishya123"`). If correct, redirects to `index.html`. No backend validation, no session creation, no token generation.
+
+**Why this is a gotcha:**
+- It *looks* like a login page but provides **zero security**
+- Anyone can bypass it by navigating directly to `admin/index.html`
+- The hardcoded password `"drishya123"` is visible in source code
+- No logout functionality (just closing the tab works)
+- No server-side session — the admin panel has no auth middleware
+
+**Current state (from PROJECT_STATUS.md Known Gaps #1):** Admin authentication is intentionally deferred. The login page exists as a UI placeholder for future implementation.
+
+**When implementing real auth:**
+1. Add backend endpoint: `POST /api/auth/login` → returns JWT or sets session cookie
+2. Add auth middleware to verify tokens on all `/api/` routes
+3. Update `admin/login.html` to POST to `/api/auth/login` and store token
+4. Update `admin/js/script.js` to include auth header in all API calls
+5. Add logout button that clears token/session
+6. Redirect unauthenticated users to `login.html` from `admin/index.html`
+
+**Do not mistake this for working authentication.**
+
+---
+
 *Generated from git history and code inspection. Update this doc when new gotchas are discovered.*

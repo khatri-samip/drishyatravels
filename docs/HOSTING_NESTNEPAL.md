@@ -8,7 +8,7 @@ Deployment guide for Drishya Travels on NestNepal shared/managed hosting.
 
 NestNepal is a Nepal-based web hosting provider (nestnepal.com) offering:
 - **Shared Hosting**: Apache + PHP (typically 8.x), MySQL/MariaDB databases
-- **VPS/Cloud**: Full root access, can run Nginx, Python/Django, Gunicorn, Docker
+- **VPS/Cloud**: Full root access, can run Nginx, Python, Gunicorn, Docker
 - **Subdirectory Deployment**: One account can host multiple projects in subdirectories (`/project-a/`, `/project-b/`)
 - **SSL**: Free Let's Encrypt certificates
 - **cPanel/Plesk**: Standard control panels for file management, database creation, cron jobs
@@ -33,7 +33,6 @@ The PHP backend already anticipates NestNepal subdirectory deployment with `/dri
 - [ ] **Environment:** Create production `.env` with live DB credentials
 - [ ] **CORS:** Set `CORS_ALLOW_ORIGIN` to your production domain
 - [ ] **Frontend paths:** Update all hardcoded `/DRISHYATRAVELS/backend/api/` URLs
-- [ ] **Django (optional):** Decide whether to deploy trip planner or port to PHP
 - [ ] **SSL:** Enable Let's Encrypt for all domains/subdomains
 - [ ] **File permissions:** `755` directories, `644` files, `.env` protected
 
@@ -78,14 +77,14 @@ In NestNepal control panel:
 # Via phpMyAdmin (recommended for shared hosting)
 # 1. Open phpMyAdmin from control panel
 # 2. Select your database
-# 3. Import → Choose backend/database/schema_mysql.sql
+# 3. Import → Choose backend/database/schema.sql
 # 4. Click "Go"
 
 # Via CLI (VPS only)
-mysql -u db_user -p db_name < backend/database/schema_mysql.sql
+mysql -u db_user -p db_name < backend/database/schema.sql
 ```
 
-**⚠️ Important:** Use the **MySQL-specific** schema, not `docs/database/001_initial_schema.sql` (PostgreSQL).
+**⚠️ Important:** Use the canonical MySQL schema at `backend/database/schema.sql`, not `docs/database/001_initial_schema.sql` (PostgreSQL — legacy artifact).
 
 ### 3. Production `.env`
 
@@ -162,44 +161,6 @@ RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 ```
 
-### 7. Django Trip Planner (Optional)
-
-If deploying the Django trip planner on NestNepal VPS:
-
-```bash
-# On VPS
-cd /var/www/drishya-travels-backend/backend
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt gunicorn
-
-# Configure systemd service or supervisor
-# /etc/systemd/system/drishya-trip-planner.service
-[Unit]
-Description=Drishya Trip Planner
-After=network.target
-
-[Service]
-User=www-data
-WorkingDirectory=/var/www/drishya-travels-backend/backend
-ExecStart=/var/www/drishya-travels-backend/backend/venv/bin/gunicorn trip_planner.wsgi:application --bind 127.0.0.1:8000
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-
-# Nginx reverse proxy
-location /api/trip-planner/ {
-    proxy_pass http://127.0.0.1:8000;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-}
-```
-
-**Simpler alternative:** Port the trip planner to PHP (it's just a dictionary lookup) and skip Django entirely.
-
 ---
 
 ## Database Schema Migration: PostgreSQL → MySQL
@@ -218,7 +179,7 @@ The canonical schema in `docs/database/001_initial_schema.sql` is PostgreSQL. Fo
 | `CHECK (price >= 0)` | `CHECK (price >= 0)` (MySQL 8.0.16+) |
 | `CREATE INDEX ... USING btree` | `CREATE INDEX ...` (btree is default) |
 
-**Full MySQL schema** should be created at `backend/database/schema_mysql.sql` (not yet present — TODO).
+**Full MySQL schema** already exists at `backend/database/schema.sql` (canonical schema with `is_featured` column, seed data, MySQL dialect).
 
 ---
 
@@ -259,8 +220,8 @@ curl https://yourdomain.com/drishya-travels-backend/api/
 # Test packages list
 curl https://yourdomain.com/drishya-travels-backend/api/packages
 
-# Test trip planner (if Django deployed)
-curl -X POST https://yourdomain.com/api/trip-planner/ \
+# Test trip planner (PHP endpoint)
+curl -X POST https://yourdomain.com/drishya-travels-backend/api/trip-planner/ \
   -H "Content-Type: application/json" \
   -d '{"style":"Adventure","days":"7","month":"October","people":2}'
 
