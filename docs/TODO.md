@@ -7,9 +7,6 @@
 | # | Priority | Category | File:Line | Description | Suggested Fix |
 |---|----------|----------|-----------|-------------|---------------|
 | 1 | Critical | Security | `admin/index.html:10` | No authentication - admin panel accessible without login | Implement authentication (session/JWT) before production |
-| 2 | Critical | Security | `backend/config/settings.py:24` | Hardcoded weak secret key | Move SECRET_KEY to environment variable |
-| 3 | Critical | Security | `backend/config/settings.py:28` | DEBUG=True in production is dangerous | Set DEBUG via environment variable, default to False |
-| 4 | Critical | Security | `backend/config/settings.py:31` | ALLOWED_HOSTS empty - must be configured for production | Set ALLOWED_HOSTS via environment variable |
 | 5 | High | Security/DevOps | `backend/middleware/cors.php:9` | Fragile CORS config - wildcard origin with credentials is invalid per spec | Separate dev/prod configs, require explicit origin list in production |
 
 ### High / Architecture
@@ -25,7 +22,7 @@
 | 12 | High | Architecture | `public/js/main.js:212` | Hardcoded API path `/DRISHYATRAVELS/backend/api/packages/` | Use configurable API_BASE constant from shared config module |
 | 13 | High | Architecture | `public/js/packages.js:43` | Hardcoded API path `/DRISHYATRAVELS/backend/api/packages/` | Use configurable API_BASE constant from shared config module |
 | 14 | High | Architecture | `public/js/package-details.js:33` | Hardcoded API path `/DRISHYATRAVELS/backend/api/packages/{id}` | Use configurable API_BASE constant from shared config module |
-| 15 | High | Architecture | `docs/database/001_initial_schema.sql:18` | PostgreSQL vs MySQL schema mismatch - uses PG-specific syntax | Convert to MySQL dialect or switch PHP backend to PostgreSQL |
+| 15 | High | Architecture | `docs/database/001_initial_schema.sql:18` | Legacy PostgreSQL schema exists but is not used — canonical MySQL schema at `backend/database/schema.sql` | Mark PostgreSQL file as legacy/historical; ensure all docs reference MySQL schema |
 | 16 | High | Architecture | `public/data/packages.js:1` | Data duplication - static JS duplicates SQL seed data | Remove static file once backend API is fully functional, use API with fallback |
 
 ### Medium / Code Quality
@@ -40,8 +37,6 @@
 | 22 | Medium | Code Quality | `admin/js/script.js:290` | Missing error handling in deletePackage() | Show specific error type, toast notification, retry logic |
 | 23 | Medium | Code Quality | `admin/js/script.js:363` | Missing error handling in editPackage() | Show specific error type, toast notification, retry logic |
 | 24 | Medium | Code Quality | `admin/index.html:11` | Inline preloader script should be moved to utils module | Move to js/utils.js or separate module |
-| 25 | Medium | Code Quality | `backend/trip_planner/models.py:1` | Django trip_planner app referenced but doesn't exist | Either create the app or remove reference from urls.py |
-| 26 | Medium | Code Quality | `backend/config/urls.py:39` | References trip_planner.urls but app doesn't exist | Create trip_planner app or remove the include |
 
 ### Low / Documentation & Cleanup
 
@@ -55,10 +50,7 @@
 
 ### Phase 1: Critical Security (Do First)
 1. **Admin Authentication** (#1) - Implement auth system
-2. **Django Secret Key** (#2) - Move to env var
-3. **Django DEBUG** (#3) - Set via env var
-4. **Django ALLOWED_HOSTS** (#4) - Configure for production
-5. **CORS Config** (#5) - Fix wildcard + credentials issue
+2. **CORS Config** (#2) - Fix wildcard + credentials issue
 
 ### Phase 2: Architecture (High Impact)
 6. **API Base Configuration** (#6-14) - Create shared config module with API_BASE
@@ -69,7 +61,6 @@
 9. **Deduplicate escapeHTML** (#17-19) - Single shared utility
 10. **Error Handling** (#20-23) - Add proper error UX in admin
 11. **Move preloader** (#24) - Refactor to utils module
-12. **Django trip_planner** (#25-26) - Create or remove
 
 ### Phase 4: Cleanup
 13. **Dead Files** (#27) - Review/remove main_new.js
@@ -78,7 +69,7 @@
 
 ## Notes
 
-- **Admin Authentication**: Currently deferred per project planning, but marked Critical for production readiness
-- **Database**: The project uses a mixed architecture - static frontend + PHP API + unused Django app. The PostgreSQL schema in `docs/database/` was designed for Supabase but the PHP backend uses MySQL/MariaDB (XAMPP).
-- **Testing**: Zero tests exist anywhere - no PHPUnit, no Vitest/Jest, no Django tests
+- **Admin Authentication**: Currently deferred per project planning, but marked Critical for production readiness. Note: `admin/login.html` exists as a static placeholder (client-side only check, hardcoded password "drishya123") — not wired to backend. See GOTCHAS.md #6.
+- **Database**: The PostgreSQL schema in `docs/database/` was designed for Supabase but the PHP backend uses MySQL/MariaDB (XAMPP). Canonical schema is `backend/database/schema.sql`.
+- **Testing**: Zero tests exist anywhere - no PHPUnit, no Vitest/Jest
 - **Environment**: Uses `.env` for PHP config but not consistently across all files
