@@ -5,7 +5,7 @@ Drishya Travels is a travel agency website showcasing Nepal's mountains, cultura
 ---
 
 ## Architecture Overview
-
+NOTE:DJANGO REMOVED TOTALLY IN THE LATEST VERSION; EVERYTHING MIGRATED TO PHP
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        DRISHYATRAVELS                           │
