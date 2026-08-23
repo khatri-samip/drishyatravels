@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetch(
     // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
-    `/DRISHYATRAVELS/backend/api/packages/${encodeURIComponent(id)}`,
+    `/backend/api/packages/${encodeURIComponent(id)}`,
     {
     method: "GET",
     headers: {

@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const response = await fetch(
                 // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
-                "/DRISHYATRAVELS/backend/api/trip-planner/", // why: hardcoded project subdirectory; breaks if deployed to root or different subpath
+                "/backend/api/trip-planner/", // why: hardcoded project subdirectory; breaks if deployed to root or different subpath
                 {
                     method: "POST",
 
@@ -145,7 +145,7 @@ function loadFeaturedPackages(featuredContainer) {
 
     fetch(
         // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
-        "/DRISHYATRAVELS/backend/api/packages/?featured=1",
+        "/backend/api/packages/?featured=1",
         { // why: ?featured=1 returns featured packages; ?limit=3 would return first 3 of all packages — not interchangeable
             method: "GET",
             headers: {
@@ -209,7 +209,7 @@ function loadAllPackagesCarousel(container) {
 
     fetch(
         // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
-        "/DRISHYATRAVELS/backend/api/packages/",
+        "/backend/api/packages/",
         {
             method: "GET",
             headers: {
