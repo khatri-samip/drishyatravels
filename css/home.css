@@ -191,6 +191,8 @@ h1{font-size:clamp(52px,7vw,92px);line-height:.95;letter-spacing:-4px;margin-bot
 .hero p{font-size:18px;max-width:600px;color:rgba(255,255,255,.86);margin-bottom:34px}
 .actions{display:flex;gap:12px;flex-wrap:wrap}
 .hero-stats{position:absolute;bottom:32px;left:0;right:0}
+
+
 /* =========================
    FEATURED PACKAGES
 ========================= */
@@ -215,7 +217,10 @@ h1{font-size:clamp(52px,7vw,92px);line-height:.95;letter-spacing:-4px;margin-bot
   letter-spacing:-2px;
 }
 
+<<<<<<< HEAD:css/home.css
 
+=======
+>>>>>>> origin/main:public/css/home.css
 
 /* =========================
    FEATURED GRID
@@ -376,24 +381,33 @@ h1{font-size:clamp(52px,7vw,92px);line-height:.95;letter-spacing:-4px;margin-bot
   display:flex;
   justify-content:space-between;
   align-items:center;
+
   gap:15px;
+
   margin-bottom:10px;
+
   font-size:11px;
   text-transform:uppercase;
+
   letter-spacing:1px;
+
   font-weight:800;
+
   color:var(--accent2);
 }
 
 .featured-card-content h3{
   font-size:23px;
   line-height:1.15;
+
   margin-bottom:9px;
+
   letter-spacing:-.5px;
 }
 
 .featured-card-content p{
   color:var(--muted);
+
   font-size:14px;
   line-height:1.6;
 }
@@ -405,11 +419,15 @@ h1{font-size:clamp(52px,7vw,92px);line-height:.95;letter-spacing:-4px;margin-bot
 
 .featured-bottom{
   display:flex;
+
   justify-content:space-between;
   align-items:center;
+
   gap:15px;
+
   margin-top:20px;
   padding-top:16px;
+
   border-top:1px solid var(--line);
 }
 
@@ -420,8 +438,10 @@ h1{font-size:clamp(52px,7vw,92px);line-height:.95;letter-spacing:-4px;margin-bot
 
 .featured-bottom span{
   color:var(--accent);
+
   font-size:14px;
   font-weight:800;
+
   transition:transform .25s ease;
 }
 
@@ -478,7 +498,11 @@ h1{font-size:clamp(52px,7vw,92px);line-height:.95;letter-spacing:-4px;margin-bot
     grid-column:auto;
   }
 
-.featured-card-image{height:240px;}}
+  .featured-card-image{
+    height:240px;
+  }
+
+}
 .stats{display:flex;gap:45px;color:#fff}
 .stat strong{display:block;font-size:23px}.stat span{font-size:12px;color:rgba(255,255,255,.68)}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
