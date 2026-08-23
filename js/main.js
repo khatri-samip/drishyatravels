@@ -172,11 +172,15 @@ function loadFeaturedPackages(featuredContainer) {
             featuredContainer.innerHTML = packages.slice(0, 3).map(pkg => `
           <article class="featured-card">
             <a href="package.html?id=${encodeURIComponent(pkg.id)}" aria-label="Explore ${escapeHTML(pkg.title)}">
-              <div class="featured-card-image" style="background-image:url('${escapeHTML(pkg.hero_image_url || "")}')"></div>
+              <div class="featured-card-image">
+                <div class="featured-card-image-bg" style="background-image:url('${escapeHTML(pkg.hero_image_url || "")}')"></div>
+                <span class="featured-tag">${escapeHTML(pkg.destination || "Nepal")}</span>
+                <span class="featured-explore-text">Explore Now →</span>
+              </div>
               <div class="featured-card-content">
                 <div class="featured-meta">
                   <span>${escapeHTML(pkg.duration || "")}</span>
-                  <span>${escapeHTML(pkg.destination || "Nepal")}</span>
+                  <span>${escapeHTML(pkg.category || "")}</span>
                 </div>
                 <h3>${escapeHTML(pkg.title)}</h3>
                 <p>${escapeHTML(pkg.short_description || pkg.description || "")}</p>
