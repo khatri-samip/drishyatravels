@@ -73,7 +73,7 @@ async function loadPackages() {
   try {
     // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
     // Should use a configurable API_BASE constant from a shared config module
-    const response = await fetch("/DRISHYATRAVELS/backend/api/packages/", { // why: hardcoded project subdirectory; breaks if deployed to root or different subpath
+    const response = await fetch("/backend/api/packages/", { // why: hardcoded project subdirectory; breaks if deployed to root or different subpath
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -208,8 +208,8 @@ async function savePackage(event) {
 
   try {
     const url = isEdit
-      ? `/DRISHYATRAVELS/backend/api/packages/${encodeURIComponent(isEdit)}`
-      : "/DRISHYATRAVELS/backend/api/packages/";
+      ? `/backend/api/packages/${encodeURIComponent(isEdit)}`
+      : "/backend/api/packages/";
     // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
     // Should use a configurable API_BASE constant from a shared config module
 
@@ -273,7 +273,7 @@ async function deletePackage(id) {
 
   try {
     // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
-    const response = await fetch(`/DRISHYATRAVELS/backend/api/packages/${encodeURIComponent(id)}`, {
+    const response = await fetch(`/backend/api/packages/${encodeURIComponent(id)}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -300,7 +300,7 @@ async function deletePackage(id) {
 async function editPackage(id) {
   try {
     // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
-    const response = await fetch(`/DRISHYATRAVELS/backend/api/packages/${encodeURIComponent(id)}`, {
+    const response = await fetch(`/backend/api/packages/${encodeURIComponent(id)}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

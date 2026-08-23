@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const response = await fetch(
                 // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
-                "/DRISHYATRAVELS/backend/api/trip-planner/", // why: hardcoded project subdirectory; breaks if deployed to root or different subpath
+                "/backend/api/trip-planner/", // why: hardcoded project subdirectory; breaks if deployed to root or different subpath
                 {
                     method: "POST",
 
@@ -145,7 +145,7 @@ function loadFeaturedPackages(featuredContainer) {
 
     fetch(
         // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
-        "/DRISHYATRAVELS/backend/api/packages/?featured=1",
+        "/backend/api/packages/?featured=1",
         { // why: ?featured=1 returns featured packages; ?limit=3 would return first 3 of all packages — not interchangeable
             method: "GET",
             headers: {
@@ -172,11 +172,15 @@ function loadFeaturedPackages(featuredContainer) {
             featuredContainer.innerHTML = packages.slice(0, 3).map(pkg => `
           <article class="featured-card">
             <a href="package.html?id=${encodeURIComponent(pkg.id)}" aria-label="Explore ${escapeHTML(pkg.title)}">
-              <div class="featured-card-image" style="background-image:url('${escapeHTML(pkg.hero_image_url || "")}')"></div>
+              <div class="featured-card-image">
+                <div class="featured-card-image-bg" style="background-image:url('${escapeHTML(pkg.hero_image_url || "")}')"></div>
+                <span class="featured-tag">${escapeHTML(pkg.destination || "Nepal")}</span>
+                <span class="featured-explore-text">Explore Now →</span>
+              </div>
               <div class="featured-card-content">
                 <div class="featured-meta">
                   <span>${escapeHTML(pkg.duration || "")}</span>
-                  <span>${escapeHTML(pkg.destination || "Nepal")}</span>
+                  <span>${escapeHTML(pkg.category || "")}</span>
                 </div>
                 <h3>${escapeHTML(pkg.title)}</h3>
                 <p>${escapeHTML(pkg.short_description || pkg.description || "")}</p>
@@ -209,7 +213,7 @@ function loadAllPackagesCarousel(container) {
 
     fetch(
         // TODO: [High/Architecture] Hardcoded API path - fails when deployed to different base path
-        "/DRISHYATRAVELS/backend/api/packages/",
+        "/backend/api/packages/",
         {
             method: "GET",
             headers: {

@@ -23,7 +23,8 @@ $requestUri = $_SERVER['REQUEST_URI'];
 $path = parse_url($requestUri, PHP_URL_PATH);
 // Handle both /api/packages/{id} and /{project}/api/packages/{id} deployments
 $basePaths = [
-    '/DRISHYATRAVELS/backend/api/packages/', // why: hardcoded for XAMPP subdirectory deployment; add new base paths here for other environments
+    '/backend/api/packages/', // why: project root deployment; add new base paths here for other environments
+    '/DRISHYATRAVELS/backend/api/packages/', // why: XAMPP alias /drishya-api points to this path
     '/api/packages/',
     '/drishya-travels-backend/api/packages/',
 ];
