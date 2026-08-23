@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,628 +13,620 @@
 </head>
 
 <body>
- <!-- =========================
+  <!-- =========================
      PAGE PRELOADER
 ========================= -->
 
-<div class="preloader" id="preloader">
+  <div class="preloader" id="preloader">
 
-  <div class="preloader-content">
+    <div class="preloader-content">
 
-    <div class="preloader-logo">
-      Drishya Travels<span>.</span>
+      <div class="preloader-logo">
+        Drishya Travels<span>.</span>
+      </div>
+
+      <div class="mountain-loader">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <p>Discovering Nepal...</p>
+
     </div>
-
-    <div class="mountain-loader">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-
-    <p>Discovering Nepal...</p>
 
   </div>
+  <div class="admin-layout">
 
-</div>
-<div class="admin-layout">
+    <!-- SIDEBAR -->
 
-  <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-  <aside class="sidebar">
-
-    <div class="sidebar-logo">
-      DRISHYA TRAVELS<span>.</span>
-    </div>
-
-    <div class="sidebar-label">
-      ADMIN PANEL
-    </div>
-
-<nav class="sidebar-nav">
-
-  <a href="#dashboard" class="nav-item active">
-    <span class="nav-icon">⌂</span>
-    Dashboard
-  </a>
-
-  <a href="#packages" class="nav-item">
-    <span class="nav-icon">▣</span>
-    Packages
-  </a>
-
-  <a href="#add-package" class="nav-item">
-    <span class="nav-icon">＋</span>
-    Add Package
-  </a>
-
-</nav>
-
-    <div class="sidebar-bottom">
-
-      <a href="../../index.html" class="back-site">
-        ← View website
-      </a>
-
-    </div>
-
-  </aside>
-
-
-  <!-- MAIN -->
-
-  <main class="admin-main">
-
-    <!-- TOP BAR -->
-
-    <header class="admin-header">
-
-      <div>
-
-        <div class="kicker">
-          Drishya Travels
-        </div>
-
-        <h1>
-          Admin Dashboard
-        </h1>
-
+      <div class="sidebar-logo">
+        DRISHYA TRAVELS<span>.</span>
       </div>
 
-      <div class="admin-user">
-
-        <div class="user-avatar">
-          A
-        </div>
-
-        <div>
-          <strong>
-            Administrator
-          </strong>
-
-          <span>
-            Website Manager
-          </span>
-        </div>
-
+      <div class="sidebar-label">
+        ADMIN PANEL
       </div>
 
-    </header>
+      <nav class="sidebar-nav">
 
+        <a href="#dashboard" class="nav-item active">
+          <span class="nav-icon">⌂</span>
+          Dashboard
+        </a>
 
-    <!-- DASHBOARD -->
+        <a href="#packages" class="nav-item">
+          <span class="nav-icon">▣</span>
+          Packages
+        </a>
 
-    <section id="dashboard" class="dashboard-section">
+        <a href="#add-package" class="nav-item">
+          <span class="nav-icon">＋</span>
+          Add Package
+        </a>
 
-      <div class="welcome">
+      </nav>
 
-        <div>
+      <div class="sidebar-bottom">
 
-          <div class="kicker">
-            Welcome back
-          </div>
-
-          <h2>
-            Manage your journeys.
-          </h2>
-
-          <p>
-            Add, edit and manage the travel packages
-            displayed throughout the Himalaya website.
-          </p>
-
-        </div>
-
-        <a href="#add-package" class="btn btn-primary">
-          + Add Package
+        <a href="../index.html" class="back-site">
+          ← View website
         </a>
 
       </div>
 
-
-      <!-- STAT CARDS -->
-
-      <div class="stats-grid">
-
-        <div class="stat-card">
-
-          <div class="stat-label">
-            Total Packages
-          </div>
-
-          <strong id="totalPackages">
-            0
-          </strong>
-
-          <span>
-            Currently in database
-          </span>
-
-        </div>
+    </aside>
 
 
-        <div class="stat-card">
+    <!-- MAIN -->
 
-          <div class="stat-label">
-            Published
-          </div>
+    <main class="admin-main">
 
-          <strong id="publishedPackages">
-            0
-          </strong>
+      <!-- TOP BAR -->
 
-          <span>
-            Visible on website
-          </span>
-
-        </div>
-
-
-        <div class="stat-card">
-
-          <div class="stat-label">
-            Drafts
-          </div>
-
-          <strong id="draftPackages">
-            0
-          </strong>
-
-          <span>
-            Not visible publicly
-          </span>
-
-        </div>
-
-        
-      </div>
-
-    </section>
-
-
-    <!-- PACKAGES -->
-
-    <section id="packages" class="content-section">
-
-      <div class="section-title">
+      <header class="admin-header">
 
         <div>
 
           <div class="kicker">
-            Manage
+            Drishya Travels
           </div>
 
-          <h2>
-            Packages
-          </h2>
+          <h1>
+            Admin Dashboard
+          </h1>
 
         </div>
 
-      </div>
+        <div class="admin-user">
 
+          <div class="user-avatar">
+            A
+          </div>
 
-      <div id="packageCards" class="package-cards"></div>
+          <div>
+            <strong>
+              Administrator
+            </strong>
 
-      <div class="package-table">
-
-        <div class="table-header">
-
-          <span>
-            Package
-          </span>
-
-          <span>
-            Category
-          </span>
-
-          <span>
-            Duration
-          </span>
-
-          <span>
-            Price
-          </span>
-
-          <span>
-            Status
-          </span>
-
-          <span>
-            Actions
-          </span>
+            <span>
+              Website Manager
+            </span>
+          </div>
 
         </div>
 
+      </header>
 
-        <div id="packageList">
 
-          <div class="empty-state">
+      <!-- DASHBOARD -->
 
-            <div class="empty-icon">
-              +
+      <section id="dashboard" class="dashboard-section">
+
+        <div class="welcome">
+
+          <div>
+
+            <div class="kicker">
+              Welcome back
             </div>
 
-            <h3>
-              No packages yet
-            </h3>
+            <h2>
+              Manage your journeys.
+            </h2>
 
             <p>
-              Add your first package to get started.
+              Add, edit and manage the travel packages
+              displayed throughout the Himalaya website.
             </p>
 
-            <a href="#add-package" class="btn btn-primary">
-              Add Package
-            </a>
+          </div>
+
+          <a href="#add-package" class="btn btn-primary">
+            + Add Package
+          </a>
+
+        </div>
+
+
+        <!-- STAT CARDS -->
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Total Packages
+            </div>
+
+            <strong id="totalPackages">
+              0
+            </strong>
+
+            <span>
+              Currently in database
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Published
+            </div>
+
+            <strong id="publishedPackages">
+              0
+            </strong>
+
+            <span>
+              Visible on website
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Drafts
+            </div>
+
+            <strong id="draftPackages">
+              0
+            </strong>
+
+            <span>
+              Not visible publicly
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- PACKAGES -->
+
+      <section id="packages" class="content-section">
+
+        <div class="section-title">
+
+          <div>
+
+            <div class="kicker">
+              Manage
+            </div>
+
+            <h2>
+              Packages
+            </h2>
 
           </div>
 
         </div>
 
-      </div>
 
-    </section>
-    <!-- ADD PACKAGE -->
+        <div id="packageCards" class="package-cards"></div>
 
-    <section id="add-package" class="content-section">
+        <div class="package-table">
 
-      <div class="section-title">
-        <div>
-          <div class="kicker">Create</div>
-          <h2>Add Package</h2>
-        </div>
-      </div>
+          <div class="table-header">
 
-      <form id="packageForm" class="package-form">
+            <span>
+              Package
+            </span>
 
-        <!-- BASIC INFORMATION -->
-        <div class="form-section">
-          <div class="form-section-heading">
-            <div>
-              <h3>Basic Information</h3>
-              <p>The main information displayed on package cards and detail pages.</p>
-            </div>
+            <span>
+              Category
+            </span>
+
+            <span>
+              Duration
+            </span>
+
+            <span>
+              Price
+            </span>
+
+            <span>
+              Status
+            </span>
+
+            <span>
+              Actions
+            </span>
+
           </div>
 
-          <div class="form-grid">
 
-            <div class="field field-full">
-              <label for="title">Package Title</label>
-              <input id="title" name="title" type="text"
-                placeholder="e.g. Everest Base Camp Trek" required>
+          <div id="packageList">
+
+            <div class="empty-state">
+
+              <div class="empty-icon">
+                +
+              </div>
+
+              <h3>
+                No packages yet
+              </h3>
+
+              <p>
+                Add your first package to get started.
+              </p>
+
+              <a href="#add-package" class="btn btn-primary">
+                Add Package
+              </a>
+
             </div>
 
-            <div class="field">
-              <label for="category">Category</label>
-              <select id="category" name="category" required>
-                <option value="">Select category</option>
-                <option value="Trekking">Trekking</option>
-                <option value="Adventure">Adventure</option>
-                <option value="Heritage">Heritage</option>
-                <option value="Culture">Culture</option>
-                <option value="Wildlife">Wildlife</option>
-                <option value="Tours">Tours</option>
-              </select>
-            </div>
+          </div>
 
-            <div class="field">
-              <label for="destination">Destination</label>
-              <input id="destination" name="destination" type="text"
-                placeholder="e.g. Everest Region, Nepal" required>
-            </div>
+        </div>
 
-            <div class="field">
-              <label for="duration">Duration</label>
-              <input id="duration" name="duration" type="text"
-                placeholder="e.g. 15 Days" required>
-            </div>
+      </section>
+      <!-- ADD PACKAGE -->
 
-            <div class="field">
-              <label for="price">Price</label>
-              <input id="price" name="price" type="text"
-                placeholder="e.g. 1725" required>
-            </div>
+      <section id="add-package" class="content-section">
 
-            <div class="field">
-              <label for="currency">Currency</label>
-              <select id="currency" name="currency">
-                <option value="USD">USD</option>
-                <option value="NPR">NPR</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="INR">INR</option>
-              </select>
-            </div>
-
-            <div class="field field-full">
-              <label for="priceDetails">Price Details</label>
-              <input id="priceDetails" name="priceDetails" type="text"
-                placeholder="e.g. Per person, including Government Tax">
-            </div>
-
-            <div class="field">
-              <label for="difficulty">Difficulty</label>
-              <select id="difficulty" name="difficulty">
-                <option value="">Select difficulty</option>
-                <option value="Easy">Easy</option>
-                <option value="Moderate">Moderate</option>
-                <option value="Challenging">Challenging</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="bestSeason">Best Season</label>
-              <input id="bestSeason" name="bestSeason" type="text"
-                placeholder="e.g. March–May, September–November">
-            </div>
-
-            <div class="field">
-              <label for="maxAltitude">Maximum Altitude</label>
-              <input id="maxAltitude" name="maxAltitude" type="text"
-                placeholder="e.g. 5,545m">
-            </div>
-
-            <div class="field">
-              <label for="startPoint">Starting Point</label>
-              <input id="startPoint" name="startPoint" type="text"
-                placeholder="e.g. Kathmandu">
-            </div>
-
-            <div class="field">
-              <label for="endPoint">Ending Point</label>
-              <input id="endPoint" name="endPoint" type="text"
-                placeholder="e.g. Kathmandu">
-            </div>
-
-            <div class="field field-full">
-              <label for="packageType">Package / Trek Type</label>
-              <input id="packageType" name="packageType" type="text"
-                placeholder="e.g. Himalayan Trekking">
-            </div>
-
-            <div class="field field-full">
-              <label for="description">Short Description</label>
-              <textarea id="description" name="description" rows="5"
-                placeholder="Short description shown on package cards..." required></textarea>
-            </div>
-
+        <div class="section-title">
+          <div>
+            <div class="kicker">Create</div>
+            <h2>Add Package</h2>
           </div>
         </div>
 
+        <form id="packageForm" class="package-form">
 
-        <!-- FULL DESCRIPTION -->
-        <div class="form-section">
-          <div class="form-section-heading">
-            <div>
-              <h3>Full Package Description</h3>
-              <p>Detailed description displayed on the package detail page.</p>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="fullDescription">Detailed Description</label>
-            <textarea id="fullDescription" name="fullDescription" rows="12"
-              placeholder="Enter the complete package description..."></textarea>
-          </div>
-        </div>
-
-
-        <!-- IMAGE -->
-        <div class="form-section">
-          <div class="form-section-heading">
-            <div>
-              <h3>Package Image</h3>
-              <p>This image appears on the package card and package page.</p>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="heroImage">Hero Image URL</label>
-            <input id="heroImage" name="heroImage" type="url"
-              placeholder="https://..." required>
-          </div>
-
-          <div id="imagePreview" class="image-preview"></div>
-        </div>
-
-
-        <!-- ITINERARY -->
-        <div class="form-section">
-          <div class="form-section-heading">
-            <div>
-              <h3>Day-by-Day Itinerary</h3>
-              <p>Add, edit and remove individual itinerary days. The website will display them automatically.</p>
-            </div>
-
-            <button type="button" id="addDayBtn" class="btn btn-secondary">
-              + Add Day
-            </button>
-          </div>
-
-          <div id="itineraryList" class="itinerary-list"></div>
-
-          <div id="itineraryEmpty" class="empty-state">
-            <h3>No itinerary days yet</h3>
-            <p>Click "Add Day" to create the first day.</p>
-          </div>
-        </div>
-
-
-        <!-- PACKAGE DETAILS -->
-        <div class="form-section">
-          <div class="form-section-heading">
-            <div>
-              <h3>Package Details</h3>
-              <p>Additional information shown on the package detail page.</p>
-            </div>
-          </div>
-
-          <div class="form-grid">
-
-            <div class="field">
-              <label for="status">Status</label>
-              <select id="status" name="status">
-                <option value="published">Published — visible on website</option>
-                <option value="draft">Draft — hidden from website</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="isFeatured">Featured Package</label>
-              <div class="checkbox-wrapper">
-                <input type="checkbox" id="isFeatured" name="isFeatured" value="1">
-                <span class="checkbox-label">Show on homepage featured section</span>
+          <!-- BASIC INFORMATION -->
+          <div class="form-section">
+            <div class="form-section-heading">
+              <div>
+                <h3>Basic Information</h3>
+                <p>The main information displayed on package cards and detail pages.</p>
               </div>
             </div>
 
-          </div>
-        </div>
+            <div class="form-grid">
 
-        <!-- HIGHLIGHTS -->
-        <div class="form-section">
-          <div class="form-section-heading">
-            <div>
-              <h3>Highlights</h3>
-              <p>Key highlights displayed on the package detail page (one per line).</p>
+              <div class="field field-full">
+                <label for="title">Package Title</label>
+                <input id="title" name="title" type="text" placeholder="e.g. Everest Base Camp Trek" required>
+              </div>
+
+              <div class="field">
+                <label for="category">Category</label>
+                <select id="category" name="category" required>
+                  <option value="">Select category</option>
+                  <option value="Trekking">Trekking</option>
+                  <option value="Adventure">Adventure</option>
+                  <option value="Heritage">Heritage</option>
+                  <option value="Culture">Culture</option>
+                  <option value="Wildlife">Wildlife</option>
+                  <option value="Tours">Tours</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="destination">Destination</label>
+                <input id="destination" name="destination" type="text" placeholder="e.g. Everest Region, Nepal"
+                  required>
+              </div>
+
+              <div class="field">
+                <label for="duration">Duration</label>
+                <input id="duration" name="duration" type="text" placeholder="e.g. 15 Days" required>
+              </div>
+
+              <div class="field">
+                <label for="price">Price</label>
+                <input id="price" name="price" type="text" placeholder="e.g. 1725" required>
+              </div>
+
+              <div class="field">
+                <label for="currency">Currency</label>
+                <select id="currency" name="currency">
+                  <option value="USD">USD</option>
+                  <option value="NPR">NPR</option>
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
+                  <option value="INR">INR</option>
+                </select>
+              </div>
+
+              <div class="field field-full">
+                <label for="priceDetails">Price Details</label>
+                <input id="priceDetails" name="priceDetails" type="text"
+                  placeholder="e.g. Per person, including Government Tax">
+              </div>
+
+              <div class="field">
+                <label for="difficulty">Difficulty</label>
+                <select id="difficulty" name="difficulty">
+                  <option value="">Select difficulty</option>
+                  <option value="Easy">Easy</option>
+                  <option value="Moderate">Moderate</option>
+                  <option value="Challenging">Challenging</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="bestSeason">Best Season</label>
+                <input id="bestSeason" name="bestSeason" type="text" placeholder="e.g. March–May, September–November">
+              </div>
+
+              <div class="field">
+                <label for="maxAltitude">Maximum Altitude</label>
+                <input id="maxAltitude" name="maxAltitude" type="text" placeholder="e.g. 5,545m">
+              </div>
+
+              <div class="field">
+                <label for="startPoint">Starting Point</label>
+                <input id="startPoint" name="startPoint" type="text" placeholder="e.g. Kathmandu">
+              </div>
+
+              <div class="field">
+                <label for="endPoint">Ending Point</label>
+                <input id="endPoint" name="endPoint" type="text" placeholder="e.g. Kathmandu">
+              </div>
+
+              <div class="field field-full">
+                <label for="packageType">Package / Trek Type</label>
+                <input id="packageType" name="packageType" type="text" placeholder="e.g. Himalayan Trekking">
+              </div>
+
+              <div class="field field-full">
+                <label for="description">Short Description</label>
+                <textarea id="description" name="description" rows="5"
+                  placeholder="Short description shown on package cards..." required></textarea>
+              </div>
+
             </div>
           </div>
 
-          <div class="field">
-            <label for="highlightsInput">Highlights</label>
-            <textarea id="highlightsInput" name="highlightsInput" rows="6"
-              placeholder="Scenic mountain views&#10;Cultural village visits&#10;Wildlife spotting"></textarea>
-            <small>One highlight per line</small>
-          </div>
-        </div>
 
-        <!-- INCLUSIONS -->
-        <div class="form-section">
-          <div class="form-section-heading">
-            <div>
-              <h3>Inclusions</h3>
-              <p>What's included in the package price (one per line).</p>
+          <!-- FULL DESCRIPTION -->
+          <div class="form-section">
+            <div class="form-section-heading">
+              <div>
+                <h3>Full Package Description</h3>
+                <p>Detailed description displayed on the package detail page.</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="fullDescription">Detailed Description</label>
+              <textarea id="fullDescription" name="fullDescription" rows="12"
+                placeholder="Enter the complete package description..."></textarea>
             </div>
           </div>
 
-          <div class="field">
-            <label for="inclusionsInput">Inclusions</label>
-            <textarea id="inclusionsInput" name="inclusionsInput" rows="6"
-              placeholder="Accommodation&#10;Meals (breakfast & dinner)&#10;Transportation&#10;Guide services"></textarea>
-            <small>One inclusion per line</small>
-          </div>
-        </div>
 
-        <!-- EXCLUSIONS -->
-        <div class="form-section">
-          <div class="form-section-heading">
-            <div>
-              <h3>Exclusions</h3>
-              <p>What's not included in the package price (one per line).</p>
+          <!-- IMAGE -->
+          <div class="form-section">
+            <div class="form-section-heading">
+              <div>
+                <h3>Package Image</h3>
+                <p>This image appears on the package card and package page.</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="heroImage">Hero Image URL</label>
+              <input id="heroImage" name="heroImage" type="url" placeholder="https://..." required>
+            </div>
+
+            <div id="imagePreview" class="image-preview"></div>
+          </div>
+
+
+          <!-- ITINERARY -->
+          <div class="form-section">
+            <div class="form-section-heading">
+              <div>
+                <h3>Day-by-Day Itinerary</h3>
+                <p>Add, edit and remove individual itinerary days. The website will display them automatically.</p>
+              </div>
+
+              <button type="button" id="addDayBtn" class="btn btn-secondary">
+                + Add Day
+              </button>
+            </div>
+
+            <div id="itineraryList" class="itinerary-list"></div>
+
+            <div id="itineraryEmpty" class="empty-state">
+              <h3>No itinerary days yet</h3>
+              <p>Click "Add Day" to create the first day.</p>
             </div>
           </div>
 
-          <div class="field">
-            <label for="exclusionsInput">Exclusions</label>
-            <textarea id="exclusionsInput" name="exclusionsInput" rows="6"
-              placeholder="Visa fees&#10;Travel insurance&#10;Personal expenses&#10;Beverages & tips"></textarea>
-            <small>One exclusion per line</small>
-          </div>
-        </div>
 
-        <!-- GALLERY -->
-        <div class="form-section">
-          <div class="form-section-heading">
-            <div>
-              <h3>Gallery Images</h3>
-              <p>Additional images for the package gallery (one URL per line).</p>
+          <!-- PACKAGE DETAILS -->
+          <div class="form-section">
+            <div class="form-section-heading">
+              <div>
+                <h3>Package Details</h3>
+                <p>Additional information shown on the package detail page.</p>
+              </div>
+            </div>
+
+            <div class="form-grid">
+
+              <div class="field">
+                <label for="status">Status</label>
+                <select id="status" name="status">
+                  <option value="published">Published — visible on website</option>
+                  <option value="draft">Draft — hidden from website</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="isFeatured">Featured Package</label>
+                <div class="checkbox-wrapper">
+                  <input type="checkbox" id="isFeatured" name="isFeatured" value="1">
+                  <span class="checkbox-label">Show on homepage featured section</span>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <div class="field">
-            <label for="galleryInput">Gallery URLs</label>
-            <textarea id="galleryInput" name="galleryInput" rows="6"
-              placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"></textarea>
-            <small>One image URL per line</small>
-          </div>
-        </div>
+          <!-- HIGHLIGHTS -->
+          <div class="form-section">
+            <div class="form-section-heading">
+              <div>
+                <h3>Highlights</h3>
+                <p>Key highlights displayed on the package detail page (one per line).</p>
+              </div>
+            </div>
 
-        <!-- FAQS -->
-        <div class="form-section">
-          <div class="form-section-heading">
-            <div>
-              <h3>Frequently Asked Questions</h3>
-              <p>FAQs for the package (format: Question::Answer, one per line).</p>
+            <div class="field">
+              <label for="highlightsInput">Highlights</label>
+              <textarea id="highlightsInput" name="highlightsInput" rows="6"
+                placeholder="Scenic mountain views&#10;Cultural village visits&#10;Wildlife spotting"></textarea>
+              <small>One highlight per line</small>
             </div>
           </div>
 
-          <div class="field">
-            <label for="faqsInput">FAQs</label>
-            <textarea id="faqsInput" name="faqsInput" rows="8"
-              placeholder="How difficult is this trek?::Moderate difficulty, suitable for fit beginners&#10;What is included?::Accommodation, meals, transport, and guide"></textarea>
-            <small>Format: Question::Answer (one per line)</small>
+          <!-- INCLUSIONS -->
+          <div class="form-section">
+            <div class="form-section-heading">
+              <div>
+                <h3>Inclusions</h3>
+                <p>What's included in the package price (one per line).</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="inclusionsInput">Inclusions</label>
+              <textarea id="inclusionsInput" name="inclusionsInput" rows="6"
+                placeholder="Accommodation&#10;Meals (breakfast & dinner)&#10;Transportation&#10;Guide services"></textarea>
+              <small>One inclusion per line</small>
+            </div>
           </div>
-        </div>
+
+          <!-- EXCLUSIONS -->
+          <div class="form-section">
+            <div class="form-section-heading">
+              <div>
+                <h3>Exclusions</h3>
+                <p>What's not included in the package price (one per line).</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="exclusionsInput">Exclusions</label>
+              <textarea id="exclusionsInput" name="exclusionsInput" rows="6"
+                placeholder="Visa fees&#10;Travel insurance&#10;Personal expenses&#10;Beverages & tips"></textarea>
+              <small>One exclusion per line</small>
+            </div>
+          </div>
+
+          <!-- GALLERY -->
+          <div class="form-section">
+            <div class="form-section-heading">
+              <div>
+                <h3>Gallery Images</h3>
+                <p>Additional images for the package gallery (one URL per line).</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="galleryInput">Gallery URLs</label>
+              <textarea id="galleryInput" name="galleryInput" rows="6"
+                placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"></textarea>
+              <small>One image URL per line</small>
+            </div>
+          </div>
+
+          <!-- FAQS -->
+          <div class="form-section">
+            <div class="form-section-heading">
+              <div>
+                <h3>Frequently Asked Questions</h3>
+                <p>FAQs for the package (format: Question::Answer, one per line).</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="faqsInput">FAQs</label>
+              <textarea id="faqsInput" name="faqsInput" rows="8"
+                placeholder="How difficult is this trek?::Moderate difficulty, suitable for fit beginners&#10;What is included?::Accommodation, meals, transport, and guide"></textarea>
+              <small>Format: Question::Answer (one per line)</small>
+            </div>
+          </div>
 
 
-        <!-- ACTIONS -->
-        <div class="form-actions">
-          <button type="reset" class="btn btn-secondary">Clear</button>
+          <!-- ACTIONS -->
+          <div class="form-actions">
+            <button type="reset" class="btn btn-secondary">Clear</button>
 
-          <button type="submit" class="btn btn-primary">
-            Save Package →
-          </button>
-        </div>
+            <button type="submit" class="btn btn-primary">
+              Save Package →
+            </button>
+          </div>
 
-        <div id="formMessage" class="form-message"></div>
+          <div id="formMessage" class="form-message"></div>
 
-      </form>
+        </form>
 
-    </section>
+      </section>
 
-  </main>
+    </main>
 
-</div>
+  </div>
 
 
-<!-- =========================
+  <!-- =========================
      JAVASCRIPT
 ========================= -->
 
-<script>
-window.addEventListener("load", function(){
+  <script>
+    window.addEventListener("load", function () {
 
-  const preloader = document.getElementById("preloader");
+      const preloader = document.getElementById("preloader");
 
-  setTimeout(() => {
-    preloader.classList.add("loaded");
-  }, 500);
+      setTimeout(() => {
+        preloader.classList.add("loaded");
+      }, 500);
 
-});
-</script>
+    });
+  </script>
 
-<!-- The public package detail page can use the same stored package object.
+  <!-- The public package detail page can use the same stored package object.
      admin.js exposes window.getStoredPackages() for other pages. -->
 
-<script src="js/utils.js"></script>
-<script src="js/script.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/script.js"></script>
 
 </body>
+
 </html>
